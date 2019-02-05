@@ -1,0 +1,70 @@
+<html>
+
+<head>
+    <style>
+        @keyframes example {
+            0% {
+                background-color: red;
+            }
+
+            25% {
+                background-color: yellow;
+            }
+
+            50% {
+                background-color: green;
+            }
+
+            75% {
+                background-color: blue;
+            }
+            100% {
+                background-color: red;
+            }
+        }
+
+        @keyframes untz {
+            0% {
+                color: yellow;
+            }
+
+            25% {
+                color: green;
+            }
+
+            50% {
+                color: blue;
+            }
+
+            75% {
+                color: red;
+            }
+            100% {
+                color: yellow;
+            }
+        }
+
+        div {
+            font-size: 8em;
+            font-family: arial, sans-serif;
+            text-align: center;
+            display: block;
+            margin: auto;
+            float: center;
+            animation-name:untz;
+            animation-duration:2s;
+            animation-iteration-count: infinite;
+        }
+        body{
+            animation-name:example;
+            animation-duration:2s;
+            animation-iteration-count: infinite;
+        }
+    </style>
+</head>
+
+<body id='seizure'>
+    <div id='seizure2'>PARTY TIME!!!!</div>
+</body>
+
+</html>
