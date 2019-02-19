@@ -8,22 +8,23 @@
 
 <body id='seizure'>
     <button id="music">Click me</button>
-    <img id="moe" src="">
+    <img id="moe" src="./assets/img/0.jpg">
 </body>
 
 <script>
     var t;
     var m;
 
-    //var moe = 1;
+    var moeExt = 1;
 
     function moe(){
         var hue = (Math.floor(Math.random() * 16777215)).toString(16);
         document.getElementById('seizure').style.backgroundColor = '#' + hue;
-        
+
         //console.log(moe);
-        
-        var moe = (Math.ceil(Math.random() * 4));
+
+        var moe = ((moeExt + (Math.ceil(Math.random() * 3))) % 4);
+        moeExt= moe;
         moeStr = moe.toString();
 
         document.getElementById('moe').src='./assets/img/'+moeStr+'.jpg';
