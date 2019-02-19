@@ -1,0 +1,31 @@
+<html>
+
+<head>
+    <style>
+        div {
+            font-size: 8em;
+            font-family: arial, sans-serif;
+            text-align: center;
+            display: block;
+            margin: auto;
+            float: center;
+        }
+    </style>
+</head>
+
+<body id='seizure'>
+    <div id='seizure2'>PARTY TIME!!!!</div>
+</body>
+<script>
+
+    function flash() {
+        var hue = (Math.floor(Math.random() * 16777215)).toString(16);
+        var hue2 = (Math.floor(Math.random() * 16777215)).toString(16);
+        document.getElementById('seizure').style.backgroundColor = '#' + hue;
+        document.getElementById('seizure2').style.color = '#' + hue2;
+        console.log(hue);
+    }
+    var t = setInterval(flash, 500);
+</script>
+
+</html>

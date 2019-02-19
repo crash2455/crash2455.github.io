@@ -1,0 +1,48 @@
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="moe.css">
+    <script src="./howler.js-master/dist/howler.js"></script>
+</head>
+
+
+<body id='seizure'>
+    <button id="music">Click me</button>
+    <img id="moe" src="">
+</body>
+
+<script>
+    var t;
+    var m;
+
+    //var moe = 1;
+
+    function moe(){
+        var hue = (Math.floor(Math.random() * 16777215)).toString(16);
+        document.getElementById('seizure').style.backgroundColor = '#' + hue;
+        
+        //console.log(moe);
+        
+        var moe = (Math.ceil(Math.random() * 4));
+        moeStr = moe.toString();
+
+        document.getElementById('moe').src='./assets/img/'+moeStr+'.jpg';
+        console.log(moe);
+    }
+
+    var sound = new Howl({
+        src: ['./assets/weedloop2.ogg'],
+        loop: true,
+        volume: 0.5,
+    });
+
+    document.getElementById("music").onclick = function () {
+        document.getElementById("music").style = "display: none";
+        document.getElementById("moe").style = "display: inline";
+        //t = setInterval(flash, 731.7073);
+        m = setInterval(moe, 731.7073)
+        sound.play();
+    }
+</script>
+
+</html>
