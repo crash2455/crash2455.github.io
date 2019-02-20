@@ -4,12 +4,18 @@
   <link rel="stylesheet" type="text/css" href="moe.css">
   <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
   <script src="./howler.js-master/dist/howler.js"></script>
+  <link rel="stylesheet" type="text/css" href="https://csshake.surge.sh/csshake.min.css">
 </head>
 
 
-<body id='bg'>
+<body id="bg">
   <button id="music">Click me</button>
-  <div id='ticker'></div>
+  <div id='ticker'>
+  <div class="box" id='left'></div>
+  <div class="centerbox" id='center'></div>
+  <div class="box" id='right'></div>
+  <div id='moe'></div>
+</div>
 
 </body>
 
@@ -20,40 +26,41 @@
   var moeExt = 1;
 
   var restOfLifeRhythm = ['x', '.', '.', 'o', '.', '.', 'x', '.', '.', '.',
-                          '.', '.', '.', 'o', '.', 'x', '.', '.', 'o', '.',
-                          'x', '.', '.', '.', '.', 'x', 'o', '.', '.', '.',
-                          'o', '.', '.', 'x', '.', '.', '.', '.', '.', 'o',
-                          '.', '.', 'x', '.', '.', 'o', 'x', '.', '.', '.',
-                          '.', '.', 'x', 'o', '.', '.', 'o', '.', '.', 'x',
-                          '.', '.', '.', '.', '.', '.', 'o', '.', 'x', '.',
-                          '.', '.', '.', 'x', '.', '.', '.', '.', 'x', 'o',
-                          '.', '.', '.', 'o', '.', '.', 'x', '.', '.', '.',
-                          '.', '.', '.', 'o', '.', 'x', '.', '.', 'o', 'x',
-                          '.', '.', '.', '.', '.', 'x', 'o', '.', '.', 'o',
-                          '.', '.', '.', 'x', '.', '.', '.', '.', '.', 'o',
-                          '.', '.', 'x', '.', '.', 'o', 'x', '.', '.', '.',
-                          '.', '.', 'x', 'o', '.', '.', 'o', '.', '.', 'x',
-                          '.', '.', '.', '.', '.', '.', 'o', '.', 'x', '.',
-                          '.', 'o', '.', 'x', '.', '.', '.', '.', 'x', 'o',
-                          '.', '.', '.', 'o', '.', '.', 'x', '.', '.', '.',
-                          '.', '.', '.', 'o', '.', 'x', '.', '.', 'o', 'x',
-                          '.', '.', '.', '.', '.', 'x', 'o', '.', '.', 'o',
-                          '.', '.', '.', 'x', '.', '.', '.', '.', 'x', 'o',
-                          '.', 'x', '.', '.', '.', 'o', 'x', '.', 'x', 'x',
-                          '.', 'x', '.']
+    '.', '.', '.', 'o', '.', 'x', '.', '.', 'o', '.',
+    'x', '.', '.', '.', '.', 'x', 'o', '.', '.', '.',
+    'o', '.', '.', 'x', '.', '.', '.', '.', '.', 'o',
+    '.', '.', 'x', '.', '.', 'o', 'x', '.', '.', '.',
+    '.', '.', 'x', 'o', '.', '.', 'o', '.', '.', 'x',
+    '.', '.', '.', '.', '.', '.', 'o', '.', 'x', '.',
+    '.', '.', '.', 'x', '.', '.', '.', '.', 'x', 'o',
+    '.', '.', '.', 'o', '.', '.', 'x', '.', '.', '.',
+    '.', '.', '.', 'o', '.', 'x', '.', '.', 'o', 'x',
+    '.', '.', '.', '.', '.', 'x', 'o', '.', '.', 'o',
+    '.', '.', '.', 'x', '.', '.', '.', '.', '.', 'o',
+    '.', '.', 'x', '.', '.', 'o', 'x', '.', '.', '.',
+    '.', '.', 'x', 'o', '.', '.', 'o', '.', '.', 'x',
+    '.', '.', '.', '.', '.', '.', 'o', '.', 'x', '.',
+    '.', 'o', '.', 'x', '.', '.', '.', '.', 'x', 'o',
+    '.', '.', '.', 'o', '.', '.', 'x', '.', '.', '.',
+    '.', '.', '.', 'o', '.', 'x', '.', '.', 'o', 'x',
+    '.', '.', '.', '.', '.', 'x', 'o', '.', '.', 'o',
+    '.', '.', '.', 'x', '.', '.', '.', '.', 'x', 'o',
+    '.', 'x', '.', '.', '.', 'o', 'x', '.', 'x', 'x',
+    '.', 'x', '.']
   var ticker = [];
   var backTicker = [];
 
   function moe() {
     var hue = (Math.floor(Math.random() * 16777215)).toString(16);
     document.getElementById('bg').style.backgroundColor = '#' + hue;
+    document.getElementById('moe').style.backgroundColor = '#' + hue;
 
     //console.log(moe);
 
     var moe = ((moeExt + (Math.ceil(Math.random() * 23))) % 24);
     moeExt = moe;
     var moeStr = moe.toString();
-    document.getElementById('bg').style.backgroundImage='url("./assets/img/'+moeStr+'.png")';
+    document.getElementById('moe').style.backgroundImage = 'url("./assets/img/' + moeStr + '.png")';
 
     //old sprite page function, did not have better efficiency
     //    moeStr = (moe*-1280).toString();
@@ -69,17 +76,27 @@
   var musicIndex = 0;
 
   function musicBox() {
-    document.getElementById("ticker").innerHTML = backTicker.join('') +
-      ' <span id="big">' + (restOfLifeRhythm[musicIndex] == '.' ? ' ' : restOfLifeRhythm[musicIndex]) + "</span> "
-      + ticker.join('');
+    document.getElementById("left").innerHTML = backTicker.join('');
+    document.getElementById("center").innerHTML = (restOfLifeRhythm[musicIndex] == '.' ? ' ' : restOfLifeRhythm[musicIndex]) + "</span> "
+    document.getElementById("right").innerHTML = ticker.join('');
     if (restOfLifeRhythm[musicIndex] == 'x') {
       moe();
+      document.getElementById('moe').classList.add('shake-vertical');
+      document.getElementById('moe').classList.remove('shake-horizontal');
     }
     else if (restOfLifeRhythm[musicIndex] == 'o') {
       moe();
+      document.getElementById('moe').classList.remove('shake-vertical');
+      document.getElementById('moe').classList.add('shake-horizontal');
     }
     else if (restOfLifeRhythm[musicIndex] == '-') {
       moe();
+      document.getElementById('moe').classList.remove('shake-vertical');
+      document.getElementById('moe').classList.remove('shake-horizontal');
+    }
+    else {
+      document.getElementById('moe').classList.remove('shake-vertical');
+      document.getElementById('moe').classList.remove('shake-horizontal');
     }
     musicIndex++;
     if (musicIndex == restOfLifeRhythm.length) {
@@ -88,9 +105,9 @@
     }
     ticker.shift();
     backTicker.pop();
-    ticker.push(restOfLifeRhythm[(musicIndex+19) % restOfLifeRhythm.length]);
-    backTicker.unshift(restOfLifeRhythm[(musicIndex+19) % restOfLifeRhythm.length]);
-    console.log(restOfLifeRhythm[musicIndex] == ticker[0] ? '' : musicIndex.toString() + ' ' + ticker[0]);
+    ticker.push(restOfLifeRhythm[(musicIndex + 19) % restOfLifeRhythm.length]);
+    backTicker.unshift(restOfLifeRhythm[(musicIndex + 19) % restOfLifeRhythm.length]);
+    //console.log(restOfLifeRhythm[musicIndex] == ticker[0] ? '' : musicIndex.toString() + ' ' + ticker[0]);
   }
 
 

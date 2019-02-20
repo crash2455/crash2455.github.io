@@ -1,9 +1,18 @@
-body {
+#bg{
+    background-color: black;
+    background-size: 100%;
+    width:100%;
+    height: 100%;
+}
+#moe{
     background-color: black;
     background-blend-mode: color-burn;
     background-repeat: no-repeat;
     background-image: url('./assets/img/0.png');
     background-size: 100%;
+    width:100%;
+    height: 100%;
+    padding: 0;
 }
 img {
     width:1280px;
@@ -17,13 +26,34 @@ img {
 
     z-index: -1
 }
-#big{
-  font-size:2em;
+.box {
+  float: left;
+  width: 20%; /* three boxes (use 25% for four, and 50% for two, etc) */
+  padding-top: 50px;
+  padding-right: 250px
+}
+.centerbox {
+  float: left;
+  width:10%; /* three boxes (use 25% for four, and 50% for two, etc) */
+  padding-top:20px; /* if you want space between the images */
+  font-size: 2.5em
+}
+#center{
+  text-align: center;
+}
+button #music{
+  position: relative;
+  height: 2em;
+  margin: auto;
+}
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
 }
 #ticker{
-  font-size: 1.5em;
+  font-size: 1.6em;
   font-family: 'Press Start 2P', cursive;
-  text-align: center;
   margin:auto;
   -webkit-text-fill-color: black; /* Will override color (regardless of order) */
   -webkit-text-stroke-width: 1px;
