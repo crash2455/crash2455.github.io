@@ -8,7 +8,7 @@
 </head>
 
 
-<body id="bg">
+<body id='moe'>
   <button id="music">Click me</button>
   <div id='ticker'>
   <div class="box" id='left'></div>
@@ -16,7 +16,7 @@
   <div class="box" id='right'></div>
 
 </div>
-<div id='moe'></div>
+<!--<div id='moe'></div>-->
 
 </body>
 
@@ -54,7 +54,7 @@
 
   function moe() {
     var hue = (Math.floor(Math.random() * 16777215)).toString(16);
-    document.getElementById('bg').style.backgroundColor = '#' + hue;
+    //document.getElementById('bg').style.backgroundColor = '#' + hue;
     document.getElementById('moe').style.backgroundColor = '#' + hue;
 
     //console.log(moe);
@@ -79,34 +79,21 @@
 
   function musicBox() {
     document.getElementById("center").classList.remove('hidden');
-    document.getElementById("center").classList.remove('drop');
+    //document.getElementById('moe').classList.remove('shake-vertical');
+    //document.getElementById('moe').classList.remove('shake-horizontal');
     document.getElementById("left").innerHTML = backTicker.join('');
     document.getElementById("center").innerHTML = (restOfLifeRhythm[musicIndex] == '.' ? ' ' : restOfLifeRhythm[musicIndex]) + "</span> "
     document.getElementById("right").innerHTML = ticker.join('');
-    if (restOfLifeRhythm[musicIndex] == 'x') {
+    if (restOfLifeRhythm[musicIndex] != '.') {
       moe();
       document.getElementById("center").classList.add('hidden');
       document.getElementById("center").classList.add('drop');
+    }
+    if (restOfLifeRhythm[musicIndex] == 'x') {
       //document.getElementById('moe').classList.add('shake-vertical');
-      //document.getElementById('moe').classList.remove('shake-horizontal');
     }
     else if (restOfLifeRhythm[musicIndex] == 'o') {
-      moe();
-      document.getElementById("center").classList.add('hidden');
-      document.getElementById("center").classList.add('drop');
-      //document.getElementById('moe').classList.remove('shake-vertical');
       //document.getElementById('moe').classList.add('shake-horizontal');
-    }
-    else if (restOfLifeRhythm[musicIndex] == '-') {
-      moe();
-      document.getElementById("center").classList.add('hidden');
-      document.getElementById("center").classList.add('drop');
-      //document.getElementById('moe').classList.remove('shake-vertical');
-      //document.getElementById('moe').classList.remove('shake-horizontal');
-    }
-    else {
-      //document.getElementById('moe').classList.remove('shake-vertical');
-      //document.getElementById('moe').classList.remove('shake-horizontal');
     }
     musicIndex++;
     if (musicIndex == restOfLifeRhythm.length) {
