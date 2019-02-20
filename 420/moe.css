@@ -1,9 +1,19 @@
 body {
     background-color: black;
+    background-blend-mode: color-burn;
+    background-image: url('./assets/img/0.png');
 }
 img {
     width: 100%;
-    display: none;
+    opacity: .8;
+    mix-blend-mode: color-burn;
+}
+#ticker{
+  font-size: 1.5em;
+  font-family: 'Press Start 2P', cursive;
+  text-align: center;
+  margin:auto;
+
 }
 /* loading controls */
 #isItLoaded {
