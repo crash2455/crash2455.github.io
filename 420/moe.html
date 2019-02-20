@@ -8,7 +8,7 @@
 
 <body id='seizure'>
     <button id="music">Click me</button>
-    <img id="moe" src="./assets/img/0.jpg">
+    <img id="moe" src="./assets/img/0.png">
 </body>
 
 <script>
@@ -23,11 +23,11 @@
 
         //console.log(moe);
 
-        var moe = ((moeExt + (Math.ceil(Math.random() * 3))) % 4);
+        var moe = ((moeExt + (Math.ceil(Math.random() * 23))) % 24);
         moeExt= moe;
         moeStr = moe.toString();
 
-        document.getElementById('moe').src='./assets/img/'+moeStr+'.jpg';
+        document.getElementById('moe').src='./assets/img/'+moeStr+'.png';
         console.log(moe);
     }
 
