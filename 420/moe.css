@@ -1,14 +1,21 @@
 body {
     background-color: black;
     background-blend-mode: color-burn;
+    background-repeat: no-repeat;
     background-image: url('./assets/img/0.png');
     background-size: 100%;
-    background-repeat: no-repeat;
 }
 img {
-    width: 100%;
-    opacity: .8;
+    width:1280px;
+    height: 720px;
+    object-fit: none;
+    object-position: 0 0;
+    position: absolute;
+    top: 0;
+    left: 0;
     mix-blend-mode: color-burn;
+
+    z-index: -1
 }
 #big{
   font-size:2em;

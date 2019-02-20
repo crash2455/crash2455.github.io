@@ -1,89 +1,110 @@
 <html>
 
 <head>
-    <link rel="stylesheet" type="text/css" href="moe.css">
-    <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
-    <script src="./howler.js-master/dist/howler.js"></script>
+  <link rel="stylesheet" type="text/css" href="moe.css">
+  <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
+  <script src="./howler.js-master/dist/howler.js"></script>
 </head>
 
 
 <body id='bg'>
-    <button id="music">Click me</button>
-    <div id ='ticker'></div>
+  <button id="music">Click me</button>
+  <div id='ticker'></div>
 
 </body>
 
 <script>
-    var t;
-    var m;
+  var t;
+  var m;
 
-    var moeExt = 1;
+  var moeExt = 1;
 
-    var restOfLifeRhythm = ['x','.','o','.','x','.','o','.','x','.','o','.','x','.','o','.','x','.','o','.','x','.','o','.','x','.','o','.','x','.','o','.','x','.','o','.','x','.','o','.','x','.','o','.','x','.','o','.','x','.','o','.','x','.','o','.','x','.','o','.','x','.','o','.'];//['x','.','.','o','.','.','x','.','.','.','.','.','.','o','.','x','.','.','o','.','x','.','.','.','.','x','o','.','.','.','o','.','.','x','.','.','.','.','.','o','.','.','x','.','.','o','x','.','.','.','.','.','x','o','.','.','o','.','.','x','.','.','.','.','.','.','o','.','x','.','.','.','.','x','.','.','.','.','x','o','.','.','.','o','.','.','x','.','.','.','.','.','.','o','.','x','.','.','o','x','.','.','.','.','.','x','o','.','.','o','.','.','.','x','.','.','.','.','.','o','.','.','x','.','.','o','x','.','.','.','.','.','x','o','.','.','o','.','.','x','.','.','.','.','.','.','o','.','x','.','.','o','.','x','.','.','.','.','x','o','.','.','.','o','.','.','x','.','.','.','.','.','.','o','.','x','.','.','o','x','.','.','.','.','.','x','o','.','.','o','.','.','.','x','.','.','.','.','x','o','.','x','.','.','.','o','x','.','x','x','.','x','.']
-    var ticker = [];
-    var backTicker = [];
+  var restOfLifeRhythm = ['x', '.', '.', 'o', '.', '.', 'x', '.', '.', '.',
+                          '.', '.', '.', 'o', '.', 'x', '.', '.', 'o', '.',
+                          'x', '.', '.', '.', '.', 'x', 'o', '.', '.', '.',
+                          'o', '.', '.', 'x', '.', '.', '.', '.', '.', 'o',
+                          '.', '.', 'x', '.', '.', 'o', 'x', '.', '.', '.',
+                          '.', '.', 'x', 'o', '.', '.', 'o', '.', '.', 'x',
+                          '.', '.', '.', '.', '.', '.', 'o', '.', 'x', '.',
+                          '.', '.', '.', 'x', '.', '.', '.', '.', 'x', 'o',
+                          '.', '.', '.', 'o', '.', '.', 'x', '.', '.', '.',
+                          '.', '.', '.', 'o', '.', 'x', '.', '.', 'o', 'x',
+                          '.', '.', '.', '.', '.', 'x', 'o', '.', '.', 'o',
+                          '.', '.', '.', 'x', '.', '.', '.', '.', '.', 'o',
+                          '.', '.', 'x', '.', '.', 'o', 'x', '.', '.', '.',
+                          '.', '.', 'x', 'o', '.', '.', 'o', '.', '.', 'x',
+                          '.', '.', '.', '.', '.', '.', 'o', '.', 'x', '.',
+                          '.', 'o', '.', 'x', '.', '.', '.', '.', 'x', 'o',
+                          '.', '.', '.', 'o', '.', '.', 'x', '.', '.', '.',
+                          '.', '.', '.', 'o', '.', 'x', '.', '.', 'o', 'x',
+                          '.', '.', '.', '.', '.', 'x', 'o', '.', '.', 'o',
+                          '.', '.', '.', 'x', '.', '.', '.', '.', 'x', 'o',
+                          '.', 'x', '.', '.', '.', 'o', 'x', '.', 'x', 'x',
+                          '.', 'x', '.']
+  var ticker = [];
+  var backTicker = [];
 
-    function moe(){
-        var hue = (Math.floor(Math.random() * 16777215)).toString(16);
-        document.getElementById('bg').style.backgroundColor = '#' + hue;
+  function moe() {
+    var hue = (Math.floor(Math.random() * 16777215)).toString(16);
+    document.getElementById('bg').style.backgroundColor = '#' + hue;
 
-        //console.log(moe);
+    //console.log(moe);
 
-        var moe = ((moeExt + (Math.ceil(Math.random() * 23))) % 24);
-        moeExt= moe;
-        moeStr = moe.toString();
+    var moe = ((moeExt + (Math.ceil(Math.random() * 23))) % 24);
+    moeExt = moe;
+    var moeStr = moe.toString();
+    document.getElementById('bg').style.backgroundImage='url("./assets/img/'+moeStr+'.png")';
 
-        document.getElementById('bg').style.backgroundImage="url('./assets/img/"+moeStr+".png')";
-    }
+    //old sprite page function, did not have better efficiency
+    //    moeStr = (moe*-1280).toString();
+    //document.getElementById('moe').style.objectPosition=moeStr + 'px 0';
+    //console.log(moeStr);
+  }
 
-    var sound = new Howl({
-        src: ['./assets/weedloop2.ogg'],
-        volume: 0.5
-    });
+  var sound = new Howl({
+    src: ['./assets/weedloop2.ogg'],
+    volume: 0.5
+  });
 
-    var musicIndex = 0;
+  var musicIndex = 0;
 
-    function musicBox(){
-      document.getElementById("ticker").innerHTML = backTicker.join('') +
-      ' <span id="big">' + (restOfLifeRhythm[musicIndex] == '.' ? '   ' : restOfLifeRhythm[musicIndex]) + "</span> "
+  function musicBox() {
+    document.getElementById("ticker").innerHTML = backTicker.join('') +
+      ' <span id="big">' + (restOfLifeRhythm[musicIndex] == '.' ? ' ' : restOfLifeRhythm[musicIndex]) + "</span> "
       + ticker.join('');
-      if(restOfLifeRhythm[musicIndex] == 'x')
-      {
-        moe();
-      }
-      else if(restOfLifeRhythm[musicIndex] == 'o')
-      {
-        moe();
-      }
-      else if(restOfLifeRhythm[musicIndex] == '-')
-      {
-        moe();
-      }
-      musicIndex++;
-      if (musicIndex == restOfLifeRhythm.length)
-      {
-        musicIndex = 0;
-        sound.seek(0);
-      }
-      ticker.shift();
-      backTicker.pop();
-      ticker.push(restOfLifeRhythm[musicIndex%restOfLifeRhythm.length]);
-      backTicker.unshift(restOfLifeRhythm[musicIndex%restOfLifeRhythm.length]);
+    if (restOfLifeRhythm[musicIndex] == 'x') {
+      moe();
     }
-
-
-
-    document.getElementById("music").onclick = function () {
-        document.getElementById("music").style = "display: none";
-        //document.getElementById("moe").style = "display: inline";
-        for(var i = 0; i<20; i++)
-        {
-          ticker.push(restOfLifeRhythm[i]);
-          backTicker.unshift(restOfLifeRhythm[i]);
-        }
-        m = setInterval(musicBox, 365.85365853) //official time is 121.915
-        sound.play();
+    else if (restOfLifeRhythm[musicIndex] == 'o') {
+      moe();
     }
+    else if (restOfLifeRhythm[musicIndex] == '-') {
+      moe();
+    }
+    musicIndex++;
+    if (musicIndex == restOfLifeRhythm.length) {
+      musicIndex = 0;
+      sound.seek(0);
+    }
+    ticker.shift();
+    backTicker.pop();
+    ticker.push(restOfLifeRhythm[(musicIndex+19) % restOfLifeRhythm.length]);
+    backTicker.unshift(restOfLifeRhythm[(musicIndex+19) % restOfLifeRhythm.length]);
+    console.log(restOfLifeRhythm[musicIndex] == ticker[0] ? '' : musicIndex.toString() + ' ' + ticker[0]);
+  }
+
+
+
+  document.getElementById("music").onclick = function () {
+    document.getElementById("music").style = "display: none";
+    //document.getElementById("moe").style = "display: inline";
+    for (var i = 0; i < 20; i++) {
+      ticker.push(restOfLifeRhythm[i]);
+      backTicker.unshift(restOfLifeRhythm[i]);
+    }
+    m = setInterval(musicBox, 110) //official time is 121.951
+    sound.play();
+  }
 </script>
 
 </html>
