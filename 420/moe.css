@@ -2,6 +2,8 @@ body {
     background-color: black;
     background-blend-mode: color-burn;
     background-image: url('./assets/img/0.png');
+    background-size: 100%;
+    background-repeat: no-repeat;
 }
 img {
     width: 100%;
@@ -13,6 +15,7 @@ img {
   font-family: 'Press Start 2P', cursive;
   text-align: center;
   margin:auto;
+  color:#222;
 
 }
 /* loading controls */
