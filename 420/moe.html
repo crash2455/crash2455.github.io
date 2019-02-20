@@ -34,7 +34,7 @@
     }
 
     var sound = new Howl({
-        src: ['./assets/weedloop2.ogg'],
+        src: ['./assets/weedloop3.ogg'],
         loop: true,
         volume: 0.5,
     });
@@ -65,7 +65,6 @@
     document.getElementById("music").onclick = function () {
         document.getElementById("music").style = "display: none";
         document.getElementById("moe").style = "display: inline";
-        //t = setInterval(flash, 731.7073);
         m = setInterval(musicBox, 121.95121951)
         sound.play();
     }
