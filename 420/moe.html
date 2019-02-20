@@ -17,6 +17,8 @@
 
     var moeExt = 1;
 
+    var restOfLifeRhythm = ['x','.','.','o','.','.','x','.','.','.','.','.','.','o','.','x','.','.','o','.','x','.','.','.','.','x','o','.','.','.','o','.','.','x','.','.','.','.','.','o','.','.','x','.','.','o','x','.','.','.','.','.','x','o','.','.','o','.','.','x','.','.','.','.','.','.','o','.','x','.','.','.','.','x','.','.','.','.','x','o','.','.','.','o','.','.','x','.','.','.','.','.','.','o','.','x','.','.','o','x','.','.','.','.','.','x','o','.','.','o','.','.','.','x','.','.','.','.','.','o','.','.','x','.','.','o','x','.','.','.','.','.','x','o','.','.','o','.','.','x','.','.','.','.','.','.','o','.','x','.','.','o','.','x','.','.','.','.','x','o','.','.','.','o','.','.','x','.','.','.','.','.','.','o','.','x','.','.','o','x','.','.','.','.','.','x','o','.','.','o','.','.','.','x','.','.','.','.','x','o','.','x','.','.','.','o','x','.','x','x','.','x','.']
+
     function moe(){
         var hue = (Math.floor(Math.random() * 16777215)).toString(16);
         document.getElementById('seizure').style.backgroundColor = '#' + hue;
@@ -37,11 +39,34 @@
         volume: 0.5,
     });
 
+    var musicIndex = 0;
+
+    function musicBox(){
+      if(restOfLifeRhythm[musicIndex] == 'x')
+      {
+        moe();
+      }
+      else if(restOfLifeRhythm[musicIndex] == 'o')
+      {
+        moe();
+      }
+      else if(restOfLifeRhythm[musicIndex] == '-')
+      {
+        moe();
+      }
+      musicIndex++;
+      if (musicIndex == restOfLifeRhythm.length)
+      {
+        musicIndex = 0;
+        sound.seek(0);
+      }
+    }
+
     document.getElementById("music").onclick = function () {
         document.getElementById("music").style = "display: none";
         document.getElementById("moe").style = "display: inline";
         //t = setInterval(flash, 731.7073);
-        m = setInterval(moe, 731.7073)
+        m = setInterval(musicBox, 121.95121951)
         sound.play();
     }
 </script>
