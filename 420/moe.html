@@ -14,8 +14,9 @@
   <div class="box" id='left'></div>
   <div class="centerbox" id='center'></div>
   <div class="box" id='right'></div>
-  <div id='moe'></div>
+
 </div>
+<div id='moe'></div>
 
 </body>
 
@@ -25,7 +26,8 @@
 
   var moeExt = 1;
 
-  var restOfLifeRhythm = ['x', '.', '.', 'o', '.', '.', 'x', '.', '.', '.',
+  var restOfLifeRhythm = [
+    'x', '.', '.', 'o', '.', '.', 'x', '.', '.', '.',
     '.', '.', '.', 'o', '.', 'x', '.', '.', 'o', '.',
     'x', '.', '.', '.', '.', 'x', 'o', '.', '.', '.',
     'o', '.', '.', 'x', '.', '.', '.', '.', '.', 'o',
@@ -76,27 +78,35 @@
   var musicIndex = 0;
 
   function musicBox() {
+    document.getElementById("center").classList.remove('hidden');
+    document.getElementById("center").classList.remove('drop');
     document.getElementById("left").innerHTML = backTicker.join('');
     document.getElementById("center").innerHTML = (restOfLifeRhythm[musicIndex] == '.' ? ' ' : restOfLifeRhythm[musicIndex]) + "</span> "
     document.getElementById("right").innerHTML = ticker.join('');
     if (restOfLifeRhythm[musicIndex] == 'x') {
       moe();
-      document.getElementById('moe').classList.add('shake-vertical');
-      document.getElementById('moe').classList.remove('shake-horizontal');
+      document.getElementById("center").classList.add('hidden');
+      document.getElementById("center").classList.add('drop');
+      //document.getElementById('moe').classList.add('shake-vertical');
+      //document.getElementById('moe').classList.remove('shake-horizontal');
     }
     else if (restOfLifeRhythm[musicIndex] == 'o') {
       moe();
-      document.getElementById('moe').classList.remove('shake-vertical');
-      document.getElementById('moe').classList.add('shake-horizontal');
+      document.getElementById("center").classList.add('hidden');
+      document.getElementById("center").classList.add('drop');
+      //document.getElementById('moe').classList.remove('shake-vertical');
+      //document.getElementById('moe').classList.add('shake-horizontal');
     }
     else if (restOfLifeRhythm[musicIndex] == '-') {
       moe();
-      document.getElementById('moe').classList.remove('shake-vertical');
-      document.getElementById('moe').classList.remove('shake-horizontal');
+      document.getElementById("center").classList.add('hidden');
+      document.getElementById("center").classList.add('drop');
+      //document.getElementById('moe').classList.remove('shake-vertical');
+      //document.getElementById('moe').classList.remove('shake-horizontal');
     }
     else {
-      document.getElementById('moe').classList.remove('shake-vertical');
-      document.getElementById('moe').classList.remove('shake-horizontal');
+      //document.getElementById('moe').classList.remove('shake-vertical');
+      //document.getElementById('moe').classList.remove('shake-horizontal');
     }
     musicIndex++;
     if (musicIndex == restOfLifeRhythm.length) {
