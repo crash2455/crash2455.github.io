@@ -10,12 +10,8 @@
 
 <body id='moe'>
   <button id="music">Click me</button>
-  <div id='ticker'>
-  <div class="box" id='left'></div>
-  <div class="centerbox" id='center'></div>
-  <div class="box" id='right'></div>
-
-</div>
+  <div id='ticker'></div>
+  <div id ='beatDrop'></div>
 <!--<div id='moe'></div>-->
 
 </body>
@@ -26,7 +22,31 @@
 
   var moeExt = 1;
 
-  var restOfLifeRhythm = [
+  var rhythm = [
+    'x', '.', '.', 'o', '.', '.', 'x', '.', '.', '.',
+    '.', '.', '.', 'o', '.', 'x', '.', '.', 'o', '.',
+    'x', '.', '.', '.', '.', 'x', 'o', '.', '.', '.',
+    'o', '.', '.', 'x', '.', '.', '.', '.', '.', 'o',
+    '.', '.', 'x', '.', '.', 'o', 'x', '.', '.', '.',
+    '.', '.', 'x', 'o', '.', '.', 'o', '.', '.', 'x',
+    '.', '.', '.', '.', '.', '.', 'o', '.', 'x', '.',
+    '.', '.', '.', 'x', '.', '.', '.', '.', 'x', 'o',
+    '.', '.', '.', 'o', '.', '.', 'x', '.', '.', '.',
+    '.', '.', '.', 'o', '.', 'x', '.', '.', 'o', 'x',
+    '.', '.', '.', '.', '.', 'x', 'o', '.', '.', 'o',
+    '.', '.', '.', 'x', '.', '.', '.', '.', '.', 'o',
+    '.', '.', 'x', '.', '.', 'o', 'x', '.', '.', '.',
+    '.', '.', 'x', 'o', '.', '.', 'o', '.', '.', 'x',
+    '.', '.', '.', '.', '.', '.', 'o', '.', 'x', '.',
+    '.', 'o', '.', 'x', '.', '.', '.', '.', 'x', 'o',
+    '.', '.', '.', 'o', '.', '.', 'x', '.', '.', '.',
+    '.', '.', '.', 'o', '.', 'x', '.', '.', 'o', 'x',
+    '.', '.', '.', '.', '.', 'x', 'o', '.', '.', 'o',
+    '.', '.', '.', 'x', '.', '.', '.', '.', 'x', 'o',
+    '.', 'x', '.', '.', '.', 'o', 'x', '.', 'x', 'x',
+    '.', 'x', '.']
+
+    var restOfLife = [
     'x', '.', '.', 'o', '.', '.', 'x', '.', '.', '.',
     '.', '.', '.', 'o', '.', 'x', '.', '.', 'o', '.',
     'x', '.', '.', '.', '.', 'x', 'o', '.', '.', '.',
@@ -53,7 +73,10 @@
   var backTicker = [];
 
   function moe() {
-    var hue = (Math.floor(Math.random() * 16777215)).toString(16);
+    var r = (128+ (Math.floor(Math.random() * 128))).toString(16);
+    var g = (128+ (Math.floor(Math.random() * 128))).toString(16);
+    var b = (128+ (Math.floor(Math.random() * 128))).toString(16);
+    var hue = r+g+b;
     //document.getElementById('bg').style.backgroundColor = '#' + hue;
     document.getElementById('moe').style.backgroundColor = '#' + hue;
 
@@ -63,11 +86,6 @@
     moeExt = moe;
     var moeStr = moe.toString();
     document.getElementById('moe').style.backgroundImage = 'url("./assets/img/' + moeStr + '.png")';
-
-    //old sprite page function, did not have better efficiency
-    //    moeStr = (moe*-1280).toString();
-    //document.getElementById('moe').style.objectPosition=moeStr + 'px 0';
-    //console.log(moeStr);
   }
 
   var sound = new Howl({
@@ -78,33 +96,32 @@
   var musicIndex = 0;
 
   function musicBox() {
-    document.getElementById("center").classList.remove('hidden');
+    document.getElementById("beatDrop").classList.remove('hidden');
     //document.getElementById('moe').classList.remove('shake-vertical');
     //document.getElementById('moe').classList.remove('shake-horizontal');
-    document.getElementById("left").innerHTML = backTicker.join('');
-    document.getElementById("center").innerHTML = (restOfLifeRhythm[musicIndex] == '.' ? ' ' : restOfLifeRhythm[musicIndex]) + "</span> "
-    document.getElementById("right").innerHTML = ticker.join('');
-    if (restOfLifeRhythm[musicIndex] != '.') {
+    document.getElementById("ticker").innerHTML = backTicker.join('')+ticker.join('');
+    document.getElementById("beatDrop").innerHTML = (rhythm[musicIndex] == '.' ? ' ' : rhythm[musicIndex]) + "</span> "
+    if (rhythm[musicIndex] != '.') {
       moe();
-      document.getElementById("center").classList.add('hidden');
-      document.getElementById("center").classList.add('drop');
+      document.getElementById("beatDrop").classList.add('hidden');
+      document.getElementById("beatDrop").classList.add('drop');
     }
-    if (restOfLifeRhythm[musicIndex] == 'x') {
+    if (rhythm[musicIndex] == 'x') {
       //document.getElementById('moe').classList.add('shake-vertical');
     }
-    else if (restOfLifeRhythm[musicIndex] == 'o') {
+    else if (rhythm[musicIndex] == 'o') {
       //document.getElementById('moe').classList.add('shake-horizontal');
     }
     musicIndex++;
-    if (musicIndex == restOfLifeRhythm.length) {
+    if (musicIndex == rhythm.length) {
       musicIndex = 0;
       sound.seek(0);
     }
     ticker.shift();
     backTicker.pop();
-    ticker.push(restOfLifeRhythm[(musicIndex + 19) % restOfLifeRhythm.length]);
-    backTicker.unshift(restOfLifeRhythm[(musicIndex + 19) % restOfLifeRhythm.length]);
-    //console.log(restOfLifeRhythm[musicIndex] == ticker[0] ? '' : musicIndex.toString() + ' ' + ticker[0]);
+    ticker.push(rhythm[(musicIndex + 30) % rhythm.length]);
+    backTicker.unshift(rhythm[(musicIndex + 30) % rhythm.length]);
+    //console.log(rhythm[musicIndex] == ticker[0] ? '' : musicIndex.toString() + ' ' + ticker[0]);
   }
 
 
@@ -112,9 +129,9 @@
   document.getElementById("music").onclick = function () {
     document.getElementById("music").style = "display: none";
     //document.getElementById("moe").style = "display: inline";
-    for (var i = 0; i < 20; i++) {
-      ticker.push(restOfLifeRhythm[i]);
-      backTicker.unshift(restOfLifeRhythm[i]);
+    for (var i = 0; i < 30; i++) {
+      ticker.push(rhythm[i+1]);
+      backTicker.unshift(rhythm[i+1]);
     }
     m = setInterval(musicBox, 110) //official time is 121.951
     sound.play();
