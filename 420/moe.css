@@ -8,6 +8,7 @@ body{
   font-family: 'Press Start 2P', cursive;
 }
 
+/*gotta keep things secret until people click in */
 #bg{
     background-color: black;
     width:100%;
@@ -17,6 +18,8 @@ body{
     top: 0;
     left: 0;
 }
+
+/*the bread and butter of this hot nonsense*/
 #moe{
     background-color: black;
     background-blend-mode: color-burn;
@@ -40,29 +43,23 @@ img {
     top: 0;
     left: 0;
     mix-blend-mode: color-burn;
-
     z-index: -1
 }
 
-#center{
-  text-align: center;
-}
 button #music{
   position: relative;
   height: 2em;
   margin: auto;
 }
-.clearfix::after {
-  content: "";
-  clear: both;
-  display: table;
-}
+
 #ticker{
   font-size: 1em;
   text-align: center;
 }
-#beatdrop{
-  font-size: 3em;
+
+/*beats comin off the ticker will fall down and vanish*/
+#beatDrop{
+  font-size: 4em;
   text-align:center;
   color: white;
 }
@@ -74,4 +71,10 @@ button #music{
 .drop {
   animation-name: drop;
   animation-duration: .1s;
+}
+
+#menu {
+  color: white;
+  position: absolute;
+  bottom: 0;
 }
