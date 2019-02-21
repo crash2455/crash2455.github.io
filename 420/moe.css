@@ -77,4 +77,12 @@ button #music{
   color: white;
   position: absolute;
   bottom: 0;
+  right: 0;
+}
+
+#menu a{
+  color: black;
+}
+#menu a:hover{
+  color: white;
 }
