@@ -11,112 +11,91 @@
 <body id='moe'>
   <button id="music">Click me</button>
   <div id='ticker'></div>
-  <div id ='beatDrop'></div>
-<!--<div id='moe'></div>-->
+  <div id='beatDrop'></div>
 
 </body>
 
 <script>
+  //variables to hold onto timings for iterators
   var t;
   var m;
 
-  var moeExt = 1;
-
-  var rhythm = [
-    'x', '.', '.', 'o', '.', '.', 'x', '.', '.', '.',
-    '.', '.', '.', 'o', '.', 'x', '.', '.', 'o', '.',
-    'x', '.', '.', '.', '.', 'x', 'o', '.', '.', '.',
-    'o', '.', '.', 'x', '.', '.', '.', '.', '.', 'o',
-    '.', '.', 'x', '.', '.', 'o', 'x', '.', '.', '.',
-    '.', '.', 'x', 'o', '.', '.', 'o', '.', '.', 'x',
-    '.', '.', '.', '.', '.', '.', 'o', '.', 'x', '.',
-    '.', '.', '.', 'x', '.', '.', '.', '.', 'x', 'o',
-    '.', '.', '.', 'o', '.', '.', 'x', '.', '.', '.',
-    '.', '.', '.', 'o', '.', 'x', '.', '.', 'o', 'x',
-    '.', '.', '.', '.', '.', 'x', 'o', '.', '.', 'o',
-    '.', '.', '.', 'x', '.', '.', '.', '.', '.', 'o',
-    '.', '.', 'x', '.', '.', 'o', 'x', '.', '.', '.',
-    '.', '.', 'x', 'o', '.', '.', 'o', '.', '.', 'x',
-    '.', '.', '.', '.', '.', '.', 'o', '.', 'x', '.',
-    '.', 'o', '.', 'x', '.', '.', '.', '.', 'x', 'o',
-    '.', '.', '.', 'o', '.', '.', 'x', '.', '.', '.',
-    '.', '.', '.', 'o', '.', 'x', '.', '.', 'o', 'x',
-    '.', '.', '.', '.', '.', 'x', 'o', '.', '.', 'o',
-    '.', '.', '.', 'x', '.', '.', '.', '.', 'x', 'o',
-    '.', 'x', '.', '.', '.', 'o', 'x', '.', 'x', 'x',
-    '.', 'x', '.']
-
-    var restOfLife = [
-    'x', '.', '.', 'o', '.', '.', 'x', '.', '.', '.',
-    '.', '.', '.', 'o', '.', 'x', '.', '.', 'o', '.',
-    'x', '.', '.', '.', '.', 'x', 'o', '.', '.', '.',
-    'o', '.', '.', 'x', '.', '.', '.', '.', '.', 'o',
-    '.', '.', 'x', '.', '.', 'o', 'x', '.', '.', '.',
-    '.', '.', 'x', 'o', '.', '.', 'o', '.', '.', 'x',
-    '.', '.', '.', '.', '.', '.', 'o', '.', 'x', '.',
-    '.', '.', '.', 'x', '.', '.', '.', '.', 'x', 'o',
-    '.', '.', '.', 'o', '.', '.', 'x', '.', '.', '.',
-    '.', '.', '.', 'o', '.', 'x', '.', '.', 'o', 'x',
-    '.', '.', '.', '.', '.', 'x', 'o', '.', '.', 'o',
-    '.', '.', '.', 'x', '.', '.', '.', '.', '.', 'o',
-    '.', '.', 'x', '.', '.', 'o', 'x', '.', '.', '.',
-    '.', '.', 'x', 'o', '.', '.', 'o', '.', '.', 'x',
-    '.', '.', '.', '.', '.', '.', 'o', '.', 'x', '.',
-    '.', 'o', '.', 'x', '.', '.', '.', '.', 'x', 'o',
-    '.', '.', '.', 'o', '.', '.', 'x', '.', '.', '.',
-    '.', '.', '.', 'o', '.', 'x', '.', '.', 'o', 'x',
-    '.', '.', '.', '.', '.', 'x', 'o', '.', '.', 'o',
-    '.', '.', '.', 'x', '.', '.', '.', '.', 'x', 'o',
-    '.', 'x', '.', '.', '.', 'o', 'x', '.', 'x', 'x',
-    '.', 'x', '.']
+  //arrays for our visual beat tickers
   var ticker = [];
   var backTicker = [];
 
+  //external counter for last slide shown, starts initialized at 1
+  var moeExt = 1;
+
+  //song time finder
+  var seek = 0;
+
+  //song rhythm array storage
+  var restOfLife = ['x', '.', '.', 'o', '.', '.', 'x', '.', '.', '.', '.', '.', '.', 'o', '.', 'x', '.', '.', 'o', '.', 'x', '.', '.', '.', '.', 'x', 'o', '.', '.', '.', 'o', '.', '.', 'x', '.', '.', '.', '.', '.', 'o', '.', '.', 'x', '.', '.', 'o', 'x', '.', '.', '.', '.', '.', 'x', 'o', '.', '.', 'o', '.', '.', 'x', '.', '.', '.', '.', '.', '.', 'o', '.', 'x', '.', '.', '.', '.', 'x', '.', '.', '.', '.', 'x', 'o', '.', '.', '.', 'o', '.', '.', 'x', '.', '.', '.', '.', '.', '.', 'o', '.', 'x', '.', '.', 'o', 'x', '.', '.', '.', '.', '.', 'x', 'o', '.', '.', 'o', '.', '.', '.', 'x', '.', '.', '.', '.', '.', 'o', '.', '.', 'x', '.', '.', 'o', 'x', '.', '.', '.', '.', '.', 'x', 'o', '.', '.', 'o', '.', '.', 'x', '.', '.', '.', '.', '.', '.', 'o', '.', 'x', '.', '.', 'o', '.', 'x', '.', '.', '.', '.', 'x', 'o', '.', '.', '.', 'o', '.', '.', 'x', '.', '.', '.', '.', '.', '.', 'o', '.', 'x', '.', '.', 'o', 'x', '.', '.', '.', '.', '.', 'x', 'o', '.', '.', 'o', '.', '.', '.', 'x', '.', '.', '.', '.', 'x', 'o', '.', 'x', '.', '.', '.', 'o', 'x', '.', 'x', 'x', '.', 'x', '.']
+  var greenAndPurple = ['o','.','.','.','.','-','.','.','.','.','x','.','.','.','.','.','o','.','.','o','.','.','.','.','o','.','.','o','.','.','.','.','.','x','.','.','.','.','-','.','.','-','.','o','.','.','.','.','.','-','.','.','.','.','x','.','.','.','.','.','o','.','.','o','.','.','.','.','o','.','.','o','.','.','.','.','.','x','.','o','.','.','.','.','.','.','.','.','o','.','.','.','.','-','.','.','.','.','x','.','.','.','.','.','o','.','.','o','.','.','.','.','o','.','.','o','.','.','.','.','.','x','.','.','.','.','.','-','-','-','-','.','o','.','.','.','.','.','.','.','.','.','.','x','.','.','.','.','.','.','.','o','.','.','o','.','o','.','.','o','.','.','.','.','.','x','.','o','.','.','.','.','.','.','.','.','o','.','.','.','.','-','.','.','.','.','.','x','.','.','.','.','o','.','.','o','.','.','.','.','o','.','.','o','.','.','.','.','x','.','.','.','.','.','-','.','.','-','.','.','o','.','.','.','.','.','.','.','.','.','x','.','.','.','.','.','o','.','.','o','.','.','.','.','o','.','.','o','.','.','.','.','.','x','.','o','.','.','.','.','.','.','.','.','o','.','.','.','.','-','.','.','.','.','.','x','.','.','.','.','o','.','.','o','.','.','.','.','o','.','.','o','.','.','.','.','.','x','.','.','.','.','.','-','-','-','-','.','o','.','.','.','.','-','.','.','.','.','.','x','.','.','.','.','.','.','.','o','.','.','o','.','o','.','.','o','.','.','.','.','x','.','.','o','.','.','.','.','.','.','.','.','.','.','.']
+
+  //stock rhythm, starts loaded with first song
+  var rhythm = greenAndPurple;
+
   function moe() {
-    var r = (128+ (Math.floor(Math.random() * 128))).toString(16);
-    var g = (128+ (Math.floor(Math.random() * 128))).toString(16);
-    var b = (128+ (Math.floor(Math.random() * 128))).toString(16);
-    var hue = r+g+b;
-    //document.getElementById('bg').style.backgroundColor = '#' + hue;
+    //random color generator, builds r g and b with some bias towards lighter colors
+    var r = (128 + (Math.floor(Math.random() * 128))).toString(16);
+    var g = (128 + (Math.floor(Math.random() * 128))).toString(16);
+    var b = (128 + (Math.floor(Math.random() * 128))).toString(16);
+    var hue = r + g + b;
     document.getElementById('moe').style.backgroundColor = '#' + hue;
 
     //console.log(moe);
 
+    //slide changer, biased to not pick the same image twice
     var moe = ((moeExt + (Math.ceil(Math.random() * 23))) % 24);
     moeExt = moe;
     var moeStr = moe.toString();
     document.getElementById('moe').style.backgroundImage = 'url("./assets/img/' + moeStr + '.png")';
   }
 
+  //a way to make audio work smoothly, also load up one soundtrack to play 7 songs
   var sound = new Howl({
     src: ['./assets/weedloop2.ogg'],
+    sprite: {
+      restOfLife : [0,25000],
+      greenAndPurple: [30000, 55000]
+    },
     volume: 0.5
   });
 
+  //external counter to keep track of where we are in the sample
   var musicIndex = 0;
 
   function musicBox() {
+    //a bunch of class removals to avoid animation lingering
     document.getElementById("beatDrop").classList.remove('hidden');
     //document.getElementById('moe').classList.remove('shake-vertical');
     //document.getElementById('moe').classList.remove('shake-horizontal');
-    document.getElementById("ticker").innerHTML = backTicker.join('')+ticker.join('');
-    document.getElementById("beatDrop").innerHTML = (rhythm[musicIndex] == '.' ? ' ' : rhythm[musicIndex]) + "</span> "
+
+    document.getElementById("ticker").innerHTML = backTicker.join('') + ticker.join('');
+    document.getElementById("beatDrop").innerHTML = (rhythm[musicIndex] == '.' || rhythm[musicIndex] == '-' ? ' ' : rhythm[musicIndex]) + "</span> "
     if (rhythm[musicIndex] != '.') {
       moe();
       document.getElementById("beatDrop").classList.add('hidden');
       document.getElementById("beatDrop").classList.add('drop');
     }
     if (rhythm[musicIndex] == 'x') {
+      //if i can ever figure out how to get the shake to work correctly this will shake vertical
       //document.getElementById('moe').classList.add('shake-vertical');
     }
     else if (rhythm[musicIndex] == 'o') {
+      //if i can ever figure out how to get the shake to work correctly this will shake horizontal
       //document.getElementById('moe').classList.add('shake-horizontal');
     }
+    //increment index
     musicIndex++;
+    //restart loop when we run out of beats
     if (musicIndex == rhythm.length) {
       musicIndex = 0;
-      sound.seek(0);
+      sound.seek(seek);
     }
+    //add and remove beats to our visual beat ticker up top
     ticker.shift();
     backTicker.pop();
     ticker.push(rhythm[(musicIndex + 30) % rhythm.length]);
@@ -125,16 +104,21 @@
   }
 
 
-
+  //chrome actually won't allow audio to autoplay
+  //so we made this function which also gives our assets time to load
   document.getElementById("music").onclick = function () {
     document.getElementById("music").style = "display: none";
-    //document.getElementById("moe").style = "display: inline";
+    //populate ticker with new beats
     for (var i = 0; i < 30; i++) {
-      ticker.push(rhythm[i+1]);
-      backTicker.unshift(rhythm[i+1]);
+      ticker.push(rhythm[i + 1]);
+      backTicker.unshift(rhythm[i + 1]);
     }
-    m = setInterval(musicBox, 110) //official time is 121.951
-    sound.play();
+    //timings for my shitty laptop:
+    //rest of my life: 110ms
+    //green and purple: 66ms
+    m = setInterval(musicBox, 66)
+    seek = 30;
+    sound.play('greenAndPurple');
   }
 </script>
 
