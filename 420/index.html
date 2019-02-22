@@ -119,11 +119,36 @@
 
   */
   function moe() {
+    var rgb = [0,0,0];
+
     //random color generator, builds r g and b with some bias towards lighter colors
-    var r = (128 + (Math.floor(Math.random() * 128))).toString(16);
-    var g = (128 + (Math.floor(Math.random() * 128))).toString(16);
-    var b = (128 + (Math.floor(Math.random() * 128))).toString(16);
-    var hue = r + g + b;
+    for (var i=0; i<rgb.length; i++){
+      var coinflip = (Math.floor(Math.random() * 3))
+      if (coinflip == 0)
+      {
+        rgb[i] = (128+ (Math.floor(Math.random() * 128)))
+      }
+      if (coinflip == 1)
+      {
+        rgb[i] = (192+(Math.floor(Math.random() * 64)))
+      }
+      if (coinflip == 2)
+      {
+        rgb[i] = (240+(Math.floor(Math.random() * 16)))
+      }
+    }
+    //some hardcoded bias to get more fluorescent burns
+    if (rgb[0] < 240 && rgb[1] < 240 && rgb[2] < 240){
+      rgb[(Math.floor(Math.random() * 3))] = 255;
+    }
+    if (rgb[0] > 128 && rgb[1] > 128 && rgb[2] > 128){
+      rgb[(Math.floor(Math.random() * 3))] -= 100;
+    }
+    if (rgb[0] > 220 && rgb[2] > 220){
+      rgb[0] -= 20;
+    }
+
+    var hue = rgb[0].toString(16)+rgb[1].toString(16)+rgb[2].toString(16);
     document.getElementById('moe').style.backgroundColor = '#' + hue;
     document.getElementById('bg').style.backgroundColor = '#' + hue;
     document.getElementById('color').innerHTML = '0x' + hue;
