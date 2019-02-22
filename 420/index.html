@@ -1,6 +1,7 @@
 <html>
 
 <head>
+  <title>MOKE SWEED IN JS</title>
   <link rel="stylesheet" type="text/css" href="moe.css">
   <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
   <script src="./howler.js-master/dist/howler.js"></script>
@@ -160,8 +161,6 @@
     //a bunch of class removals to avoid animation lingering
     document.getElementById("beatDrop").classList.remove('hidden');
     document.getElementById('moe').classList.remove('blur');
-    //document.getElementById('moe').classList.remove('shake-vertical');
-    //document.getElementById('moe').classList.remove('shake-horizontal');
 
     document.getElementById("ticker").innerHTML = backTicker.join('') + ticker.join('');
     document.getElementById("beatDrop").innerHTML = (rhythm[musicIndex] == '.' || rhythm[musicIndex] == '-' ? ' ' : rhythm[musicIndex]) + "</span> "
@@ -170,15 +169,8 @@
       document.getElementById("beatDrop").classList.add('hidden');
       document.getElementById("beatDrop").classList.add('drop');
     }
-    if (rhythm[musicIndex] == 'x') {
+    if (rhythm[musicIndex] == 'x' || rhythm[musicIndex] == 'o') {
       document.getElementById('moe').classList.add('blur');
-      //if i can ever figure out how to get the shake to work correctly this will shake vertical
-      //document.getElementById('moe').classList.add('shake-vertical');
-    }
-    else if (rhythm[musicIndex] == 'o') {
-      document.getElementById('moe').classList.add('blur');
-      //if i can ever figure out how to get the shake to work correctly this will shake horizontal
-      //document.getElementById('moe').classList.add('shake-horizontal');
     }
     //increment index
     musicIndex++;
