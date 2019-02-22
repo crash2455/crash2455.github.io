@@ -127,7 +127,7 @@
 
     if (many) { //if we have character changer on then change characters
       //slide changer, biased to not pick the same image twice
-      var moe = ((moeExt + (Math.ceil(Math.random() * 23))) % 24);
+      var moe = ((moeExt + (Math.ceil(Math.random() * 11))) % 24);
       moeExt = moe;
       var moeStr = moe.toString();
       document.getElementById('moe').style.backgroundImage = 'url("./assets/img/' + moeStr + '.png")';
