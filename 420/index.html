@@ -8,7 +8,8 @@
 </head>
 
 
-<body id='moe'>
+<body id="bg">
+  <div id='moe'></div>
   <div id='splash'>THIS IS A TRIBUTE TO 420.MOE MADE IN HTML AND JAVASCRIPT
     <br><br><br><br><a href="#" id="start">CLICK HERE TO MOKE SWEED</a></div>
   <div id='ticker'></div>
@@ -123,6 +124,7 @@
     var b = (128 + (Math.floor(Math.random() * 128))).toString(16);
     var hue = r + g + b;
     document.getElementById('moe').style.backgroundColor = '#' + hue;
+    document.getElementById('bg').style.backgroundColor = '#' + hue;
     document.getElementById('color').innerHTML = '0x' + hue;
 
     if (many) { //if we have character changer on then change characters
@@ -157,6 +159,7 @@
   function musicBox() {
     //a bunch of class removals to avoid animation lingering
     document.getElementById("beatDrop").classList.remove('hidden');
+    document.getElementById('moe').classList.remove('blur');
     //document.getElementById('moe').classList.remove('shake-vertical');
     //document.getElementById('moe').classList.remove('shake-horizontal');
 
@@ -168,10 +171,12 @@
       document.getElementById("beatDrop").classList.add('drop');
     }
     if (rhythm[musicIndex] == 'x') {
+      document.getElementById('moe').classList.add('blur');
       //if i can ever figure out how to get the shake to work correctly this will shake vertical
       //document.getElementById('moe').classList.add('shake-vertical');
     }
     else if (rhythm[musicIndex] == 'o') {
+      document.getElementById('moe').classList.add('blur');
       //if i can ever figure out how to get the shake to work correctly this will shake horizontal
       //document.getElementById('moe').classList.add('shake-horizontal');
     }
