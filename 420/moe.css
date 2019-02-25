@@ -99,7 +99,7 @@ img {
 
 /*hud settings*/
 #hud{
-  width:150px;
+  width:225px;
   left: 0;
 }
 #hud ul{
@@ -109,7 +109,7 @@ img {
 
 /*menu settings*/
 #menu {
-  width:260px;
+  width:280px;
   right: 0;
   text-align: right;
 }
