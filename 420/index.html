@@ -17,7 +17,7 @@
   <div id='beatDrop' class="hideable"></div>
 
   <div id='menu' class="bottom invis">
-    <ul id='songMenu' class="invis">
+    <ul id='songMenu' class="invis hideable">
       <li><a href="#" id="restOfMyLife">REST OF MY LIFE</a></li>
       <li><a href="#" id="greenAndPurple">GREEN AND PURPLE</a></li>
       <li><a href="#" id="holdItIn">HOLD IT IN</a></li>
@@ -25,7 +25,7 @@
       <li><a href="#" id="becuzIGotHi">BECUZ I GOT HI</a></li>
       <li><a href="#" id="fourtwenty">#420FGT</a></li>
     </ul>
-    <ul id='waifuMenu' class="invis">
+    <ul id='waifuMenu' class="invis hideable">
         <li><a href="#" id="agiri">AGIRI</a></li>
         <li><a href="#" id="akarin">AKARIN</a></li>
         <li><a href="#" id="astraea">ASTRAEA</a></li>
@@ -415,13 +415,18 @@
       document.getElementById("showHide").innerHTML = '&#x2191;';
       for(var i=0; i<elements.length; i++){
         elements[i].classList.add('invis');
+
       }
+      menu = 0;
       hide = true;
     }
     else{
       document.getElementById("showHide").innerHTML = '&#x2193;';
       for(var i=0; i<elements.length; i++){
-        elements[i].classList.remove('invis');
+        if(elements[i].id != 'waifuMenu' && elements[i].id != 'songMenu')
+        {
+          elements[i].classList.remove('invis');
+        }
       }
       hide = false;
     }
