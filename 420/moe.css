@@ -72,6 +72,10 @@ img {
   opacity: 0;
   transition: visibility 0s .1s, opacity .1s linear;
 }
+.snap
+{
+  opacity: 100%;
+}
 .drop {
   animation-name: drop;
   animation-duration: .1s;
