@@ -5,27 +5,37 @@
   <link rel="stylesheet" type="text/css" href="moe.css">
   <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
   <script src="./howler.js-master/dist/howler.js"></script>
-  <link rel="stylesheet" type="text/css" href="https://csshake.surge.sh/csshake.min.css">
+  <script src="./assets/script/caman.min.js"></script>
+  <script src="./assets/script/velocity.min.js"></script>
 </head>
 
 
 <body id="bg">
-  <div id='moe'></div>
-  <div id='splash'>THIS IS A TRIBUTE TO 420.MOE MADE IN HTML AND JAVASCRIPT
-    <br><br><br><br><a href="#" id="start">CLICK HERE TO MOKE SWEED</a></div>
-  <div id='ticker' class="hideable"></div>
-  <div id='beatDrop' class="hideable"></div>
+  <svg xmlns="http://www.w3.org/2000/svg" version="1.1" class="filters invis">
+    <defs>
+      <filter id="blur">
+        <feGaussianBlur in="SourceGraphic" stdDeviation="0,0" />
+      </filter>
+    </defs>
+  </svg>
 
-  <div id='menu' class="bottom invis">
-    <ul id='songMenu' class="invis hideable">
-      <li><a href="#" id="restOfMyLife">REST OF MY LIFE</a></li>
-      <li><a href="#" id="greenAndPurple">GREEN AND PURPLE</a></li>
-      <li><a href="#" id="holdItIn">HOLD IT IN</a></li>
-      <li><a href="#" id="smokinRollin">SMOKIN ROLLIN</a></li>
-      <li><a href="#" id="becuzIGotHi">BECUZ I GOT HI</a></li>
-      <li><a href="#" id="fourtwenty">#420FGT</a></li>
-    </ul>
-    <ul id='waifuMenu' class="invis hideable">
+    <div id="moe"></div>
+
+    <div id='splash'>THIS IS A TRIBUTE TO 420.MOE MADE IN HTML AND JAVASCRIPT
+      <br><br><br><br><a href="#" id="start">CLICK HERE TO MOKE SWEED</a></div>
+    <div id='ticker' class="hideable"></div>
+    <div id='beatDrop' class="hideable"></div>
+
+    <div id='menu' class="bottom invis">
+      <ul id='songMenu' class="invis hideable">
+        <li><a href="#" id="restOfMyLife">REST OF MY LIFE</a></li>
+        <li><a href="#" id="greenAndPurple">GREEN AND PURPLE</a></li>
+        <li><a href="#" id="holdItIn">HOLD IT IN</a></li>
+        <li><a href="#" id="smokinRollin">SMOKIN ROLLIN</a></li>
+        <li><a href="#" id="becuzIGotHi">BECUZ I GOT HI</a></li>
+        <li><a href="#" id="fourtwenty">#420FGT</a></li>
+      </ul>
+      <ul id='waifuMenu' class="invis hideable">
         <li><a href="#" id="agiri">AGIRI</a></li>
         <li><a href="#" id="akarin">AKARIN</a></li>
         <li><a href="#" id="astraea">ASTRAEA</a></li>
@@ -51,23 +61,23 @@
         <li><a href="#" id="renge">RENGE</a></li>
         <li><a href="#" id="suiseiseki">SUISEISEKI</a></li>
       </ul>
-    <span class="hideable">
-    <a href="#" id="oneMany">MANY</a>
-    <a href="#" id="waifuList">CHARACTERS</a>
-    <a href="#" id="songList">SONGS</a>
-    </span>
-    <a href="#" id="showHide">&#x2193;</a>
-  </div>
+      <span class="hideable">
+        <a href="#" id="oneMany">MANY</a>
+        <a href="#" id="waifuList">CHARACTERS</a>
+        <a href="#" id="songList">SONGS</a>
+      </span>
+      <a href="#" id="showHide">&#x2193;</a>
+    </div>
 
-  <div id='hud' class="bottom invis">
-    <ul class="hideable">
-      <li>T: <span id="track"></span></li>
-      <li>B: <span id="beat"></span></li>
-      <li>C: <span id="color"></span></li>
-      <li>I: <span id="character"></span></li>
-    </ul>
-    <a href="http://420.moe">420.MOE</a>
-  </div>
+    <div id='hud' class="bottom invis">
+      <ul class="hideable">
+        <li>T: <span id="track"></span></li>
+        <li>B: <span id="beat"></span></li>
+        <li>C: <span id="color"></span></li>
+        <li>I: <span id="character"></span></li>
+      </ul>
+      <a href="http://420.moe">420.MOE</a>
+    </div>
 </body>
 
 <script>
@@ -103,12 +113,12 @@
   var restOfLife = ['x', '.', '.', 'o', '.', '.', 'x', '.', '.', '.', '.', '.', '.', 'o', '.', 'x', '.', '.', 'o', '.', 'x', '.', '.', '.', '.', 'x', 'o', '.', '.', '.', 'o', '.', '.', 'x', '.', '.', '.', '.', '.', 'o', '.', '.', 'x', '.', '.', 'o', 'x', '.', '.', '.', '.', '.', 'x', 'o', '.', '.', 'o', '.', '.', 'x', '.', '.', '.', '.', '.', '.', 'o', '.', 'x', '.', '.', '.', '.', 'x', '.', '.', '.', '.', 'x', 'o', '.', '.', '.', 'o', '.', '.', 'x', '.', '.', '.', '.', '.', '.', 'o', '.', 'x', '.', '.', 'o', 'x', '.', '.', '.', '.', '.', 'x', 'o', '.', '.', 'o', '.', '.', '.', 'x', '.', '.', '.', '.', '.', 'o', '.', '.', 'x', '.', '.', 'o', 'x', '.', '.', '.', '.', '.', 'x', 'o', '.', '.', 'o', '.', '.', 'x', '.', '.', '.', '.', '.', '.', 'o', '.', 'x', '.', '.', 'o', '.', 'x', '.', '.', '.', '.', 'x', 'o', '.', '.', '.', 'o', '.', '.', 'x', '.', '.', '.', '.', '.', '.', 'o', '.', 'x', '.', '.', 'o', 'x', '.', '.', '.', '.', '.', 'x', 'o', '.', '.', 'o', '.', '.', '.', 'x', '.', '.', '.', '.', 'x', 'o', '.', 'x', '.', '.', '.', 'o', 'x', '.', 'x', 'x', '.', 'x', '.'];
   var greenAndPurple = ['o', '.', '.', '.', '.', '-', '.', '.', '.', '.', 'x', '.', '.', '.', '.', '.', 'o', '.', '.', 'o', '.', '.', '.', '.', 'o', '.', '.', 'o', '.', '.', '.', '.', '.', 'x', '.', '.', '.', '.', '-', '.', '.', '-', '.', 'o', '.', '.', '.', '.', '.', '-', '.', '.', '.', '.', 'x', '.', '.', '.', '.', '.', 'o', '.', '.', 'o', '.', '.', '.', '.', 'o', '.', '.', 'o', '.', '.', '.', '.', '.', 'x', '.', 'o', '.', '.', '.', '.', '.', '.', '.', '.', 'o', '.', '.', '.', '.', '-', '.', '.', '.', '.', 'x', '.', '.', '.', '.', '.', 'o', '.', '.', 'o', '.', '.', '.', '.', 'o', '.', '.', 'o', '.', '.', '.', '.', '.', 'x', '.', '.', '.', '.', '.', '-', '-', '-', '-', '.', 'o', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', 'x', '.', '.', '.', '.', '.', '.', '.', 'o', '.', '.', 'o', '.', 'o', '.', '.', 'o', '.', '.', '.', '.', '.', 'x', '.', 'o', '.', '.', '.', '.', '.', '.', '.', '.', 'o', '.', '.', '.', '.', '-', '.', '.', '.', '.', '.', 'x', '.', '.', '.', '.', 'o', '.', '.', 'o', '.', '.', '.', '.', 'o', '.', '.', 'o', '.', '.', '.', '.', 'x', '.', '.', '.', '.', '.', '-', '.', '.', '-', '.', '.', 'o', '.', '.', '.', '.', '.', '.', '.', '.', '.', 'x', '.', '.', '.', '.', '.', 'o', '.', '.', 'o', '.', '.', '.', '.', 'o', '.', '.', 'o', '.', '.', '.', '.', '.', 'x', '.', 'o', '.', '.', '.', '.', '.', '.', '.', '.', 'o', '.', '.', '.', '.', '-', '.', '.', '.', '.', '.', 'x', '.', '.', '.', '.', 'o', '.', '.', 'o', '.', '.', '.', '.', 'o', '.', '.', 'o', '.', '.', '.', '.', '.', 'x', '.', '.', '.', '.', '.', '-', '-', '-', '-', '.', 'o', '.', '.', '.', '.', '-', '.', '.', '.', '.', '.', 'x', '.', '.', '.', '.', '.', '.', '.', 'o', '.', '.', 'o', '.', 'o', '.', '.', 'o', '.', '.', '.', '.', 'x', '.', '.', 'o', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.'];
   var holdItIn = ['o', '.', '.', '.', '.', '.', '.', 'x', '.', '.', '.', '.', '.', 'o', 'o', 'o', '.', '.', '.', '.', '.', '.', '.', 'x', '.', '.', '.', '.', '.', '.', '.', 'o', '.', '.', '.', '.', '.', '.', 'x', '.', '.', '.', '.', '.', 'o', 'o', 'o', '.', '.', '.', '.', '.', '.', '.', 'x', '.', '.', '.', 'o', '.', '.', '.', 'o', '.', '.', '.', '.', '.', '.', '.', 'x', '.', '.', '.', '.', '.', 'o', 'o', 'o', '.', '.', '.', '.', '.', '.', 'x', '.', '.', '.', '.', '.', '.', '.', 'o', '.', '.', '.', '.', '.', '.', '.', 'x', '.', '.', '.', '.', '.', 'o', 'o', 'o', '.', '.', '.', '.', '.', '.', '.', 'x', '.', '.', '.', 'o', '.', '.', '.', 'o', '.', '.', '.', '.', '.', '.', 'x', '.', '.', '.', '.', '.', 'o', 'o', 'o', '.', '.', '.', '.', '.', '.', '.', 'x', '.', '.', '.', '.', '.', '.', '.', 'o', '.', '.', '.', '.', '.', '.', '.', 'x', '.', '.', '.', '.', 'o', 'o', 'o', '.', '.', '.', '.', '.', '.', '.', 'x', '.', '.', '.', 'o', '.', '.', '.', 'o', '.', '.', '.', '.', '.', '.', '.', 'x', '.', '.', '.', '.', '.', 'o', 'o', 'o', '.', '.', '.', '.', '.', '.', '.', 'x', '.', '.', '.', '.', '.', '.', 'o', '.', '.', '.', '.', '.', '.', '.', 'x', '.', '.', '.', '.', '.', 'o', 'o', 'o', '-', '-', '-', '-', '-', '-', '-', 'x', '-', '-', '-', 'o', '-', '-'];
-  var smokinRollin = ['.','o', '.', '.', 'o', 'x', '.', '.', 'o', '.', '.', '.', 'o', 'o', '.', '.', 'x', 'o', '.', '.', '.', 'o', '.', '.', 'o', '.', 'x', '.', 'o', '.', '.', '.', 'o', 'o', '.', '.', 'x', 'o', '.', '.', '.', 'o', '.', '.', 'o', '.', 'x', '.', 'o', '.', '.', '.', 'o', 'o', '.', '.', 'x', 'o', '.', '.', '.', 'o', '.', '.', 'o', '.', 'x', '.', 'o', '.', '.', '.', 'o', 'o', '.', '.', 'x', 'o','.','.'];
+  var smokinRollin = ['.', 'o', '.', '.', 'o', 'x', '.', '.', 'o', '.', '.', '.', 'o', 'o', '.', '.', 'x', 'o', '.', '.', '.', 'o', '.', '.', 'o', '.', 'x', '.', 'o', '.', '.', '.', 'o', 'o', '.', '.', 'x', 'o', '.', '.', '.', 'o', '.', '.', 'o', '.', 'x', '.', 'o', '.', '.', '.', 'o', 'o', '.', '.', 'x', 'o', '.', '.', '.', 'o', '.', '.', 'o', '.', 'x', '.', 'o', '.', '.', '.', 'o', 'o', '.', '.', 'x', 'o', '.', '.'];
   var becuzIGotHi = ['x', '.', '.', '.', '.', '.', 'x', '.', '.', '.', 'o', 'o', '.', '.', '.', '.', '.', 'x', '.', '.', '.', '.', '.', 'o', '.', '.', '.', '.', 'x', '.', '.', '.', '.', 'o', 'o', '.', '.', 'o', '.', '.', 'x', 'o', 'o', '.', '.', 'o', '.', '.', '.', '.', '.', 'x', '.', '.', '.', 'o', 'o', '.', '.', '.', '.', '.', 'x', '.', '.', '.', '.', '.', 'o', '.', '.', '.', '.', 'x', '.', '.', '.', '.', 'o', 'o', '.', '.', 'o', '.', '.', 'x', 'o', 'o', '.', '.', 'o', '.', '.', '.', '.', '.', 'x', '.', '.', '.', 'o', 'o', '.', '.', '.', '.', '.', 'x', '.', '.', '.', '.', '.', 'o', '.', '.', '.', '.', 'x', '.', '.', '.', '.', 'o', 'o', '.', '.', 'o', '.', '.', 'x', 'o', 'o', '.', '.', 'o', '.', '.', '.', '.', '.', 'x', '.', '.', '.', 'o', 'o', '.', '.', '.', '.', '.', 'x', '.', '.', '.', '.', '.', 'o', '.', '.', '.', '.', 'x', '.', '.', '.', 'o', '.', 'o', '.', '.', 'o', '.', '.', 'x', 'o', 'o', '.', '.', 'x', '.', '.', '.', '.', '.', 'x', '.', '.', '.', 'o', 'o', '.', '.', '.', '.', '.', 'x', '.', '.', '.', '.', '.', 'o', '.', '.', '.', '.', 'x', '.', '.', '.', 'o', '.', 'o', '.', '.', 'o', '.', '.', 'x', 'o', 'o', '.', '.', 'o', '.', '.', '.', '.', '.', 'x', '.', '.', '.', 'o', 'o', '.', '.', '.', '.', '.', 'x', '.', '.', '.', '.', '.', 'o', '.', '.', '.', '.', 'x', '.', '.', '.', 'o', '.', 'o', '.', '.', 'o', '.', '.', 'x', 'o', 'o', '.', '.', 'o', '.', '.', '.', '.', '.', 'x', '.', '.', '.', 'o', 'o', '.', '.', '.', '.', '.', 'x', '.', '.', '.', '.', '.', 'o', '.', '.', '.', '.', 'x', '.', '.', '.', 'o', '.', 'o', '.', '.', 'o', '.', '.', 'x', 'o', 'o', '.', '.', 'o', '.', '.', '.', '.', '.', 'x', '.', '.', '.', 'o', 'o', '.', '.', '.', '.', '.', 'x', '.', '.', '.', '.', '.', 'o', '.', 'o', '.', '.', 'x', '.', 'o', 'o', 'o', '.', 'o', '.', '.', 'o', '.', 'x', '.', 'o', 'o', '.', '.', '.']
-  var fourtwenty = ['o', '.', '.', '.', 'x', '.', '.', '.', 'o', '.', '.', '.', 'x', '.', 'o', '.', 'o', '.', '.', '.', 'x', '.', '.', '.', 'o', '.', '.', '.', 'x', '.', 'o', '.', 'o', '.', '.', '.', 'x', '.', '.', '.', 'o', '.', '.', '.', 'x', '.', 'o', '.', 'o', '.', '.', '.', 'x', '.', '.', '.', 'o', '.', '.', '.', 'x', '.', 'o', '.', 'o', '.', '.', '.', 'x', '.', '.', '.', 'o', '.', '.', '.', 'x', '.', 'o', '.', 'o', '.', '.', '.', 'x', '.', '.', '.', '.', 'o', '.', '.', '.', 'x', '.', 'o', '.', 'o', '.', '.', 'x', '.', '.', '.', '.', 'o', '.', '.', '.', 'x', '.', 'o', '.', 'o', '.', '.', '.', 'o', '.', '.', '.', 'o', '.', '.', '.', 'x', '.', '.', '.', 'o', '.', '.', '.', 'x', '.', '.', '.', 'o', '.', '.', '.', 'x', '.', 'o', '.', 'o', '.', '.', '.', 'x', '.', '.', '.', 'o', '.', '.', '.', '.', 'x', '.', 'o', '.', 'o', '.', '.', 'x', '.', '.', '.', 'o', '.', '.', '.', 'x', '.', 'o', '.', 'o', '.', '.', '.', '.', 'x', '.', '.', 'o', '.', '.', '.', '.', 'x', '.', 'o', '.', 'o', '.', '.', '.', 'x', '.', '.', '.', 'o', '.', '.', '.', 'x', '.', 'o', '.', 'o', '.', '.', '.', 'x', '.', '.', '.', 'o', '.', '.', '.', '.', 'x', '.', 'o', '.', 'o', '.', '.', 'x', '.', '.', '.', 'o', '.', '.', '.', 'x', '.', 'o', '.', 'o', '.', '.', '.', 'o', '.', '.', '.', 'o', '.', '.', '.', 'o','.','.','.','.']
+  var fourtwenty = ['o', '.', '.', '.', 'x', '.', '.', '.', 'o', '.', '.', '.', 'x', '.', 'o', '.', 'o', '.', '.', '.', 'x', '.', '.', '.', 'o', '.', '.', '.', 'x', '.', 'o', '.', 'o', '.', '.', '.', 'x', '.', '.', '.', 'o', '.', '.', '.', 'x', '.', 'o', '.', 'o', '.', '.', '.', 'x', '.', '.', '.', 'o', '.', '.', '.', 'x', '.', 'o', '.', 'o', '.', '.', '.', 'x', '.', '.', '.', 'o', '.', '.', '.', 'x', '.', 'o', '.', 'o', '.', '.', '.', 'x', '.', '.', '.', '.', 'o', '.', '.', '.', 'x', '.', 'o', '.', 'o', '.', '.', 'x', '.', '.', '.', '.', 'o', '.', '.', '.', 'x', '.', 'o', '.', 'o', '.', '.', '.', 'o', '.', '.', '.', 'o', '.', '.', '.', 'x', '.', '.', '.', 'o', '.', '.', '.', 'x', '.', '.', '.', 'o', '.', '.', '.', 'x', '.', 'o', '.', 'o', '.', '.', '.', 'x', '.', '.', '.', 'o', '.', '.', '.', '.', 'x', '.', 'o', '.', 'o', '.', '.', 'x', '.', '.', '.', 'o', '.', '.', '.', 'x', '.', 'o', '.', 'o', '.', '.', '.', '.', 'x', '.', '.', 'o', '.', '.', '.', '.', 'x', '.', 'o', '.', 'o', '.', '.', '.', 'x', '.', '.', '.', 'o', '.', '.', '.', 'x', '.', 'o', '.', 'o', '.', '.', '.', 'x', '.', '.', '.', 'o', '.', '.', '.', '.', 'x', '.', 'o', '.', 'o', '.', '.', 'x', '.', '.', '.', 'o', '.', '.', '.', 'x', '.', 'o', '.', 'o', '.', '.', '.', 'o', '.', '.', '.', 'o', '.', '.', '.', 'o', '.', '.', '.', '.']
 
   //list of character names
-  var characters = ['AYASE', 'HANAKO', 'HORO', 'AKARIN', 'LUCY', 'ASTRAEA', 'MISAKI', 'RENGE', 'MIRAI', 'LALARU', 'NYMPH', 'MADOTSUKI', 'MAYOI','CIRNO', 'AGIRI', 'NOEL', 'HARUHI', 'MAO', 'EUREKA', 'KYOKO', 'MEGUMI', 'KANOE', 'FUU', 'SUISEISEKI']
+  var characters = ['AYASE', 'HANAKO', 'HORO', 'AKARIN', 'LUCY', 'ASTRAEA', 'MISAKI', 'RENGE', 'MIRAI', 'LALARU', 'NYMPH', 'MADOTSUKI', 'MAYOI', 'CIRNO', 'AGIRI', 'NOEL', 'HARUHI', 'MAO', 'EUREKA', 'KYOKO', 'MEGUMI', 'KANOE', 'FUU', 'SUISEISEKI']
 
   //stock rhythm, starts loaded with first song
   var rhythm = restOfLife;
@@ -121,7 +131,6 @@
   //external counter to keep track of where we are in the sample
   var musicIndex = 0;
 
-
   /*
 
     THE FUN PART
@@ -130,6 +139,7 @@
   function moe() {
 
     var hue = colorGen();
+
     document.getElementById('moe').style.backgroundColor = '#' + hue;
     document.getElementById('bg').style.backgroundColor = '#' + hue;
     document.getElementById('color').innerHTML = '0x' + hue;
@@ -140,6 +150,7 @@
       moeExt = moe;
       var moeStr = moe.toString();
       document.getElementById('moe').style.backgroundImage = 'url("./assets/img/' + moeStr + '.png")';
+      //document.getElementById('moe').src = './assets/img/' + moeStr + '.png';
       document.getElementById('character').innerHTML = characters[moe];
     }
   }
@@ -166,21 +177,27 @@
   */
   function musicBox() {
     //a bunch of class removals to avoid animation lingering
-    document.getElementById("beatDrop").classList.remove('hidden');
-    document.getElementById("beatDrop").classList.add('snap');
-    document.getElementById('moe').classList.remove('blur');
+    //document.getElementById('moe').classList.remove('blur');
+    document.getElementById('blur').firstElementChild.setAttribute('stdDeviation',"0,0");
 
     document.getElementById("ticker").innerHTML = backTicker.join('') + ticker.join('');
     document.getElementById("beatDrop").innerHTML = (rhythm[musicIndex] == '.' || rhythm[musicIndex] == '-' ? ' ' : rhythm[musicIndex]) + "</span> "
+    if (rhythm[musicIndex] == 'x') {
+      for(var i = 0; i< 1000; i++){
+      document.getElementById('blur').firstElementChild.setAttribute('stdDeviation',(i/100).toString()+",0");
+      }
+    }
+    if (rhythm[musicIndex] == 'o') {
+      for(var i = 0; i< 1000; i++){
+      document.getElementById('blur').firstElementChild.setAttribute('stdDeviation',"0,"+(i/100).toString());
+      }
+    }
     if (rhythm[musicIndex] != '.') {
       moe();
-      document.getElementById("beatDrop").classList.add('hidden');
-      document.getElementById("beatDrop").classList.remove('snap');
-      //document.getElementById("beatDrop").classList.add('drop');
+      //document.getElementById("beatDrop").classList.add('hidden');
+      Velocity(document.getElementById("beatDrop"), { opacity: 0 }, { duration: 200 });
     }
-    if (rhythm[musicIndex] == 'x' || rhythm[musicIndex] == 'o') {
-      document.getElementById('moe').classList.add('blur');
-    }
+    //document.getElementById('blur').firstElementChild.setAttribute('stdDeviation',"0,0");
     //increment index
     musicIndex++;
     //restart loop when we run out of beats
@@ -189,7 +206,7 @@
       sound.seek(seek);
     }
     //display index in lower HUD
-    document.getElementById("beat").innerHTML = '0x'+('000000' + musicIndex.toString(16)).substr(-6);
+    document.getElementById("beat").innerHTML = '0x' + ('000000' + musicIndex.toString(16)).substr(-6);
 
     //add and remove beats to our visual beat ticker up top
     ticker.shift();
@@ -312,8 +329,8 @@
   document.getElementById("suiseiseki").onclick = function () { waifuSwap(document.getElementById("suiseiseki").innerHTML) };
   //i feel like there's a more efficient way to do this bullshit
 
-  function waifuSwap(waifu){
-    if(many){
+  function waifuSwap(waifu) {
+    if (many) {
       manyOne();
     }
     var waifuIndex = characters.indexOf(waifu);
@@ -341,64 +358,49 @@
 
   */
   document.getElementById("songList").onclick = function () {
-    if(menu == 1)
-    {
+    if (menu == 1) {
       document.getElementById('songMenu').classList.add('invis');
       menu = 0;
     }
-    else if(menu == 2)
-    {
+    else if (menu == 2) {
       document.getElementById('waifuMenu').classList.add('invis');
       document.getElementById('songMenu').classList.remove('invis');
       menu = 1;
     }
-    else
-    {
+    else {
       document.getElementById('songMenu').classList.remove('invis');
       menu = 1;
     }
   }
 
   document.getElementById("waifuList").onclick = function () {
-    if(menu == 2)
-    {
+    if (menu == 2) {
       document.getElementById('waifuMenu').classList.add('invis');
       menu = 0;
     }
-    else if(menu == 1)
-    {
+    else if (menu == 1) {
       document.getElementById('songMenu').classList.add('invis');
       document.getElementById('waifuMenu').classList.remove('invis');
       menu = 2;
     }
-    else
-    {
+    else {
       document.getElementById('waifuMenu').classList.remove('invis');
       menu = 2;
     }
   }
 
   //big ass color generator sanity check
-  function colorGen(){
+  function colorGen() {
     var rgb = [0, 0, 0];
 
     //random color generator, builds r g and b with some bias towards lighter colors
     for (var i = 0; i < rgb.length; i++) {
-      var coinflip = (Math.floor(Math.random() * 3))
-      if (coinflip == 0) {
-        rgb[i] = (128 + (Math.floor(Math.random() * 128)))
-      }
-      if (coinflip == 1) {
-        rgb[i] = (192 + (Math.floor(Math.random() * 64)))
-      }
-      if (coinflip == 2) {
-        rgb[i] = (240 + (Math.floor(Math.random() * 16)))
-      }
+      rgb[i] = (200 + (Math.floor(Math.random() * 56)))
     }
     if (rgb[0] < 240 && rgb[1] < 240 && rgb[2] < 240) {
       rgb[(Math.floor(Math.random() * 3))] = 255;
     }
-    if (rgb[0] > 128 && rgb[1] > 128 && rgb[2] > 128) {
+    if (rgb[0] > 240 && rgb[1] > 240 && rgb[2] > 240) {
       rgb[(Math.floor(Math.random() * 3))] -= 100;
     }
     if (rgb[0] > 220 && rgb[2] > 220) {
@@ -414,22 +416,21 @@
   }
 
   //hide or show stuff
-  document.getElementById("showHide").onclick = function() {
+  document.getElementById("showHide").onclick = function () {
     var elements = document.getElementsByClassName('hideable');
-    if(!hide){
+    if (!hide) {
       document.getElementById("showHide").innerHTML = '&#x2191;';
-      for(var i=0; i<elements.length; i++){
+      for (var i = 0; i < elements.length; i++) {
         elements[i].classList.add('invis');
 
       }
       menu = 0;
       hide = true;
     }
-    else{
+    else {
       document.getElementById("showHide").innerHTML = '&#x2193;';
-      for(var i=0; i<elements.length; i++){
-        if(elements[i].id != 'waifuMenu' && elements[i].id != 'songMenu')
-        {
+      for (var i = 0; i < elements.length; i++) {
+        if (elements[i].id != 'waifuMenu' && elements[i].id != 'songMenu') {
           elements[i].classList.remove('invis');
         }
       }
