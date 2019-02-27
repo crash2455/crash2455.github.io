@@ -249,22 +249,6 @@ function load(url, element)
     DYNAMIC MENU
 
   */
-   document.getElementById("waifuList").onclick = function () {
-    if (menu == 2) {
-      document.getElementById('waifuMenu').classList.add('invis');
-      menu = 0;
-    }
-    else if (menu == 1) {
-      document.getElementById('songMenu').classList.add('invis');
-      document.getElementById('waifuMenu').classList.remove('invis');
-      menu = 2;
-    }
-    else {
-      document.getElementById('waifuMenu').classList.remove('invis');
-      menu = 2;
-    }
-  }
-
   //big ass color generator sanity check
   function colorGen() {
     var rgb = [0, 0, 0];
