@@ -18,6 +18,15 @@ body{
   color:white;
   text-decoration: none;
 }
+input{
+  font-family: 'Press Start 2P', cursive;
+  color:white;
+  text-align:center;
+  position: relative;
+  top: 150px;
+  border:2px solid white;
+  background-color: black;
+}
 
 /*gotta keep things secret until people click in */
 .invis {
@@ -33,7 +42,6 @@ body{
 #moe{
     background-color: black;
     background-blend-mode: color-burn;
-    mix-blend-mode: color-burn;
     background-repeat: no-repeat;
     /*background-image: url('./assets/img/0.png');*/
     background-size: 100%;
@@ -47,6 +55,10 @@ body{
     margin: auto;
     -webkit-filter: url("#blur");
     filter: url("#blur");
+}
+.transp{
+  -webkit-filter: opacity(.5);
+  filter: opacity(.5);
 }
 img {
     width:1280px;

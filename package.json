@@ -6,6 +6,7 @@
     "start": "gulp watch"
   },
   "dependencies": {
+    "blurify": "^1.2.0",
     "gulp-stream": "0.0.2"
   },
   "devDependencies": {

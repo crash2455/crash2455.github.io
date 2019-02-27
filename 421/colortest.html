@@ -1,0 +1,265 @@
+<html>
+
+<head>
+  <title>MOKE SWEED IN JS</title>
+  <link rel="stylesheet" type="text/css" href="moe.css">
+  <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
+  <script src="./howler.js-master/dist/howler.js"></script>
+  <link rel="stylesheet" type="text/css" href="https://csshake.surge.sh/csshake.min.css">
+</head>
+
+
+<body id="bg">
+  <div id='moe'></div>
+  <div id='splash'>THIS IS A TRIBUTE TO 420.MOE MADE IN HTML AND JAVASCRIPT
+    <br><br><br><br><a href="#" id="start">CLICK HERE TO MOKE SWEED</a></div>
+  <div id='ticker'></div>
+  <div id='beatDrop'></div>
+
+  <div id='menu' class="bottom invis">
+    <ul id='songMenu' class="invis">
+      <li><a href="#" id="restOfMyLife">REST OF MY LIFE</a></li>
+      <li><a href="#" id="greenAndPurple">GREEN AND PURPLE</a></li>
+      <li><a href="#" id="holdItIn">HOLD IT IN</a></li>
+      <li><a href="#" id="smokinRollin">SMOKIN ROLLIN</a></li>
+      <li><a href="#" id="becuzIGotHi">BECUZ I GOT HI</a></li>
+      <li><a href="#" id="fourtwenty">#420FGT</a></li>
+    </ul>
+    <ul id='waifuMenu' class="invis">
+      <li><a href="#" id="agiri">AGIRI</a></li>
+      <li><a href="#" id="akarin">AKARIN</a></li>
+      <li><a href="#" id="astraea">ASTRAEA</a></li>
+      <li><a href="#" id="ayase">AYASE</a></li>
+      <li><a href="#" id="cirno">CIRNO</a></li>
+      <li><a href="#" id="eureka">EUREKA</a></li>
+      <li><a href="#" id="fuu">FUU</a></li>
+      <li><a href="#" id="hanako">HANAKO</a></li>
+      <li><a href="#" id="haruhi">HARUHI</a></li>
+      <li><a href="#" id="horo">HORO</a></li>
+      <li><a href="#" id="kanoe">KANOE</a></li>
+      <li><a href="#" id="kyoko">KYOKO</a></li>
+      <li><a href="#" id="lalaru">LALARU</a></li>
+      <li><a href="#" id="lucy">LUCY</a></li>
+      <li><a href="#" id="madotsuki">MADOTSUKI</a></li>
+      <li><a href="#" id="mao">MAO</a></li>
+      <li><a href="#" id="megumi">MEGUMI</a></li>
+      <li><a href="#" id="mirai">MIRAI</a></li>
+      <li><a href="#" id="misaki">MISAKI</a></li>
+      <li><a href="#" id="mayoi">MAYOI</a></li>
+      <li><a href="#" id="noel">NOEL</a></li>
+      <li><a href="#" id="nymph">NYMPH</a></li>
+      <li><a href="#" id="renge">RENGE</a></li>
+      <li><a href="#" id="suiseiseki">SUISEISEKI</a></li>
+    </ul>
+    <a href="#" id="oneMany">SWAP</a>
+    <a href="#" id="waifuList">CHARACTERS</a>
+    <a href="#" id="songList">SONGS</a>
+  </div>
+
+  <div id='hud' class="bottom invis">
+    <ul>
+      <li id="track"></li>
+      <li id="color"></li>
+      <li id="character"></li>
+    </ul>
+    <a href="http://420.moe">420.MOE</a>
+  </div>
+</body>
+
+<script>
+  /*
+
+    INSTANTIATING VARIABLES
+
+  */
+  //variables to hold onto timings for iterators
+  var t;
+  var m;
+
+  //arrays for our visual beat tickers
+  var ticker = [];
+  var backTicker = [];
+
+  //external counter for last slide shown, starts initialized at 1
+  var moeExt = 1;
+
+  //song time finder
+  var seek = 0;
+
+  //many characters / one character selector
+  var many = true;
+
+  //is menu displayed?
+  var menu = 0;
+
+  //song rhythm array storage
+  var restOfLife = ['x', '.', '.', 'o', '.', '.', 'x', '.', '.', '.', '.', '.', '.', 'o', '.', 'x', '.', '.', 'o', '.', 'x', '.', '.', '.', '.', 'x', 'o', '.', '.', '.', 'o', '.', '.', 'x', '.', '.', '.', '.', '.', 'o', '.', '.', 'x', '.', '.', 'o', 'x', '.', '.', '.', '.', '.', 'x', 'o', '.', '.', 'o', '.', '.', 'x', '.', '.', '.', '.', '.', '.', 'o', '.', 'x', '.', '.', '.', '.', 'x', '.', '.', '.', '.', 'x', 'o', '.', '.', '.', 'o', '.', '.', 'x', '.', '.', '.', '.', '.', '.', 'o', '.', 'x', '.', '.', 'o', 'x', '.', '.', '.', '.', '.', 'x', 'o', '.', '.', 'o', '.', '.', '.', 'x', '.', '.', '.', '.', '.', 'o', '.', '.', 'x', '.', '.', 'o', 'x', '.', '.', '.', '.', '.', 'x', 'o', '.', '.', 'o', '.', '.', 'x', '.', '.', '.', '.', '.', '.', 'o', '.', 'x', '.', '.', 'o', '.', 'x', '.', '.', '.', '.', 'x', 'o', '.', '.', '.', 'o', '.', '.', 'x', '.', '.', '.', '.', '.', '.', 'o', '.', 'x', '.', '.', 'o', 'x', '.', '.', '.', '.', '.', 'x', 'o', '.', '.', 'o', '.', '.', '.', 'x', '.', '.', '.', '.', 'x', 'o', '.', 'x', '.', '.', '.', 'o', 'x', '.', 'x', 'x', '.', 'x', '.'];
+  var greenAndPurple = ['o', '.', '.', '.', '.', '-', '.', '.', '.', '.', 'x', '.', '.', '.', '.', '.', 'o', '.', '.', 'o', '.', '.', '.', '.', 'o', '.', '.', 'o', '.', '.', '.', '.', '.', 'x', '.', '.', '.', '.', '-', '.', '.', '-', '.', 'o', '.', '.', '.', '.', '.', '-', '.', '.', '.', '.', 'x', '.', '.', '.', '.', '.', 'o', '.', '.', 'o', '.', '.', '.', '.', 'o', '.', '.', 'o', '.', '.', '.', '.', '.', 'x', '.', 'o', '.', '.', '.', '.', '.', '.', '.', '.', 'o', '.', '.', '.', '.', '-', '.', '.', '.', '.', 'x', '.', '.', '.', '.', '.', 'o', '.', '.', 'o', '.', '.', '.', '.', 'o', '.', '.', 'o', '.', '.', '.', '.', '.', 'x', '.', '.', '.', '.', '.', '-', '-', '-', '-', '.', 'o', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', 'x', '.', '.', '.', '.', '.', '.', '.', 'o', '.', '.', 'o', '.', 'o', '.', '.', 'o', '.', '.', '.', '.', '.', 'x', '.', 'o', '.', '.', '.', '.', '.', '.', '.', '.', 'o', '.', '.', '.', '.', '-', '.', '.', '.', '.', '.', 'x', '.', '.', '.', '.', 'o', '.', '.', 'o', '.', '.', '.', '.', 'o', '.', '.', 'o', '.', '.', '.', '.', 'x', '.', '.', '.', '.', '.', '-', '.', '.', '-', '.', '.', 'o', '.', '.', '.', '.', '.', '.', '.', '.', '.', 'x', '.', '.', '.', '.', '.', 'o', '.', '.', 'o', '.', '.', '.', '.', 'o', '.', '.', 'o', '.', '.', '.', '.', '.', 'x', '.', 'o', '.', '.', '.', '.', '.', '.', '.', '.', 'o', '.', '.', '.', '.', '-', '.', '.', '.', '.', '.', 'x', '.', '.', '.', '.', 'o', '.', '.', 'o', '.', '.', '.', '.', 'o', '.', '.', 'o', '.', '.', '.', '.', '.', 'x', '.', '.', '.', '.', '.', '-', '-', '-', '-', '.', 'o', '.', '.', '.', '.', '-', '.', '.', '.', '.', '.', 'x', '.', '.', '.', '.', '.', '.', '.', 'o', '.', '.', 'o', '.', 'o', '.', '.', 'o', '.', '.', '.', '.', 'x', '.', '.', 'o', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.'];
+  var holdItIn = ['o', '.', '.', '.', '.', '.', '.', 'x', '.', '.', '.', '.', '.', 'o', 'o', 'o', '.', '.', '.', '.', '.', '.', '.', 'x', '.', '.', '.', '.', '.', '.', '.', 'o', '.', '.', '.', '.', '.', '.', 'x', '.', '.', '.', '.', '.', 'o', 'o', 'o', '.', '.', '.', '.', '.', '.', '.', 'x', '.', '.', '.', 'o', '.', '.', '.', 'o', '.', '.', '.', '.', '.', '.', '.', 'x', '.', '.', '.', '.', '.', 'o', 'o', 'o', '.', '.', '.', '.', '.', '.', 'x', '.', '.', '.', '.', '.', '.', '.', 'o', '.', '.', '.', '.', '.', '.', '.', 'x', '.', '.', '.', '.', '.', 'o', 'o', 'o', '.', '.', '.', '.', '.', '.', '.', 'x', '.', '.', '.', 'o', '.', '.', '.', 'o', '.', '.', '.', '.', '.', '.', 'x', '.', '.', '.', '.', '.', 'o', 'o', 'o', '.', '.', '.', '.', '.', '.', '.', 'x', '.', '.', '.', '.', '.', '.', '.', 'o', '.', '.', '.', '.', '.', '.', '.', 'x', '.', '.', '.', '.', 'o', 'o', 'o', '.', '.', '.', '.', '.', '.', '.', 'x', '.', '.', '.', 'o', '.', '.', '.', 'o', '.', '.', '.', '.', '.', '.', '.', 'x', '.', '.', '.', '.', '.', 'o', 'o', 'o', '.', '.', '.', '.', '.', '.', '.', 'x', '.', '.', '.', '.', '.', '.', 'o', '.', '.', '.', '.', '.', '.', '.', 'x', '.', '.', '.', '.', '.', 'o', 'o', 'o', '-', '-', '-', '-', '-', '-', '-', 'x', '-', '-', '-', 'o', '-', '-'];
+  var smokinRollin = ['o', '.', '.', 'o', 'x', '.', '.', 'o', '.', '.', '.', 'o', 'o', '.', '.', 'x', 'o', '.', '.', '.', 'o', '.', '.', 'o', '.', 'x', '.', 'o', '.', '.', '.', 'o', 'o', '.', '.', 'x', 'o', '.', '.', '.', 'o', '.', '.', 'o', '.', 'x', '.', 'o', '.', '.', '.', 'o', 'o', '.', '.', 'x', 'o', '.', '.', '.', 'o', '.', '.', 'o', '.', 'x', '.', 'o', '.', '.', '.', 'o', 'o', '.', '.', 'x', 'o', '.', '.', '.'];
+  var becuzIGotHi = ['x', '.', '.', '.', '.', '.', 'x', '.', '.', '.', 'o', 'o', '.', '.', '.', '.', '.', 'x', '.', '.', '.', '.', '.', 'o', '.', '.', '.', '.', 'x', '.', '.', '.', '.', 'o', 'o', '.', '.', 'o', '.', '.', 'x', 'o', 'o', '.', '.', 'o', '.', '.', '.', '.', '.', 'x', '.', '.', '.', 'o', 'o', '.', '.', '.', '.', '.', 'x', '.', '.', '.', '.', '.', 'o', '.', '.', '.', '.', 'x', '.', '.', '.', '.', 'o', 'o', '.', '.', 'o', '.', '.', 'x', 'o', 'o', '.', '.', 'o', '.', '.', '.', '.', '.', 'x', '.', '.', '.', 'o', 'o', '.', '.', '.', '.', '.', 'x', '.', '.', '.', '.', '.', 'o', '.', '.', '.', '.', 'x', '.', '.', '.', '.', 'o', 'o', '.', '.', 'o', '.', '.', 'x', 'o', 'o', '.', '.', 'o', '.', '.', '.', '.', '.', 'x', '.', '.', '.', 'o', 'o', '.', '.', '.', '.', '.', 'x', '.', '.', '.', '.', '.', 'o', '.', '.', '.', '.', 'x', '.', '.', '.', 'o', '.', 'o', '.', '.', 'o', '.', '.', 'x', 'o', 'o', '.', '.', 'x', '.', '.', '.', '.', '.', 'x', '.', '.', '.', 'o', 'o', '.', '.', '.', '.', '.', 'x', '.', '.', '.', '.', '.', 'o', '.', '.', '.', '.', 'x', '.', '.', '.', 'o', '.', 'o', '.', '.', 'o', '.', '.', 'x', 'o', 'o', '.', '.', 'o', '.', '.', '.', '.', '.', 'x', '.', '.', '.', 'o', 'o', '.', '.', '.', '.', '.', 'x', '.', '.', '.', '.', '.', 'o', '.', '.', '.', '.', 'x', '.', '.', '.', 'o', '.', 'o', '.', '.', 'o', '.', '.', 'x', 'o', 'o', '.', '.', 'o', '.', '.', '.', '.', '.', 'x', '.', '.', '.', 'o', 'o', '.', '.', '.', '.', '.', 'x', '.', '.', '.', '.', '.', 'o', '.', '.', '.', '.', 'x', '.', '.', '.', 'o', '.', 'o', '.', '.', 'o', '.', '.', 'x', 'o', 'o', '.', '.', 'o', '.', '.', '.', '.', '.', 'x', '.', '.', '.', 'o', 'o', '.', '.', '.', '.', '.', 'x', '.', '.', '.', '.', '.', 'o', '.', 'o', '.', '.', 'x', '.', 'o', 'o', 'o', '.', 'o', '.', '.', 'o', '.', 'x', '.', 'o', 'o', '.', '.', '.']
+  var fourtwenty = ['o', '.', '.', '.', 'x', '.', '.', '.', 'o', '.', '.', '.', 'x', '.', 'o', '.', 'o', '.', '.', '.', 'x', '.', '.', '.', 'o', '.', '.', '.', 'x', '.', 'o', '.', 'o', '.', '.', '.', 'x', '.', '.', '.', 'o', '.', '.', '.', 'x', '.', 'o', '.', 'o', '.', '.', '.', 'x', '.', '.', '.', 'o', '.', '.', '.', 'x', '.', 'o', '.', 'o', '.', '.', '.', 'x', '.', '.', '.', 'o', '.', '.', '.', 'x', '.', 'o', '.', 'o', '.', '.', '.', 'x', '.', '.', '.', '.', 'o', '.', '.', '.', 'x', '.', 'o', '.', 'o', '.', '.', 'x', '.', '.', '.', '.', 'o', '.', '.', '.', 'x', '.', 'o', '.', 'o', '.', '.', '.', 'o', '.', '.', '.', 'o', '.', '.', '.', 'x', '.', '.', '.', 'o', '.', '.', '.', 'x', '.', '.', '.', 'o', '.', '.', '.', 'x', '.', 'o', '.', 'o', '.', '.', '.', 'x', '.', '.', '.', 'o', '.', '.', '.', '.', 'x', '.', 'o', '.', 'o', '.', '.', 'x', '.', '.', '.', 'o', '.', '.', '.', 'x', '.', 'o', '.', 'o', '.', '.', '.', '.', 'x', '.', '.', 'o', '.', '.', '.', '.', 'x', '.', 'o', '.', 'o', '.', '.', '.', 'x', '.', '.', '.', 'o', '.', '.', '.', 'x', '.', 'o', '.', 'o', '.', '.', '.', 'x', '.', '.', '.', 'o', '.', '.', '.', '.', 'x', '.', 'o', '.', 'o', '.', '.', 'x', '.', '.', '.', 'o', '.', '.', '.', 'x', '.', 'o', '.', 'o', '.', '.', '.', 'o', '.', '.', '.', 'o', '.', '.', '.', 'o', '.', '.', '.', '.', '.']
+
+  //list of character names
+  var characters = ['AYASE', 'HANAKO', 'HORO', 'AKARIN', 'LUCY', 'ASTRAEA', 'MISAKI', 'RENGE', 'MIRAI', 'LALARU', 'NYMPH', 'MADOTSUKI', 'MAYOI', 'CIRNO', 'AGIRI', 'NOEL', 'HARUHI', 'MAO', 'EUREKA', 'KYOKO', 'MEGUMI', 'KANOE', 'FUU', 'SUISEISEKI']
+
+  //stock rhythm, starts loaded with first song
+  var rhythm = restOfLife;
+
+  //way to keep time
+  var metronome = 110;
+
+  //external counter to keep track of where we are in the sample
+  var musicIndex = 0;
+
+  document.getElementById("start").onclick = function () {
+    document.getElementById("splash").classList.add('invis');
+    document.getElementById("menu").classList.remove('invis');
+    document.getElementById("hud").classList.remove('invis');
+    moe();
+  };
+
+
+  /*
+
+    THE FUN PART
+
+  */
+  function moe() {
+
+    var hue = colorGen();
+    document.getElementById('moe').style.backgroundColor = '#' + hue;
+    document.getElementById('bg').style.backgroundColor = '#' + hue;
+    document.getElementById('color').innerHTML = '0x' + hue;
+
+    if (many) { //if we have character changer on then change characters
+      //slide changer, biased to not pick the same image twice
+      var moe = ((moeExt + (Math.ceil(Math.random() * 23))) % 24);
+      moeExt = moe;
+      var moeStr = moe.toString();
+      document.getElementById('moe').style.backgroundImage = 'url("./assets/img/' + moeStr + '.png")';
+      //document.getElementById('moe').style.filter = "hue-rotate("+Math.random().toString()+"turn)";
+      document.getElementById('character').innerHTML = characters[moe];
+    }
+  }
+
+
+  /*
+
+    DYNAMIC WAIFU SWAP ACTION
+
+  */
+  document.getElementById("agiri").onclick = function () { waifuSwap(document.getElementById("agiri").innerHTML) };
+  document.getElementById("akarin").onclick = function () { waifuSwap(document.getElementById("akarin").innerHTML) };
+  document.getElementById("astraea").onclick = function () { waifuSwap(document.getElementById("astraea").innerHTML) };
+  document.getElementById("ayase").onclick = function () { waifuSwap(document.getElementById("ayase").innerHTML) };
+  document.getElementById("cirno").onclick = function () { waifuSwap(document.getElementById("cirno").innerHTML) };
+  document.getElementById("eureka").onclick = function () { waifuSwap(document.getElementById("eureka").innerHTML) };
+  document.getElementById("fuu").onclick = function () { waifuSwap(document.getElementById("fuu").innerHTML) };
+  document.getElementById("hanako").onclick = function () { waifuSwap(document.getElementById("hanako").innerHTML) };
+  document.getElementById("haruhi").onclick = function () { waifuSwap(document.getElementById("haruhi").innerHTML) };
+  document.getElementById("horo").onclick = function () { waifuSwap(document.getElementById("horo").innerHTML) };
+  document.getElementById("kanoe").onclick = function () { waifuSwap(document.getElementById("kanoe").innerHTML) };
+  document.getElementById("kyoko").onclick = function () { waifuSwap(document.getElementById("kyoko").innerHTML) };
+  document.getElementById("lalaru").onclick = function () { waifuSwap(document.getElementById("lalaru").innerHTML) };
+  document.getElementById("lucy").onclick = function () { waifuSwap(document.getElementById("lucy").innerHTML) };
+  document.getElementById("madotsuki").onclick = function () { waifuSwap(document.getElementById("madotsuki").innerHTML) };
+  document.getElementById("mao").onclick = function () { waifuSwap(document.getElementById("mao").innerHTML) };
+  document.getElementById("megumi").onclick = function () { waifuSwap(document.getElementById("megumi").innerHTML) };
+  document.getElementById("mirai").onclick = function () { waifuSwap(document.getElementById("mirai").innerHTML) };
+  document.getElementById("misaki").onclick = function () { waifuSwap(document.getElementById("misaki").innerHTML) };
+  document.getElementById("mayoi").onclick = function () { waifuSwap(document.getElementById("mayoi").innerHTML) };
+  document.getElementById("noel").onclick = function () { waifuSwap(document.getElementById("noel").innerHTML) };
+  document.getElementById("nymph").onclick = function () { waifuSwap(document.getElementById("nymph").innerHTML) };
+  document.getElementById("renge").onclick = function () { waifuSwap(document.getElementById("renge").innerHTML) };
+  document.getElementById("suiseiseki").onclick = function () { waifuSwap(document.getElementById("suiseiseki").innerHTML) };
+
+  function waifuSwap(waifu) {
+    if (many) {
+      manyOne();
+    }
+    var waifuIndex = characters.indexOf(waifu);
+    document.getElementById('moe').style.backgroundImage = 'url("./assets/img/' + waifuIndex + '.png")';
+    document.getElementById('character').innerHTML = characters[waifuIndex];
+  }
+
+  //switch between showing all characters and sticking with your main waifu
+  document.getElementById("oneMany").onclick = function () { moe() };
+
+  function manyOne() {
+    if (many) {
+      many = false;
+      document.getElementById("oneMany").innerHTML = "ONE"
+    }
+    else {
+      many = true;
+      document.getElementById("oneMany").innerHTML = "MANY"
+    }
+  }
+
+  /*
+
+    DYNAMIC MENU
+
+  */
+  document.getElementById("songList").onclick = function () {
+    if (menu == 1) {
+      document.getElementById('songMenu').classList.add('invis');
+      menu = 0;
+    }
+    else if (menu == 2) {
+      document.getElementById('waifuMenu').classList.add('invis');
+      document.getElementById('songMenu').classList.remove('invis');
+      menu = 1;
+    }
+    else {
+      document.getElementById('songMenu').classList.remove('invis');
+      menu = 1;
+    }
+  }
+
+  document.getElementById("waifuList").onclick = function () {
+    if (menu == 2) {
+      document.getElementById('waifuMenu').classList.add('invis');
+      menu = 0;
+    }
+    else if (menu == 1) {
+      document.getElementById('songMenu').classList.add('invis');
+      document.getElementById('waifuMenu').classList.remove('invis');
+      menu = 2;
+    }
+    else {
+      document.getElementById('waifuMenu').classList.remove('invis');
+      menu = 2;
+    }
+  }
+
+  //big ass color generator sanity check
+  function colorGen() {
+    var rgb = [0, 0, 0];
+
+    //random color generator, builds r g and b with some bias towards lighter colors
+    for (var i = 0; i < rgb.length; i++) {
+      rgb[i] = (200 + (Math.floor(Math.random() * 56)))
+    }
+    if (rgb[0] < 240 && rgb[1] < 240 && rgb[2] < 240) {
+      rgb[(Math.floor(Math.random() * 3))] = 255;
+    }
+    if (rgb[0] > 240 && rgb[1] > 240 && rgb[2] > 240) {
+      rgb[(Math.floor(Math.random() * 3))] -= 100;
+    }
+    if (rgb[0] > 220 && rgb[2] > 220) {
+      rgb[0] -= 35;
+    }
+    if (rgb[1] > 220 && rgb[2] > 220) {
+      rgb[1] -= 35;
+    }
+    if (rgb[0] > 128 && rgb[1] > 128 && rgb[2] > 128) {
+      rgb[(Math.floor(Math.random() * 3))] -= 100;
+    }
+    return rgb[0].toString(16) + rgb[1].toString(16) + rgb[2].toString(16);
+  }
+
+</script>
+
+</html>

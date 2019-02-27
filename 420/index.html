@@ -16,68 +16,74 @@
       <filter id="blur">
         <feGaussianBlur in="SourceGraphic" stdDeviation="0,0" />
       </filter>
+      <filter id="blurx">
+        <feGaussianBlur in="SourceGraphic" stdDeviation="10,0" />
+      </filter>
+      <filter id="bluro">
+        <feGaussianBlur in="SourceGraphic" stdDeviation="0,10" />
+      </filter>
     </defs>
   </svg>
 
-    <div id="moe"></div>
+  <div id="moe"></div>
 
-    <div id='splash'>THIS IS A TRIBUTE TO 420.MOE MADE IN HTML AND JAVASCRIPT
-      <br><br><br><br><a href="#" id="start">CLICK HERE TO MOKE SWEED</a></div>
-    <div id='ticker' class="hideable"></div>
-    <div id='beatDrop' class="hideable"></div>
+  <div id='splash'>THIS IS A TRIBUTE TO 420.MOE MADE IN HTML AND JAVASCRIPT
+    <br><br><br><br><a href="#" id="start">CLICK HERE TO MOKE SWEED</a></div>
+  <div id='ticker' class="hideable"></div>
+  <div id='beatDrop' class="hideable"></div>
 
-    <div id='menu' class="bottom invis">
-      <ul id='songMenu' class="invis hideable">
-        <li><a href="#" id="restOfMyLife">REST OF MY LIFE</a></li>
-        <li><a href="#" id="greenAndPurple">GREEN AND PURPLE</a></li>
-        <li><a href="#" id="holdItIn">HOLD IT IN</a></li>
-        <li><a href="#" id="smokinRollin">SMOKIN ROLLIN</a></li>
-        <li><a href="#" id="becuzIGotHi">BECUZ I GOT HI</a></li>
-        <li><a href="#" id="fourtwenty">#420FGT</a></li>
-      </ul>
-      <ul id='waifuMenu' class="invis hideable">
-        <li><a href="#" id="agiri">AGIRI</a></li>
-        <li><a href="#" id="akarin">AKARIN</a></li>
-        <li><a href="#" id="astraea">ASTRAEA</a></li>
-        <li><a href="#" id="ayase">AYASE</a></li>
-        <li><a href="#" id="cirno">CIRNO</a></li>
-        <li><a href="#" id="eureka">EUREKA</a></li>
-        <li><a href="#" id="fuu">FUU</a></li>
-        <li><a href="#" id="hanako">HANAKO</a></li>
-        <li><a href="#" id="haruhi">HARUHI</a></li>
-        <li><a href="#" id="horo">HORO</a></li>
-        <li><a href="#" id="kanoe">KANOE</a></li>
-        <li><a href="#" id="kyoko">KYOKO</a></li>
-        <li><a href="#" id="lalaru">LALARU</a></li>
-        <li><a href="#" id="lucy">LUCY</a></li>
-        <li><a href="#" id="madotsuki">MADOTSUKI</a></li>
-        <li><a href="#" id="mao">MAO</a></li>
-        <li><a href="#" id="megumi">MEGUMI</a></li>
-        <li><a href="#" id="mirai">MIRAI</a></li>
-        <li><a href="#" id="misaki">MISAKI</a></li>
-        <li><a href="#" id="mayoi">MAYOI</a></li>
-        <li><a href="#" id="noel">NOEL</a></li>
-        <li><a href="#" id="nymph">NYMPH</a></li>
-        <li><a href="#" id="renge">RENGE</a></li>
-        <li><a href="#" id="suiseiseki">SUISEISEKI</a></li>
-      </ul>
-      <span class="hideable">
-        <a href="#" id="oneMany">MANY</a>
-        <a href="#" id="waifuList">CHARACTERS</a>
-        <a href="#" id="songList">SONGS</a>
-      </span>
-      <a href="#" id="showHide">&#x2193;</a>
-    </div>
+  <div id='menu' class="bottom invis">
+    <ul id='songMenu' class="invis hideable">
+      <li><a href="#" id="restOfMyLife">REST OF MY LIFE</a></li>
+      <li><a href="#" id="greenAndPurple">GREEN AND PURPLE</a></li>
+      <li><a href="#" id="holdItIn">HOLD IT IN</a></li>
+      <li><a href="#" id="smokinRollin">SMOKIN ROLLIN</a></li>
+      <li><a href="#" id="becuzIGotHi">BECUZ I GOT HI</a></li>
+      <li><a href="#" id="fourtwenty">#420FGT</a></li>
+    </ul>
+    <ul id='waifuMenu' class="invis hideable">
+      <li><a href="#" id="agiri">AGIRI</a></li>
+      <li><a href="#" id="akarin">AKARIN</a></li>
+      <li><a href="#" id="astraea">ASTRAEA</a></li>
+      <li><a href="#" id="ayase">AYASE</a></li>
+      <li><a href="#" id="cirno">CIRNO</a></li>
+      <li><a href="#" id="eureka">EUREKA</a></li>
+      <li><a href="#" id="fuu">FUU</a></li>
+      <li><a href="#" id="hanako">HANAKO</a></li>
+      <li><a href="#" id="haruhi">HARUHI</a></li>
+      <li><a href="#" id="horo">HORO</a></li>
+      <li><a href="#" id="kanoe">KANOE</a></li>
+      <li><a href="#" id="kyoko">KYOKO</a></li>
+      <li><a href="#" id="lalaru">LALARU</a></li>
+      <li><a href="#" id="lucy">LUCY</a></li>
+      <li><a href="#" id="madotsuki">MADOTSUKI</a></li>
+      <li><a href="#" id="mao">MAO</a></li>
+      <li><a href="#" id="megumi">MEGUMI</a></li>
+      <li><a href="#" id="mirai">MIRAI</a></li>
+      <li><a href="#" id="misaki">MISAKI</a></li>
+      <li><a href="#" id="mayoi">MAYOI</a></li>
+      <li><a href="#" id="noel">NOEL</a></li>
+      <li><a href="#" id="nymph">NYMPH</a></li>
+      <li><a href="#" id="renge">RENGE</a></li>
+      <li><a href="#" id="suiseiseki">SUISEISEKI</a></li>
+    </ul>
+    <span class="hideable">
+      <a href="#" id="oneMany">MANY</a>
+      <a href="#" id="waifuList">CHARACTERS</a>
+      <a href="#" id="songList">SONGS</a>
+    </span>
+    <a href="#" id="showHide">&#x2193;</a>
+  </div>
 
-    <div id='hud' class="bottom invis">
-      <ul class="hideable">
-        <li>T: <span id="track"></span></li>
-        <li>B: <span id="beat"></span></li>
-        <li>C: <span id="color"></span></li>
-        <li>I: <span id="character"></span></li>
-      </ul>
-      <a href="http://420.moe">420.MOE</a>
-    </div>
+  <div id='hud' class="bottom invis">
+    <ul class="hideable">
+      <li>T: <span id="track"></span></li>
+      <li>B: <span id="beat"></span></li>
+      <li>C: <span id="color"></span></li>
+      <li>I: <span id="character"></span></li>
+    </ul>
+    <a href="http://420.moe">420.MOE</a>
+  </div>
 </body>
 
 <script>
@@ -177,27 +183,22 @@
   */
   function musicBox() {
     //a bunch of class removals to avoid animation lingering
-    //document.getElementById('moe').classList.remove('blur');
-    document.getElementById('blur').firstElementChild.setAttribute('stdDeviation',"0,0");
+    document.getElementById('blur').firstElementChild.setAttribute('stdDeviation', "0,0");
 
     document.getElementById("ticker").innerHTML = backTicker.join('') + ticker.join('');
     document.getElementById("beatDrop").innerHTML = (rhythm[musicIndex] == '.' || rhythm[musicIndex] == '-' ? ' ' : rhythm[musicIndex]) + "</span> "
     if (rhythm[musicIndex] == 'x') {
-      for(var i = 0; i< 1000; i++){
-      document.getElementById('blur').firstElementChild.setAttribute('stdDeviation',(i/100).toString()+",0");
-      }
+      document.getElementById('blur').firstElementChild.setAttribute('stdDeviation', "10,0");
     }
     if (rhythm[musicIndex] == 'o') {
-      for(var i = 0; i< 1000; i++){
-      document.getElementById('blur').firstElementChild.setAttribute('stdDeviation',"0,"+(i/100).toString());
-      }
+      document.getElementById('blur').firstElementChild.setAttribute('stdDeviation', "0,10");
     }
     if (rhythm[musicIndex] != '.') {
       moe();
       //document.getElementById("beatDrop").classList.add('hidden');
-      Velocity(document.getElementById("beatDrop"), { opacity: 0 }, { duration: 200 });
+      Velocity(document.getElementById("beatDrop"), { opacity: [100,0]}, 200);
+      //Velocity(document.getElementById("beatDrop"), { scale: 3} , { duration: 200 });
     }
-    //document.getElementById('blur').firstElementChild.setAttribute('stdDeviation',"0,0");
     //increment index
     musicIndex++;
     //restart loop when we run out of beats
@@ -220,6 +221,7 @@
     document.getElementById("splash").classList.add('invis');
     document.getElementById("menu").classList.remove('invis');
     document.getElementById("hud").classList.remove('invis');
+    document.getElementById('moe').classList.add('transp');
     play(starter)
   };
   //chrome actually won't allow audio to autoplay
@@ -397,21 +399,7 @@
     for (var i = 0; i < rgb.length; i++) {
       rgb[i] = (200 + (Math.floor(Math.random() * 56)))
     }
-    if (rgb[0] < 240 && rgb[1] < 240 && rgb[2] < 240) {
-      rgb[(Math.floor(Math.random() * 3))] = 255;
-    }
-    if (rgb[0] > 240 && rgb[1] > 240 && rgb[2] > 240) {
-      rgb[(Math.floor(Math.random() * 3))] -= 100;
-    }
-    if (rgb[0] > 220 && rgb[2] > 220) {
-      rgb[0] -= 35;
-    }
-    if (rgb[1] > 220 && rgb[2] > 220) {
-      rgb[1] -= 35;
-    }
-    if (rgb[0] > 128 && rgb[1] > 128 && rgb[2] > 128) {
-      rgb[(Math.floor(Math.random() * 3))] -= 100;
-    }
+
     return rgb[0].toString(16) + rgb[1].toString(16) + rgb[2].toString(16);
   }
 
