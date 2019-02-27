@@ -72,6 +72,18 @@ input[type=button]{
   animation-direction: reverse;
 }
 
+@keyframes blackout{
+  0% {filter: url("#blur");}
+  10% {filter: url("#blurout");}
+  50% {background: black;}
+  100% {background: black;}
+}
+
+.blackout {
+  animation: blackout;
+  animation-duration: .2s;
+}
+
 /*the bread and butter of this hot nonsense*/
 #moe{
     background-color: black;

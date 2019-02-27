@@ -22,6 +22,9 @@
       <filter id="bluro5">
         <feGaussianBlur in="SourceGraphic" stdDeviation="0,50" />
       </filter>
+      <filter id="blurout">
+        <feGaussianBlur in="SourceGraphic" stdDeviation="50,50" />
+      </filter>
     </defs>
   </svg>
 
@@ -183,15 +186,19 @@
   */
   function musicBox() {
     //a bunch of class removals to avoid animation lingering
+    var blackedOut = document.getElementsByClassName('blackout');
+    if (blackedOut.length > 0) {
+      blackedOut[0].style.backgroundColor = "#000000";
+    }
+
     document.getElementById('moe').classList.remove('blurx');
     document.getElementById('moe').classList.remove('bluro');
-    //document.getElementById('moe').classList.add('unblurx');
-    //document.getElementById('blur').firstElementChild.setAttribute('stdDeviation', "0,0");
 
     document.getElementById("ticker").innerHTML = backTicker.join('') + ticker.join('');
     document.getElementById("beatDrop").innerHTML = (rhythm[musicIndex] == '.' || rhythm[musicIndex] == '-' || rhythm[musicIndex] == '+' ? ' ' : rhythm[musicIndex]) + "</span> "
     //change image and put up that spicy beat
     if (rhythm[musicIndex] != '.' && rhythm[musicIndex] != ':' && rhythm[musicIndex] != '+') {
+      document.getElementById('moe').classList.remove('blackout');
       moe();
       Velocity(document.getElementById("beatDrop"), { opacity: [100, 0] }, 200);
     }
@@ -212,16 +219,11 @@
 
       document.getElementById('moe').style.backgroundColor = '#' + hue;
       document.getElementById('bg').style.backgroundColor = '#' + hue;
-      document.getElementById('color').innerHTML = '0x' + hue;;
+      document.getElementById('color').innerHTML = '0x' + hue;
     }
     //mess up everything and black out
     if (rhythm[musicIndex] == '+') {
-      //document.getElementById('blur').firstElementChild.setAttribute('stdDeviation', "35,35")
-
-      var hue = '000000'
-      document.getElementById('moe').style.backgroundColor = '#' + hue;
-      document.getElementById('bg').style.backgroundColor = '#' + hue;
-      document.getElementById('color').innerHTML = '0x' + hue;;
+      document.getElementById('moe').classList.add('blackout');
     }
     //increment index
     musicIndex++;
