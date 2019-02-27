@@ -24,7 +24,7 @@
 
   <div id='splash'>THIS IS A TRIBUTE TO 0x40HUES MADE IN HTML AND JAVASCRIPT
     <br><br><br><br>ENTER VALUES
-  <br><br>
+    <br><br>
     SONG URL: <input type="text" name="url" id="url"><br><br>
     BEATMAP: <input type="text" name="beatmap" id="beatmap"><br><br>
     BEAT TIME (MS): <input type="text" name="tempo" id="tempo"><br><br>
@@ -80,7 +80,7 @@
   var hide = false;
 
   //list of character names
-  var characters = ['Agiri','Ai','Akarin','Akatsuki','Alice','Astraea','Asuha','Asuka','Ayase','CC','Chika','Chiri','Chitanda','Chiyo','Cirno','Crona','DemonSisters','Emi','Etna','Eureka','Excel','Faye','Felli','Fran','Fuu','Galil','HajimeIchinose','Hakase','Hanako','Haruhi','HaruhiFujioka','Haruko','Hitoha','Holo','Homura','Hyatt','Ibara','Ika','Kagami','Kanade','Kanoe','Kaori','Karen','Kasukabe','Kate','Kirino','KirisameMarisa','Konata','Kurisu','Kuroko','Kyouka','KyoukoSakura','KyoukoToshinou','Lain','LalaRu','Lilly','Louise','Lucchini','Lucy','Madotsuki','Mai','Maka','Makimaki','Makoto','Mami','Mary','Mashiro','Mayoi','Mayuri','Megumi','Melfina','MeyRin','Miho','Miku','Mio','MioNaganohara','Mirai','Misaka','Misaki','Miu','Mizuki','Momo','Monoko','Morgiana','Motoko','Nano','Neesan','Noel','Nymph','Onihime','Osaka','Popura','Rei','Renge','Rikka','Rin','RinTezuka','Ritsu','Ruri','Ryuuko','Sako','Sakura','Sakurako','Sanae','Senjougahara','Shiina','Shinobu','Sonya','Suiseiseki','Taiga','Tomoko','Tsumiki','Urotsuki','Winry','Yasuna','Yin','Yoko','Yotsuba','Yui','Yuki','Yuno','Yuuko'];
+  var characters = ['Agiri', 'Ai', 'Akarin', 'Akatsuki', 'Alice', 'Astraea', 'Asuha', 'Asuka', 'Ayase', 'CC', 'Chika', 'Chiri', 'Chitanda', 'Chiyo', 'Cirno', 'Crona', 'DemonSisters', 'Emi', 'Etna', 'Eureka', 'Excel', 'Faye', 'Felli', 'Fran', 'Fuu', 'Galil', 'HajimeIchinose', 'Hakase', 'Hanako', 'Haruhi', 'HaruhiFujioka', 'Haruko', 'Hitoha', 'Holo', 'Homura', 'Hyatt', 'Ibara', 'Ika', 'Kagami', 'Kanade', 'Kanoe', 'Kaori', 'Karen', 'Kasukabe', 'Kate', 'Kirino', 'KirisameMarisa', 'Konata', 'Kurisu', 'Kuroko', 'Kyouka', 'KyoukoSakura', 'KyoukoToshinou', 'Lain', 'LalaRu', 'Lilly', 'Louise', 'Lucchini', 'Lucy', 'Madotsuki', 'Mai', 'Maka', 'Makimaki', 'Makoto', 'Mami', 'Mary', 'Mashiro', 'Mayoi', 'Mayuri', 'Megumi', 'Melfina', 'MeyRin', 'Miho', 'Miku', 'Mio', 'MioNaganohara', 'Mirai', 'Misaka', 'Misaki', 'Miu', 'Mizuki', 'Momo', 'Monoko', 'Morgiana', 'Motoko', 'Nano', 'Neesan', 'Noel', 'Nymph', 'Onihime', 'Osaka', 'Popura', 'Rei', 'Renge', 'Rikka', 'Rin', 'RinTezuka', 'Ritsu', 'Ruri', 'Ryuuko', 'Sako', 'Sakura', 'Sakurako', 'Sanae', 'Senjougahara', 'Shiina', 'Shinobu', 'Sonya', 'Suiseiseki', 'Taiga', 'Tomoko', 'Tsumiki', 'Urotsuki', 'Winry', 'Yasuna', 'Yin', 'Yoko', 'Yotsuba', 'Yui', 'Yuki', 'Yuno', 'Yuuko'];
 
   //stock rhythm, starts empty
   var rhythm = [];
@@ -93,14 +93,13 @@
 
   createjs.Sound.on("fileload", this.play, this);
 
-function load(url, element)
-{
+  function load(url, element) {
     req = new XMLHttpRequest();
     req.open("GET", url, false);
     req.send(null);
 
     element.innerHTML = req.responseText;
-}
+  }
 
   /*
 
@@ -136,7 +135,12 @@ function load(url, element)
     document.getElementById('blur').firstElementChild.setAttribute('stdDeviation', "0,0");
 
     document.getElementById("ticker").innerHTML = backTicker.join('') + ticker.join('');
-    document.getElementById("beatDrop").innerHTML = (rhythm[musicIndex] == '.' || rhythm[musicIndex] == '-' ? ' ' : rhythm[musicIndex]) + "</span> "
+    document.getElementById("beatDrop").innerHTML = (rhythm[musicIndex] == '.' || rhythm[musicIndex] == '-' || rhythm[musicIndex] == '+' ? ' ' : rhythm[musicIndex]) + "</span> "
+    //change image and put up that spicy beat
+    if (rhythm[musicIndex] != '.' && rhythm[musicIndex] != ':' && rhythm[musicIndex] != '+') {
+      moe();
+      Velocity(document.getElementById("beatDrop"), { opacity: [100, 0] }, 200);
+    }
     //vibrate vertically
     if (rhythm[musicIndex] == 'x') {
       document.getElementById('blur').firstElementChild.setAttribute('stdDeviation', "10,0");
@@ -145,11 +149,7 @@ function load(url, element)
     if (rhythm[musicIndex] == 'o') {
       document.getElementById('blur').firstElementChild.setAttribute('stdDeviation', "0,10");
     }
-    //change image and put up that spicy beat
-    if (rhythm[musicIndex] != '.' && rhythm[musicIndex] != ':' && rhythm[musicIndex] != '+') {
-      moe();
-      Velocity(document.getElementById("beatDrop"), { opacity: [100, 0] }, 200);
-    }
+
     //change color but not image
     if (rhythm[musicIndex] == ':') {
       var hue = colorGen();
@@ -190,7 +190,7 @@ function load(url, element)
   //break out of the splash page and start the good shit
   document.getElementById("start").onclick = function () {
     var url = document.getElementById("url").value;
-        var beatmap = document.getElementById("beatmap").value;
+    var beatmap = document.getElementById("beatmap").value;
     rhythm = beatmap.split('');
     var tempo = document.getElementById("tempo").value;
     metronome = tempo;
@@ -255,8 +255,9 @@ function load(url, element)
 
     //random color generator, builds r g and b with some bias towards lighter colors
     for (var i = 0; i < rgb.length; i++) {
-      rgb[i] = (200 + (Math.floor(Math.random() * 56)))
+      rgb[i] = (220 + (Math.floor(Math.random() * 30)))
     }
+    rgb[Math.floor(Math.random()*3)] -= (75+(Math.floor(Math.random() * 50)));
 
     return rgb[0].toString(16) + rgb[1].toString(16) + rgb[2].toString(16);
   }
