@@ -44,6 +44,34 @@ input[type=button]{
   filter: url("./index.html#blur");
 }
 
+@keyframes blur-x{
+  0% {filter: url("#blur");}
+  50% {filter: url("#blurx5");}
+  100% {filter: url("#blurx5");}
+}
+
+.blurx{
+  animation: blur-x ;
+  animation-duration:.1s
+}
+
+@keyframes blur-o{
+  0% {filter: url("#blur");}
+  50% {filter: url("#bluro5");}
+  100% {filter: url("#bluro5");}
+}
+
+.bluro{
+  animation: blur-o ;
+  animation-duration:.05s
+}
+
+.unblurx{
+  animation: blur-x ;
+  animation-duration: .05s ;
+  animation-direction: reverse;
+}
+
 /*the bread and butter of this hot nonsense*/
 #moe{
     background-color: black;
@@ -59,8 +87,6 @@ input[type=button]{
     padding: 0;
     z-index: -1;
     margin: auto;
-    -webkit-filter: url("#blur");
-    filter: url("#blur");
 }
 .transp{
   -webkit-filter: opacity(.5);
