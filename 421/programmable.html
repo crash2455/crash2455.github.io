@@ -8,32 +8,35 @@
   <script src="https://code.createjs.com/1.0.0/preloadjs.min.js"></script>
   <script src="https://code.createjs.com/1.0.0/createjs.min.js"></script>
   <script src="./assets/script/velocity.min.js"></script>
-  <script src="./assets/script/xml-js.min.js"></script>
 </head>
 
 
 <body id="bg">
-  <svg xmlns="http://www.w3.org/2000/svg" version="1.1" class="filters invis">
-    <defs>
-      <filter id="blur">
-        <feGaussianBlur in="SourceGraphic" stdDeviation="0,0" />
-      </filter>
-      <filter id="blurx5">
-        <feGaussianBlur in="SourceGraphic" stdDeviation="50,0" />
-      </filter>
-      <filter id="bluro5">
-        <feGaussianBlur in="SourceGraphic" stdDeviation="0,50" />
-      </filter>
-      <filter id="blurout">
-        <feGaussianBlur in="SourceGraphic" stdDeviation="50,50" />
-      </filter>
-    </defs>
-  </svg>
+    <svg xmlns="http://www.w3.org/2000/svg" version="1.1" class="filters invis">
+      <defs>
+        <filter id="blur">
+          <feGaussianBlur in="SourceGraphic" stdDeviation="0,0" />
+        </filter>
+        <filter id="blurx5">
+          <feGaussianBlur in="SourceGraphic" stdDeviation="50,0" />
+        </filter>
+        <filter id="bluro5">
+          <feGaussianBlur in="SourceGraphic" stdDeviation="0,50" />
+        </filter>
+        <filter id="blurout">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="50,50" />
+          </filter>
+      </defs>
+    </svg>
 
   <div id="moe"></div>
 
   <div id='splash'>THIS IS A TRIBUTE TO 0x40HUES MADE IN HTML AND JAVASCRIPT
-    <br><br><br><br>
+    <br><br><br><br>ENTER VALUES
+    <br><br>
+    SONG URL: <input type="text" name="url" id="url"><br><br>
+    BEATMAP: <input type="text" name="beatmap" id="beatmap"><br><br>
+    BEAT TIME (MS): <input type="text" name="tempo" id="tempo"><br><br>
     <input type="button" value="GO" id="start">
   </div>
   <div id='ticker' class="hideable"></div>
@@ -41,30 +44,6 @@
 
   <div id='menu' class="bottom invis">
     <span class="hideable">
-      <ul id='songMenu' class="invis hideable">
-        <li><a href="#" id="Radioactive">RADIOACTIVE</a></li>
-        <li><a href="#" id="Finale">FINALE</a></li>
-        <li><a href="#" id="RowRow">ROW ROW</a></li>
-        <li><a href="#" id="Desire">DESIRE</a></li>
-        <li><a href="#" id="OutOfSight">OUT OF SIGHT</a></li>
-        <li><a href="#" id="SmileWithoutAFace">SMILE</a></li>
-        <li><a href="#" id="CourtshipDate">COURTSHIP DATE</a></li>
-        <li><a href="#" id="Vordhosbn">VORDHOSBN</a></li>
-        <li><a href="#" id="Orange">ORANGE</a></li>
-        <li><a href="#" id="Spoiler">SPOILER</a></li>
-        <li><a href="#" id="Kryptonite">KRYPTONITE</a></li>
-        <li><a href="#" id="BeyondRightNow">BEYOND RIGHT NOW</a></li>
-        <li><a href="#" id="HoldMyLiquor">HOLD MY LIQUOR</a></li>
-        <li><a href="#" id="Heart">HEART</a></li>
-        <li><a href="#" id="FuturePeople">FUTURE PEOPLE</a></li>
-        <li><a href="#" id="Nanox">NANOX</a></li>
-        <li><a href="#" id="BlackEarth">BLACK EARTH</a></li>
-        <li><a href="#" id="EarlyMorningJay">EARLY MORNING JAY</a></li>
-        <li><a href="#" id="Weapon">RAISE YOUR WEAPON</a></li>
-        <li><a href="#" id="LoveOnHaightStreet">LOVE ON HAIGHT STREET</a></li>
-        <li><a href="#" id="TheClockMaker">THE CLOCKMAKER</a></li>
-      </ul>
-      <a href="#" id="songList">SONGS</a>
       <a href="#" id="oneMany">MANY</a>
     </span>
     <a href="#" id="showHide">&#x2193;</a>
@@ -72,7 +51,6 @@
 
   <div id='hud' class="bottom invis">
     <ul class="hideable">
-      <li>T: <span id="track"></span></li>
       <li>B: <span id="beat"></span></li>
       <li>C: <span id="color"></span></li>
       <li>I: <span id="character"></span></li>
@@ -132,34 +110,6 @@
     element.innerHTML = req.responseText;
   }
 
-  //get song information from xml
-  function parseXML(name) {
-    var xhr = new XMLHttpRequest();
-    xhr.onload = function () {
-      var docHTML = xhr.response.documentElement.outerHTML;
-      var result = xml2json(docHTML, { compact: true, spaces: 4 });
-      var songList = JSON.parse(result);
-      var index = 0;
-      while (songList['songs']['song'][index]['_attributes']['id'] != name) {
-        index++;
-      }
-      console.log(index);
-      console.log(songList['songs']['song'][index]['_attributes']['id']);
-      var track = songList['songs']['song'][index]['title']['_text'];
-      document.getElementById('track').innerHTML = track.toUpperCase();
-      var url = songList['songs']['song'][index]['source']['_text'];
-      createjs.Sound.registerSound(url, "sound");
-      metronome = songList['songs']['song'][index]['tempo']['_text'];
-      rhythm = songList['songs']['song'][index]['rhythm']['_text'].split('');
-    }
-    xhr.onerror = function () {
-      console.log("Error while getting XML.");
-    }
-    xhr.open("GET", "songs.xml");
-    xhr.responseType = "document";
-    xhr.send();
-  }
-
   /*
 
     THE FUN PART
@@ -179,6 +129,7 @@
       moeExt = moe;
       var moeStr = moe.toString();
       document.getElementById('moe').style.backgroundImage = 'url("./assets/img/' + moeStr + '.png")';
+      //document.getElementById('moe').src = './assets/img/' + moeStr + '.png';
       document.getElementById('character').innerHTML = characters[moe].toUpperCase();
     }
   }
@@ -191,7 +142,8 @@
   function musicBox() {
     //a bunch of class removals to avoid animation lingering
     var blackedOut = document.getElementsByClassName('blackout');
-    if (blackedOut.length > 0) {
+    if (blackedOut.length > 0)
+    {
       blackedOut[0].style.backgroundColor = "#000000";
     }
 
@@ -251,11 +203,19 @@
 
   //break out of the splash page and start the good shit
   document.getElementById("start").onclick = function () {
+    var url = document.getElementById("url").value;
+    var beatmap = document.getElementById("beatmap").value;
+    rhythm = beatmap.split('');
+    var tempo = document.getElementById("tempo").value;
+    metronome = tempo;
+
     document.getElementById("splash").classList.add('invis');
+    createjs.Sound.registerSound(url, "sound");
     document.getElementById("menu").classList.remove('invis');
     document.getElementById("hud").classList.remove('invis');
+    //document.getElementById('moe').classList.add('transp');
 
-    play('Radioactive');
+    play();
   };
 
   /*
@@ -263,10 +223,10 @@
         SONG SELECTION
 
   */
-  function play(song) {
-    parseXML(song);
+  function play() {
+
+
     //for the love of god reset everything unless you want to enter the speedforce
-    createjs.Sound.stop();
     clearInterval(m);
     ticker.length = 0;
     backTicker.length = 0;
@@ -311,7 +271,7 @@
     for (var i = 0; i < rgb.length; i++) {
       rgb[i] = (220 + (Math.floor(Math.random() * 30)))
     }
-    rgb[Math.floor(Math.random() * 3)] -= (75 + (Math.floor(Math.random() * 50)));
+    rgb[Math.floor(Math.random()*3)] -= (75+(Math.floor(Math.random() * 50)));
 
     return rgb[0].toString(16) + rgb[1].toString(16) + rgb[2].toString(16);
   }
@@ -338,46 +298,6 @@
       hide = false;
     }
   }
-
-  //a bunch of ugly onclick functions
-  document.getElementById("songList").onclick = function () {
-    if (menu == 1) {
-      document.getElementById('songMenu').classList.add('invis');
-      menu = 0;
-    }
-    else if (menu == 2) {
-      //document.getElementById('waifuMenu').classList.add('invis');
-      document.getElementById('songMenu').classList.remove('invis');
-      menu = 1;
-    }
-    else {
-      document.getElementById('songMenu').classList.remove('invis');
-      menu = 1;
-    }
-  }
-
-  document.getElementById("Radioactive").onclick = function () { play('Radioactive')};
-  document.getElementById("Finale").onclick = function () { play('Finale')};
-  document.getElementById("RowRow").onclick = function () { play('RowRow')};
-  document.getElementById("Desire").onclick = function () { play('Desire')};
-  document.getElementById("OutOfSight").onclick = function () { play('OutOfSight')};
-  document.getElementById("SmileWithoutAFace").onclick = function () { play('SmileWithoutAFace')};
-  document.getElementById("CourtshipDate").onclick = function () { play('CourtshipDate')};
-  document.getElementById("Vordhosbn").onclick = function () { play('Vordhosbn')};
-  document.getElementById("Orange").onclick = function () { play('Orange')};
-  document.getElementById("Spoiler").onclick = function () { play('Spoiler')};
-  document.getElementById("Kryptonite").onclick = function () { play('Kryptonite')};
-  document.getElementById("BeyondRightNow").onclick = function () { play('BeyondRightNow')};
-  document.getElementById("HoldMyLiquor").onclick = function () { play('HoldMyLiquor')};
-  document.getElementById("Heart").onclick = function () { play('Heart')};
-  document.getElementById("FuturePeople").onclick = function () { play('FuturePeople')};
-  document.getElementById("Nanox").onclick = function () { play('Nanox')};
-  document.getElementById("BlackEarth").onclick = function () { play('BlackEarth')};
-  document.getElementById("EarlyMorningJay").onclick = function () { play('EarlyMorningMay')};
-  document.getElementById("Weapon").onclick = function () { play('Weapon')};
-  document.getElementById("LoveOnHaightStreet").onclick = function () { play('LoveOnHaightStreet')};
-  document.getElementById("TheClockMaker").onclick = function () { play('TheClockmaker')};
-
 
 </script>
 
