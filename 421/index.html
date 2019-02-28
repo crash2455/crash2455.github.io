@@ -8,35 +8,32 @@
   <script src="https://code.createjs.com/1.0.0/preloadjs.min.js"></script>
   <script src="https://code.createjs.com/1.0.0/createjs.min.js"></script>
   <script src="./assets/script/velocity.min.js"></script>
+  <script src="./assets/script/xml-js.min.js"></script>
 </head>
 
 
 <body id="bg">
-    <svg xmlns="http://www.w3.org/2000/svg" version="1.1" class="filters invis">
-      <defs>
-        <filter id="blur">
-          <feGaussianBlur in="SourceGraphic" stdDeviation="0,0" />
-        </filter>
-        <filter id="blurx5">
-          <feGaussianBlur in="SourceGraphic" stdDeviation="50,0" />
-        </filter>
-        <filter id="bluro5">
-          <feGaussianBlur in="SourceGraphic" stdDeviation="0,50" />
-        </filter>
-        <filter id="blurout">
-            <feGaussianBlur in="SourceGraphic" stdDeviation="50,50" />
-          </filter>
-      </defs>
-    </svg>
+  <svg xmlns="http://www.w3.org/2000/svg" version="1.1" class="filters invis">
+    <defs>
+      <filter id="blur">
+        <feGaussianBlur in="SourceGraphic" stdDeviation="0,0" />
+      </filter>
+      <filter id="blurx5">
+        <feGaussianBlur in="SourceGraphic" stdDeviation="50,0" />
+      </filter>
+      <filter id="bluro5">
+        <feGaussianBlur in="SourceGraphic" stdDeviation="0,50" />
+      </filter>
+      <filter id="blurout">
+        <feGaussianBlur in="SourceGraphic" stdDeviation="50,50" />
+      </filter>
+    </defs>
+  </svg>
 
   <div id="moe"></div>
 
   <div id='splash'>THIS IS A TRIBUTE TO 0x40HUES MADE IN HTML AND JAVASCRIPT
-    <br><br><br><br>ENTER VALUES
-    <br><br>
-    SONG URL: <input type="text" name="url" id="url"><br><br>
-    BEATMAP: <input type="text" name="beatmap" id="beatmap"><br><br>
-    BEAT TIME (MS): <input type="text" name="tempo" id="tempo"><br><br>
+    <br><br><br><br>
     <input type="button" value="GO" id="start">
   </div>
   <div id='ticker' class="hideable"></div>
@@ -51,6 +48,7 @@
 
   <div id='hud' class="bottom invis">
     <ul class="hideable">
+      <li>T: <span id="track"></span></li>
       <li>B: <span id="beat"></span></li>
       <li>C: <span id="color"></span></li>
       <li>I: <span id="character"></span></li>
@@ -110,6 +108,24 @@
     element.innerHTML = req.responseText;
   }
 
+  parseXML('Radioactive');
+
+  //get song information from xml
+  function parseXML(name) {
+    var xhr = new XMLHttpRequest();
+    xhr.onload = function () {
+      var docHTML = xhr.response.documentElement.outerHTML;
+      var result = xml2json(docHTML, {compact: true, spaces: 4});
+      console.log(result);
+    }
+    xhr.onerror = function () {
+      console.log("Error while getting XML.");
+    }
+    xhr.open("GET", "songs.xml");
+    xhr.responseType = "document";
+    xhr.send();
+  }
+
   /*
 
     THE FUN PART
@@ -129,7 +145,6 @@
       moeExt = moe;
       var moeStr = moe.toString();
       document.getElementById('moe').style.backgroundImage = 'url("./assets/img/' + moeStr + '.png")';
-      //document.getElementById('moe').src = './assets/img/' + moeStr + '.png';
       document.getElementById('character').innerHTML = characters[moe].toUpperCase();
     }
   }
@@ -142,8 +157,7 @@
   function musicBox() {
     //a bunch of class removals to avoid animation lingering
     var blackedOut = document.getElementsByClassName('blackout');
-    if (blackedOut.length > 0)
-    {
+    if (blackedOut.length > 0) {
       blackedOut[0].style.backgroundColor = "#000000";
     }
 
@@ -203,19 +217,18 @@
 
   //break out of the splash page and start the good shit
   document.getElementById("start").onclick = function () {
-    var url = document.getElementById("url").value;
+    /*var url = document.getElementById("url").value;
     var beatmap = document.getElementById("beatmap").value;
     rhythm = beatmap.split('');
     var tempo = document.getElementById("tempo").value;
-    metronome = tempo;
+    metronome = tempo;*/
 
     document.getElementById("splash").classList.add('invis');
     createjs.Sound.registerSound(url, "sound");
     document.getElementById("menu").classList.remove('invis');
     document.getElementById("hud").classList.remove('invis');
-    //document.getElementById('moe').classList.add('transp');
 
-    play();
+    play('Radioactive');
   };
 
   /*
@@ -223,8 +236,7 @@
         SONG SELECTION
 
   */
-  function play() {
-
+  function play(song) {
 
     //for the love of god reset everything unless you want to enter the speedforce
     clearInterval(m);
@@ -271,7 +283,7 @@
     for (var i = 0; i < rgb.length; i++) {
       rgb[i] = (220 + (Math.floor(Math.random() * 30)))
     }
-    rgb[Math.floor(Math.random()*3)] -= (75+(Math.floor(Math.random() * 50)));
+    rgb[Math.floor(Math.random() * 3)] -= (75 + (Math.floor(Math.random() * 50)));
 
     return rgb[0].toString(16) + rgb[1].toString(16) + rgb[2].toString(16);
   }
