@@ -5,38 +5,19 @@
   <link rel="stylesheet" type="text/css" href="moe.css">
   <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
   <script src="./howler.js-master/dist/howler.js"></script>
-  <script src="./assets/script/caman.min.js"></script>
-  <script src="./assets/script/velocity.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="https://csshake.surge.sh/csshake.min.css">
 </head>
 
 
 <body id="bg">
-  <svg xmlns="http://www.w3.org/2000/svg" version="1.1" class="filters invis">
-    <defs>
-      <filter id="blur">
-        <feGaussianBlur in="SourceGraphic" stdDeviation="0,0" />
-      </filter>
-      <filter id="blurx5">
-        <feGaussianBlur in="SourceGraphic" stdDeviation="50,0" />
-      </filter>
-      <filter id="bluro5">
-        <feGaussianBlur in="SourceGraphic" stdDeviation="0,50" />
-      </filter>
-      <filter id="blurout">
-        <feGaussianBlur in="SourceGraphic" stdDeviation="50,50" />
-      </filter>
-    </defs>
-  </svg>
-
-  <div id="moe"></div>
-
+  <div id='moe'></div>
   <div id='splash'>THIS IS A TRIBUTE TO 420.MOE MADE IN HTML AND JAVASCRIPT
     <br><br><br><br><a href="#" id="start">CLICK HERE TO MOKE SWEED</a></div>
-  <div id='ticker' class="hideable"></div>
-  <div id='beatDrop' class="hideable"></div>
+  <div id='ticker'></div>
+  <div id='beatDrop'></div>
 
   <div id='menu' class="bottom invis">
-    <ul id='songMenu' class="invis hideable">
+    <ul id='songMenu' class="invis">
       <li><a href="#" id="restOfMyLife">REST OF MY LIFE</a></li>
       <li><a href="#" id="greenAndPurple">GREEN AND PURPLE</a></li>
       <li><a href="#" id="holdItIn">HOLD IT IN</a></li>
@@ -44,7 +25,7 @@
       <li><a href="#" id="becuzIGotHi">BECUZ I GOT HI</a></li>
       <li><a href="#" id="fourtwenty">#420FGT</a></li>
     </ul>
-    <ul id='waifuMenu' class="invis hideable">
+    <ul id='waifuMenu' class="invis">
       <li><a href="#" id="agiri">AGIRI</a></li>
       <li><a href="#" id="akarin">AKARIN</a></li>
       <li><a href="#" id="astraea">ASTRAEA</a></li>
@@ -70,20 +51,16 @@
       <li><a href="#" id="renge">RENGE</a></li>
       <li><a href="#" id="suiseiseki">SUISEISEKI</a></li>
     </ul>
-    <span class="hideable">
-      <a href="#" id="oneMany">MANY</a>
-      <a href="#" id="waifuList">CHARACTERS</a>
-      <a href="#" id="songList">SONGS</a>
-    </span>
-    <a href="#" id="showHide">&#x2193;</a>
+    <a href="#" id="oneMany">SWAP</a>
+    <a href="#" id="waifuList">CHARACTERS</a>
+    <a href="#" id="songList">SONGS</a>
   </div>
 
   <div id='hud' class="bottom invis">
-    <ul class="hideable">
-      <li>T: <span id="track"></span></li>
-      <li>B: <span id="beat"></span></li>
-      <li>C: <span id="color"></span></li>
-      <li>I: <span id="character"></span></li>
+    <ul>
+      <li id="track"></li>
+      <li id="color"></li>
+      <li id="character"></li>
     </ul>
     <a href="http://420.moe">420.MOE</a>
   </div>
@@ -115,16 +92,13 @@
   //is menu displayed?
   var menu = 0;
 
-  //are we hiding the entire HUD
-  var hide = false;
-
   //song rhythm array storage
   var restOfLife = ['x', '.', '.', 'o', '.', '.', 'x', '.', '.', '.', '.', '.', '.', 'o', '.', 'x', '.', '.', 'o', '.', 'x', '.', '.', '.', '.', 'x', 'o', '.', '.', '.', 'o', '.', '.', 'x', '.', '.', '.', '.', '.', 'o', '.', '.', 'x', '.', '.', 'o', 'x', '.', '.', '.', '.', '.', 'x', 'o', '.', '.', 'o', '.', '.', 'x', '.', '.', '.', '.', '.', '.', 'o', '.', 'x', '.', '.', '.', '.', 'x', '.', '.', '.', '.', 'x', 'o', '.', '.', '.', 'o', '.', '.', 'x', '.', '.', '.', '.', '.', '.', 'o', '.', 'x', '.', '.', 'o', 'x', '.', '.', '.', '.', '.', 'x', 'o', '.', '.', 'o', '.', '.', '.', 'x', '.', '.', '.', '.', '.', 'o', '.', '.', 'x', '.', '.', 'o', 'x', '.', '.', '.', '.', '.', 'x', 'o', '.', '.', 'o', '.', '.', 'x', '.', '.', '.', '.', '.', '.', 'o', '.', 'x', '.', '.', 'o', '.', 'x', '.', '.', '.', '.', 'x', 'o', '.', '.', '.', 'o', '.', '.', 'x', '.', '.', '.', '.', '.', '.', 'o', '.', 'x', '.', '.', 'o', 'x', '.', '.', '.', '.', '.', 'x', 'o', '.', '.', 'o', '.', '.', '.', 'x', '.', '.', '.', '.', 'x', 'o', '.', 'x', '.', '.', '.', 'o', 'x', '.', 'x', 'x', '.', 'x', '.'];
   var greenAndPurple = ['o', '.', '.', '.', '.', '-', '.', '.', '.', '.', 'x', '.', '.', '.', '.', '.', 'o', '.', '.', 'o', '.', '.', '.', '.', 'o', '.', '.', 'o', '.', '.', '.', '.', '.', 'x', '.', '.', '.', '.', '-', '.', '.', '-', '.', 'o', '.', '.', '.', '.', '.', '-', '.', '.', '.', '.', 'x', '.', '.', '.', '.', '.', 'o', '.', '.', 'o', '.', '.', '.', '.', 'o', '.', '.', 'o', '.', '.', '.', '.', '.', 'x', '.', 'o', '.', '.', '.', '.', '.', '.', '.', '.', 'o', '.', '.', '.', '.', '-', '.', '.', '.', '.', 'x', '.', '.', '.', '.', '.', 'o', '.', '.', 'o', '.', '.', '.', '.', 'o', '.', '.', 'o', '.', '.', '.', '.', '.', 'x', '.', '.', '.', '.', '.', '-', '-', '-', '-', '.', 'o', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', 'x', '.', '.', '.', '.', '.', '.', '.', 'o', '.', '.', 'o', '.', 'o', '.', '.', 'o', '.', '.', '.', '.', '.', 'x', '.', 'o', '.', '.', '.', '.', '.', '.', '.', '.', 'o', '.', '.', '.', '.', '-', '.', '.', '.', '.', '.', 'x', '.', '.', '.', '.', 'o', '.', '.', 'o', '.', '.', '.', '.', 'o', '.', '.', 'o', '.', '.', '.', '.', 'x', '.', '.', '.', '.', '.', '-', '.', '.', '-', '.', '.', 'o', '.', '.', '.', '.', '.', '.', '.', '.', '.', 'x', '.', '.', '.', '.', '.', 'o', '.', '.', 'o', '.', '.', '.', '.', 'o', '.', '.', 'o', '.', '.', '.', '.', '.', 'x', '.', 'o', '.', '.', '.', '.', '.', '.', '.', '.', 'o', '.', '.', '.', '.', '-', '.', '.', '.', '.', '.', 'x', '.', '.', '.', '.', 'o', '.', '.', 'o', '.', '.', '.', '.', 'o', '.', '.', 'o', '.', '.', '.', '.', '.', 'x', '.', '.', '.', '.', '.', '-', '-', '-', '-', '.', 'o', '.', '.', '.', '.', '-', '.', '.', '.', '.', '.', 'x', '.', '.', '.', '.', '.', '.', '.', 'o', '.', '.', 'o', '.', 'o', '.', '.', 'o', '.', '.', '.', '.', 'x', '.', '.', 'o', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.'];
   var holdItIn = ['o', '.', '.', '.', '.', '.', '.', 'x', '.', '.', '.', '.', '.', 'o', 'o', 'o', '.', '.', '.', '.', '.', '.', '.', 'x', '.', '.', '.', '.', '.', '.', '.', 'o', '.', '.', '.', '.', '.', '.', 'x', '.', '.', '.', '.', '.', 'o', 'o', 'o', '.', '.', '.', '.', '.', '.', '.', 'x', '.', '.', '.', 'o', '.', '.', '.', 'o', '.', '.', '.', '.', '.', '.', '.', 'x', '.', '.', '.', '.', '.', 'o', 'o', 'o', '.', '.', '.', '.', '.', '.', 'x', '.', '.', '.', '.', '.', '.', '.', 'o', '.', '.', '.', '.', '.', '.', '.', 'x', '.', '.', '.', '.', '.', 'o', 'o', 'o', '.', '.', '.', '.', '.', '.', '.', 'x', '.', '.', '.', 'o', '.', '.', '.', 'o', '.', '.', '.', '.', '.', '.', 'x', '.', '.', '.', '.', '.', 'o', 'o', 'o', '.', '.', '.', '.', '.', '.', '.', 'x', '.', '.', '.', '.', '.', '.', '.', 'o', '.', '.', '.', '.', '.', '.', '.', 'x', '.', '.', '.', '.', 'o', 'o', 'o', '.', '.', '.', '.', '.', '.', '.', 'x', '.', '.', '.', 'o', '.', '.', '.', 'o', '.', '.', '.', '.', '.', '.', '.', 'x', '.', '.', '.', '.', '.', 'o', 'o', 'o', '.', '.', '.', '.', '.', '.', '.', 'x', '.', '.', '.', '.', '.', '.', 'o', '.', '.', '.', '.', '.', '.', '.', 'x', '.', '.', '.', '.', '.', 'o', 'o', 'o', '-', '-', '-', '-', '-', '-', '-', 'x', '-', '-', '-', 'o', '-', '-'];
-  var smokinRollin = ['.', 'o', '.', '.', 'o', 'x', '.', '.', 'o', '.', '.', '.', 'o', 'o', '.', '.', 'x', 'o', '.', '.', '.', 'o', '.', '.', 'o', '.', 'x', '.', 'o', '.', '.', '.', 'o', 'o', '.', '.', 'x', 'o', '.', '.', '.', 'o', '.', '.', 'o', '.', 'x', '.', 'o', '.', '.', '.', 'o', 'o', '.', '.', 'x', 'o', '.', '.', '.', 'o', '.', '.', 'o', '.', 'x', '.', 'o', '.', '.', '.', 'o', 'o', '.', '.', 'x', 'o', '.', '.'];
+  var smokinRollin = ['o', '.', '.', 'o', 'x', '.', '.', 'o', '.', '.', '.', 'o', 'o', '.', '.', 'x', 'o', '.', '.', '.', 'o', '.', '.', 'o', '.', 'x', '.', 'o', '.', '.', '.', 'o', 'o', '.', '.', 'x', 'o', '.', '.', '.', 'o', '.', '.', 'o', '.', 'x', '.', 'o', '.', '.', '.', 'o', 'o', '.', '.', 'x', 'o', '.', '.', '.', 'o', '.', '.', 'o', '.', 'x', '.', 'o', '.', '.', '.', 'o', 'o', '.', '.', 'x', 'o', '.', '.', '.'];
   var becuzIGotHi = ['x', '.', '.', '.', '.', '.', 'x', '.', '.', '.', 'o', 'o', '.', '.', '.', '.', '.', 'x', '.', '.', '.', '.', '.', 'o', '.', '.', '.', '.', 'x', '.', '.', '.', '.', 'o', 'o', '.', '.', 'o', '.', '.', 'x', 'o', 'o', '.', '.', 'o', '.', '.', '.', '.', '.', 'x', '.', '.', '.', 'o', 'o', '.', '.', '.', '.', '.', 'x', '.', '.', '.', '.', '.', 'o', '.', '.', '.', '.', 'x', '.', '.', '.', '.', 'o', 'o', '.', '.', 'o', '.', '.', 'x', 'o', 'o', '.', '.', 'o', '.', '.', '.', '.', '.', 'x', '.', '.', '.', 'o', 'o', '.', '.', '.', '.', '.', 'x', '.', '.', '.', '.', '.', 'o', '.', '.', '.', '.', 'x', '.', '.', '.', '.', 'o', 'o', '.', '.', 'o', '.', '.', 'x', 'o', 'o', '.', '.', 'o', '.', '.', '.', '.', '.', 'x', '.', '.', '.', 'o', 'o', '.', '.', '.', '.', '.', 'x', '.', '.', '.', '.', '.', 'o', '.', '.', '.', '.', 'x', '.', '.', '.', 'o', '.', 'o', '.', '.', 'o', '.', '.', 'x', 'o', 'o', '.', '.', 'x', '.', '.', '.', '.', '.', 'x', '.', '.', '.', 'o', 'o', '.', '.', '.', '.', '.', 'x', '.', '.', '.', '.', '.', 'o', '.', '.', '.', '.', 'x', '.', '.', '.', 'o', '.', 'o', '.', '.', 'o', '.', '.', 'x', 'o', 'o', '.', '.', 'o', '.', '.', '.', '.', '.', 'x', '.', '.', '.', 'o', 'o', '.', '.', '.', '.', '.', 'x', '.', '.', '.', '.', '.', 'o', '.', '.', '.', '.', 'x', '.', '.', '.', 'o', '.', 'o', '.', '.', 'o', '.', '.', 'x', 'o', 'o', '.', '.', 'o', '.', '.', '.', '.', '.', 'x', '.', '.', '.', 'o', 'o', '.', '.', '.', '.', '.', 'x', '.', '.', '.', '.', '.', 'o', '.', '.', '.', '.', 'x', '.', '.', '.', 'o', '.', 'o', '.', '.', 'o', '.', '.', 'x', 'o', 'o', '.', '.', 'o', '.', '.', '.', '.', '.', 'x', '.', '.', '.', 'o', 'o', '.', '.', '.', '.', '.', 'x', '.', '.', '.', '.', '.', 'o', '.', 'o', '.', '.', 'x', '.', 'o', 'o', 'o', '.', 'o', '.', '.', 'o', '.', 'x', '.', 'o', 'o', '.', '.', '.']
-  var fourtwenty = ['o', '.', '.', '.', 'x', '.', '.', '.', 'o', '.', '.', '.', 'x', '.', 'o', '.', 'o', '.', '.', '.', 'x', '.', '.', '.', 'o', '.', '.', '.', 'x', '.', 'o', '.', 'o', '.', '.', '.', 'x', '.', '.', '.', 'o', '.', '.', '.', 'x', '.', 'o', '.', 'o', '.', '.', '.', 'x', '.', '.', '.', 'o', '.', '.', '.', 'x', '.', 'o', '.', 'o', '.', '.', '.', 'x', '.', '.', '.', 'o', '.', '.', '.', 'x', '.', 'o', '.', 'o', '.', '.', '.', 'x', '.', '.', '.', '.', 'o', '.', '.', '.', 'x', '.', 'o', '.', 'o', '.', '.', 'x', '.', '.', '.', '.', 'o', '.', '.', '.', 'x', '.', 'o', '.', 'o', '.', '.', '.', 'o', '.', '.', '.', 'o', '.', '.', '.', 'x', '.', '.', '.', 'o', '.', '.', '.', 'x', '.', '.', '.', 'o', '.', '.', '.', 'x', '.', 'o', '.', 'o', '.', '.', '.', 'x', '.', '.', '.', 'o', '.', '.', '.', '.', 'x', '.', 'o', '.', 'o', '.', '.', 'x', '.', '.', '.', 'o', '.', '.', '.', 'x', '.', 'o', '.', 'o', '.', '.', '.', '.', 'x', '.', '.', 'o', '.', '.', '.', '.', 'x', '.', 'o', '.', 'o', '.', '.', '.', 'x', '.', '.', '.', 'o', '.', '.', '.', 'x', '.', 'o', '.', 'o', '.', '.', '.', 'x', '.', '.', '.', 'o', '.', '.', '.', '.', 'x', '.', 'o', '.', 'o', '.', '.', 'x', '.', '.', '.', 'o', '.', '.', '.', 'x', '.', 'o', '.', 'o', '.', '.', '.', 'o', '.', '.', '.', 'o', '.', '.', '.', 'o', '.', '.', '.', '.']
+  var fourtwenty = ['o', '.', '.', '.', 'x', '.', '.', '.', 'o', '.', '.', '.', 'x', '.', 'o', '.', 'o', '.', '.', '.', 'x', '.', '.', '.', 'o', '.', '.', '.', 'x', '.', 'o', '.', 'o', '.', '.', '.', 'x', '.', '.', '.', 'o', '.', '.', '.', 'x', '.', 'o', '.', 'o', '.', '.', '.', 'x', '.', '.', '.', 'o', '.', '.', '.', 'x', '.', 'o', '.', 'o', '.', '.', '.', 'x', '.', '.', '.', 'o', '.', '.', '.', 'x', '.', 'o', '.', 'o', '.', '.', '.', 'x', '.', '.', '.', '.', 'o', '.', '.', '.', 'x', '.', 'o', '.', 'o', '.', '.', 'x', '.', '.', '.', '.', 'o', '.', '.', '.', 'x', '.', 'o', '.', 'o', '.', '.', '.', 'o', '.', '.', '.', 'o', '.', '.', '.', 'x', '.', '.', '.', 'o', '.', '.', '.', 'x', '.', '.', '.', 'o', '.', '.', '.', 'x', '.', 'o', '.', 'o', '.', '.', '.', 'x', '.', '.', '.', 'o', '.', '.', '.', '.', 'x', '.', 'o', '.', 'o', '.', '.', 'x', '.', '.', '.', 'o', '.', '.', '.', 'x', '.', 'o', '.', 'o', '.', '.', '.', '.', 'x', '.', '.', 'o', '.', '.', '.', '.', 'x', '.', 'o', '.', 'o', '.', '.', '.', 'x', '.', '.', '.', 'o', '.', '.', '.', 'x', '.', 'o', '.', 'o', '.', '.', '.', 'x', '.', '.', '.', 'o', '.', '.', '.', '.', 'x', '.', 'o', '.', 'o', '.', '.', 'x', '.', '.', '.', 'o', '.', '.', '.', 'x', '.', 'o', '.', 'o', '.', '.', '.', 'o', '.', '.', '.', 'o', '.', '.', '.', 'o', '.', '.', '.', '.', '.']
 
   //list of character names
   var characters = ['AYASE', 'HANAKO', 'HORO', 'AKARIN', 'LUCY', 'ASTRAEA', 'MISAKI', 'RENGE', 'MIRAI', 'LALARU', 'NYMPH', 'MADOTSUKI', 'MAYOI', 'CIRNO', 'AGIRI', 'NOEL', 'HARUHI', 'MAO', 'EUREKA', 'KYOKO', 'MEGUMI', 'KANOE', 'FUU', 'SUISEISEKI']
@@ -135,10 +109,16 @@
   //way to keep time
   var metronome = 110;
 
-  var starter = 'restOfMyLife';
-
   //external counter to keep track of where we are in the sample
   var musicIndex = 0;
+
+  document.getElementById("start").onclick = function () {
+    document.getElementById("splash").classList.add('invis');
+    document.getElementById("menu").classList.remove('invis');
+    document.getElementById("hud").classList.remove('invis');
+    moe();
+  };
+
 
   /*
 
@@ -148,182 +128,21 @@
   function moe() {
 
     var hue = colorGen();
-
     document.getElementById('moe').style.backgroundColor = '#' + hue;
     document.getElementById('bg').style.backgroundColor = '#' + hue;
     document.getElementById('color').innerHTML = '0x' + hue;
 
     if (many) { //if we have character changer on then change characters
-      //slide changer, biased to not pick the same image twice in a row
-      var moe = ((moeExt + (Math.ceil(Math.random() * 11))) % 24);
+      //slide changer, biased to not pick the same image twice
+      var moe = ((moeExt + (Math.ceil(Math.random() * 23))) % 24);
       moeExt = moe;
       var moeStr = moe.toString();
       document.getElementById('moe').style.backgroundImage = 'url("./assets/img/' + moeStr + '.png")';
-      //document.getElementById('moe').src = './assets/img/' + moeStr + '.png';
+      //document.getElementById('moe').style.filter = "hue-rotate("+Math.random().toString()+"turn)";
       document.getElementById('character').innerHTML = characters[moe];
     }
   }
 
-  //a way to make audio work smoothly, also load up one soundtrack to play 6 songs
-  var sound = new Howl({
-    src: ['./assets/weedloop2.ogg'],
-    //to have clean audio loading all of our samples are in one ogg vorbis file
-    sprite: {
-      restOfMyLife: [0, 25000],
-      greenAndPurple: [30000, 55000],
-      holdItIn: [60000, 85000],
-      smokinRollin: [90000, 105000],
-      becuzIGotHi: [120000, 165000],
-      fourtwenty: [180000, 225000]
-    },
-    volume: 0.5
-  });
-
-  /*
-
-    BEAT COUNTER
-
-  */
-  function musicBox() {
-    //a bunch of class removals to avoid animation lingering
-    var blackedOut = document.getElementsByClassName('blackout');
-    if (blackedOut.length > 0) {
-      blackedOut[0].style.backgroundColor = "#000000";
-    }
-
-    document.getElementById('moe').classList.remove('blurx');
-    document.getElementById('moe').classList.remove('bluro');
-
-    document.getElementById("ticker").innerHTML = backTicker.join('') + ticker.join('');
-    document.getElementById("beatDrop").innerHTML = (rhythm[musicIndex] == '.' || rhythm[musicIndex] == '-' || rhythm[musicIndex] == '+' ? ' ' : rhythm[musicIndex]) + "</span> "
-    //vibrate vertically
-    if (rhythm[musicIndex] == 'x') {
-      document.getElementById('moe').classList.add('blurx');
-      //document.getElementById('blur').firstElementChild.setAttribute('stdDeviation', "10,0");
-    }
-    //vibrate horizontally
-    if (rhythm[musicIndex] == 'o') {
-      document.getElementById('moe').classList.add('bluro');
-      //document.getElementById('blur').firstElementChild.setAttribute('stdDeviation', "0,10");
-    }
-    //change image and put up that spicy beat
-    if (rhythm[musicIndex] != '.' && rhythm[musicIndex] != ':' && rhythm[musicIndex] != '+') {
-      document.getElementById('moe').classList.remove('blackout');
-      moe();
-      Velocity(document.getElementById("beatDrop"), { opacity: [100, 0] }, 200);
-    }
-
-    //change color but not image
-    if (rhythm[musicIndex] == ':') {
-      var hue = colorGen();
-
-      document.getElementById('moe').style.backgroundColor = '#' + hue;
-      document.getElementById('bg').style.backgroundColor = '#' + hue;
-      document.getElementById('color').innerHTML = '0x' + hue;
-    }
-    //mess up everything and black out
-    if (rhythm[musicIndex] == '+') {
-      document.getElementById('moe').classList.add('blackout');
-    }
-    //increment index
-    musicIndex++;
-    //restart loop when we run out of beats
-    if (musicIndex == rhythm.length) {
-      musicIndex = 0;
-      sound.seek(seek);
-    }
-    //display index in lower HUD
-    document.getElementById("beat").innerHTML = '0x' + ('000000' + musicIndex.toString(16)).substr(-6);
-
-    //add and remove beats to our visual beat ticker up top
-    ticker.shift();
-    backTicker.pop();
-    ticker.push(rhythm[(musicIndex + 30) % rhythm.length]);
-    backTicker.unshift(rhythm[(musicIndex + 30) % rhythm.length]);
-  }
-
-  //break out of the splash page and start the good shit
-  document.getElementById("start").onclick = function () {
-    document.getElementById("splash").classList.add('invis');
-    document.getElementById("menu").classList.remove('invis');
-    document.getElementById("hud").classList.remove('invis');
-    play(starter)
-  };
-  //chrome actually won't allow audio to autoplay
-  //so we made this function which also gives our assets time to load
-  //has to be wrapped in a function or it all activates at once
-  document.getElementById("restOfMyLife").onclick = function () { play('restOfMyLife') };
-  document.getElementById("greenAndPurple").onclick = function () { play('greenAndPurple') };
-  document.getElementById("holdItIn").onclick = function () { play('holdItIn') };
-  document.getElementById("smokinRollin").onclick = function () { play('smokinRollin') };
-  document.getElementById("becuzIGotHi").onclick = function () { play('becuzIGotHi') };
-  document.getElementById("fourtwenty").onclick = function () { play('fourtwenty') };
-
-  /*
-
-        SONG SELECTION
-
-  */
-  function play(song) {
-
-
-    //for the love of god reset everything unless you want to enter the speedforce
-    clearInterval(m);
-    sound.stop();
-    ticker.length = 0;
-    backTicker.length = 0;
-    musicIndex = 0;
-
-    //see what song is up to play and set parameters accordingly
-    switch (song) {
-      case 'restOfMyLife':
-        rhythm = restOfLife;
-        seek = 0;
-        metronome = 110;
-        document.getElementById("track").innerHTML = 'RESTOFMYLIFE'
-        break;
-      case 'greenAndPurple':
-        rhythm = greenAndPurple;
-        seek = 30;
-        metronome = 66;
-        document.getElementById("track").innerHTML = 'GREENANDPURPLE'
-        break;
-      case 'holdItIn':
-        rhythm = holdItIn;
-        seek = 60;
-        metronome = 110;
-        document.getElementById("track").innerHTML = 'HOLDITIN'
-        break;
-      case 'smokinRollin':
-        rhythm = smokinRollin;
-        seek = 90;
-        metronome = 177;
-        document.getElementById("track").innerHTML = 'SMOKINROLLIN'
-        break;
-      case 'becuzIGotHi':
-        rhythm = becuzIGotHi;
-        seek = 120;
-        metronome = 128;
-        document.getElementById("track").innerHTML = 'BECUZIGOTHI'
-        break;
-      case 'fourtwenty':
-        rhythm = fourtwenty;
-        seek = 180;
-        metronome = 154;
-        document.getElementById("track").innerHTML = '#420FGT'
-        break;
-    }
-
-    //populate ticker with new beats
-    for (var i = 0; i < 30; i++) {
-      ticker.push(rhythm[i + 1]);
-      backTicker.unshift(rhythm[i + 1]);
-    }
-
-    //run our beat counter function every x many ms as dictated by metronome
-    m = setInterval(musicBox, metronome);
-    sound.play(song);
-  }
 
   /*
 
@@ -354,7 +173,6 @@
   document.getElementById("nymph").onclick = function () { waifuSwap(document.getElementById("nymph").innerHTML) };
   document.getElementById("renge").onclick = function () { waifuSwap(document.getElementById("renge").innerHTML) };
   document.getElementById("suiseiseki").onclick = function () { waifuSwap(document.getElementById("suiseiseki").innerHTML) };
-  //i feel like there's a more efficient way to do this bullshit
 
   function waifuSwap(waifu) {
     if (many) {
@@ -366,7 +184,7 @@
   }
 
   //switch between showing all characters and sticking with your main waifu
-  document.getElementById("oneMany").onclick = function () { manyOne(); };
+  document.getElementById("oneMany").onclick = function () { moe() };
 
   function manyOne() {
     if (many) {
@@ -422,34 +240,11 @@
 
     //random color generator, builds r g and b with some bias towards lighter colors
     for (var i = 0; i < rgb.length; i++) {
-      rgb[i] = (170 + (Math.floor(Math.random() * 70)))
+      rgb[i] = (220 + (Math.floor(Math.random() * 30)))
     }
-    rgb[(Math.floor(Math.random() * 3))] -= (120 + (Math.floor(Math.random() * 50)))
+    rgb[Math.floor(Math.random() * 3)] -= (75 + (Math.floor(Math.random() * 50)));
 
     return rgb[0].toString(16) + rgb[1].toString(16) + rgb[2].toString(16);
-  }
-
-  //hide or show stuff
-  document.getElementById("showHide").onclick = function () {
-    var elements = document.getElementsByClassName('hideable');
-    if (!hide) {
-      document.getElementById("showHide").innerHTML = '&#x2191;';
-      for (var i = 0; i < elements.length; i++) {
-        elements[i].classList.add('invis');
-
-      }
-      menu = 0;
-      hide = true;
-    }
-    else {
-      document.getElementById("showHide").innerHTML = '&#x2193;';
-      for (var i = 0; i < elements.length; i++) {
-        if (elements[i].id != 'waifuMenu' && elements[i].id != 'songMenu') {
-          elements[i].classList.remove('invis');
-        }
-      }
-      hide = false;
-    }
   }
 
 </script>
