@@ -150,8 +150,12 @@
       document.getElementById('track').innerHTML = track.toUpperCase();
       var url = songList['songs']['song'][index]['source']['_text'];
       createjs.Sound.registerSound(url, "sound");
-      metronome = songList['songs']['song'][index]['tempo']['_text'];
+      //metronome = songList['songs']['song'][index]['tempo']['_text'];
       rhythm = songList['songs']['song'][index]['rhythm']['_text'].split('');
+      var beats = songList['songs']['song'][index]['rhythm']['_text'].length;
+      var duration = parseInt(songList['songs']['song'][index]['duration']['_text']);
+      metronome = Math.ceil(duration/beats);
+      console.log(metronome);
     }
     xhr.onerror = function () {
       console.log("Error while getting XML.");

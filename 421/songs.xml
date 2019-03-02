@@ -5,6 +5,7 @@
     <rhythm>x..xo...x...o...x..xo...x...o...x..xo...x...o...x..xo...x...oxoox..xo...x...o...x..xo...x...o...x..xo...x...o...x...o...x...oooo</rhythm>
     <buildup>build_Finale</buildup>
     <tempo>163</tempo>
+    <duration>20920</duration>
   </song>
 
   <song id="Radioactive">
@@ -12,12 +13,14 @@
     <source>./assets/audio/loop_Radioactive.mp3</source>
     <rhythm>o...x.o.o...x.o.o...x...o...x.o.o...x.o.o...x.......x.......x...</rhythm>
     <tempo>220</tempo>
+    <duration>14132</duration>
   </song>
 
   <song id="RowRow">
     <title>Row Row Fight the Powah (RAGEFOXX &amp; SLUTTT MIX)</title>
     <source>./assets/audio/loop_RowRow</source>
     <rhythm>o...x...o...x...o...x...o...x...o...x...o...x...o...x...o...xxx.x...x...o...x...o...x...o...x...o...x...o...x...o...o...o...o...</rhythm>
+    <duration>15308</duration>
   </song>
 
   <song id="Desire">
