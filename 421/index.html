@@ -288,11 +288,12 @@
     if (typeof song == 'string'){
     songIndex = tracks.lastIndexOf(song);
     }
-    console.log(song);
-    console.log(songIndex);
+    //console.log(song);
+    //console.log(songIndex);
     document.getElementById('track').innerHTML = titles[songIndex].toUpperCase();
     var url = urls[songIndex];
     createjs.Sound.registerSound(url, "sound");
+    console.log('hi');
     rhythm = rhythms[songIndex].split('');
     metronome = tempos[songIndex];
 
