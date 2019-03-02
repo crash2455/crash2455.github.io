@@ -150,7 +150,7 @@
       var result = xml2json(docHTML, { compact: true, spaces: 4 });
       var songList = JSON.parse(result);
       var index = 0;
-      while (songList['songs']['song'][index]['_attributes']['id']) {
+      while (songList['songs']['song'][index]) {
         console.log(index);
         console.log(songList['songs']['song'][index]['_attributes']['id']);
         var track = songList['songs']['song'][index]['_attributes']['id'];
@@ -292,7 +292,7 @@
     ticker.length = 0;
     backTicker.length = 0;
     musicIndex = 0;
-    var songIndex = tracks.findIndex(function(){return song});
+    var songIndex = tracks.lastIndexOf(song);
     document.getElementById('track').innerHTML = titles[songIndex].toUpperCase();
     var url = urls[songIndex];
     createjs.Sound.registerSound(url, "sound");
