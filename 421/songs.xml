@@ -144,7 +144,7 @@
 
   <song id="Weapon">
     <title>deadmau5 - Raise Your Weapon (Madeon Remix)</title>
-    <source>./assets/audio/loop_Weapon</source>
+    <source>./assets/audio/loop_Weapon.mp3</source>
     <rhythm>o.-.x...o...x...o.-.x...o...x...o.-.x...o...x...o.-.x...o...x...o.-.x...o...x...o.-.x...o...x...o..o..o...o...o.............x...</rhythm>
     <buildup>build_Weapon</buildup>
     <buildupRhythm>----</buildupRhythm>
@@ -153,7 +153,7 @@
 
   <song id="LoveOnHaightStreet">
     <title>BT - Love On Haight Street </title>
-    <source>./assets/audio/loop_LoveOnHaightStreet</source>
+    <source>./assets/audio/loop_LoveOnHaightStreet.mp3</source>
     <rhythm>o.....x.........o.ox....oo..o...x....o...o..x......o..o..x...o.....o..x....oo..o...x....+...o+..x.+...x..o.ox.....o..o...x.....oo..o..x.....o.o.o..x..oooo......x..o.....o..x.....oo..o..x.....o..oo..x............x.......oo.ox.....oo..o..x.....o...+.........</rhythm>
     <buildup>build_LoveOnHaightStreet</buildup>
     <buildupRhythm>x......:......:.....:......:.....:.....:......:.....</buildupRhythm>
@@ -172,8 +172,8 @@
   <song id="Lies">
     <title>Marina and the Diamonds - Lies</title>
     <source>./assets/audio/lies.ogg</source>
-    <rhythm>o.......:.......x.......:....---o.......:.......x.......:.......o.......:.......x.......:....---o....o....o...x.......:.......o.......:.......x.......:....---o.......:.......x.......:.......o.......:.......x.......:....---o....o....o...x.......:...............</rhythm>
+    <rhythm>o.......:.......x.......:....---o.......:.......x.......:.......o.......:.......x.......:....---o....o....o...x.......:.......o.......:.......x.......:....---o.......:.......x.......:.......o.......:.......x.......:....---o....o....o...x.......:.......</rhythm>
     <tempo>61</tempo>
-    <duration>15475</duration>
+    <duration>15620</duration>
   </song>
 </songs>
