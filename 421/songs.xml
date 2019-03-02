@@ -9,7 +9,7 @@
 
   <song id="Radioactive">
     <title>Imagine Dragons - Radioactive</title>
-    <source>./assets/audio/Radioactive.mp3</source>
+    <source>./assets/audio/loop_Radioactive.mp3</source>
     <rhythm>o...x.o.o...x.o.o...x...o...x.o.o...x.o.o...x.......x.......x...</rhythm>
     <tempo>220</tempo>
   </song>
