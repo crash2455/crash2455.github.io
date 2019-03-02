@@ -133,29 +133,43 @@
     element.innerHTML = req.responseText;
   }
 
+  //a bunch of variables to hold all the garbage we get out of xml
+
+  var ttitles = [];
+  var urls = [];
+  var rhythms = [];
+  var tempos = [];
+
+  parseXML();
+
   //get song information from xml
-  function parseXML(name) {
+  function parseXML() {
     var xhr = new XMLHttpRequest();
     xhr.onload = function () {
       var docHTML = xhr.response.documentElement.outerHTML;
       var result = xml2json(docHTML, { compact: true, spaces: 4 });
       var songList = JSON.parse(result);
       var index = 0;
-      while (songList['songs']['song'][index]['_attributes']['id'] != name) {
+      while (!songList['songs']['song'][index]['_attributes']['id']) {  
+        console.log(index);
+        console.log(songList['songs']['song'][index]['_attributes']['id']);
+        var title = songList['songs']['song'][index]['title']['_text'];
+        titles.push(title);
+        //document.getElementById('track').innerHTML = track.toUpperCase();
+        var url = songList['songs']['song'][index]['source']['_text'];
+        urls.push(url);
+        //createjs.Sound.registerSound(url, "sound");
+        //metronome = songList['songs']['song'][index]['tempo']['_text'];
+        var beatmap = songList['songs']['song'][index]['rhythm']['_text'];
+        rhythms.push(beatmap);
+        //rhythm = songList['songs']['song'][index]['rhythm']['_text'].split('');
+        var beats = songList['songs']['song'][index]['rhythm']['_text'].length;
+        var duration = parseInt(songList['songs']['song'][index]['duration']['_text']);
+        tempos.push(Math.floor(duration/beats));
+        //metronome = Math.floor(duration/beats);
         index++;
       }
-      console.log(index);
-      console.log(songList['songs']['song'][index]['_attributes']['id']);
-      var track = songList['songs']['song'][index]['title']['_text'];
-      document.getElementById('track').innerHTML = track.toUpperCase();
-      var url = songList['songs']['song'][index]['source']['_text'];
-      createjs.Sound.registerSound(url, "sound");
-      //metronome = songList['songs']['song'][index]['tempo']['_text'];
-      rhythm = songList['songs']['song'][index]['rhythm']['_text'].split('');
-      var beats = songList['songs']['song'][index]['rhythm']['_text'].length;
-      var duration = parseInt(songList['songs']['song'][index]['duration']['_text']);
-      metronome = Math.floor(duration/beats);
-      console.log(metronome);
+
     }
     xhr.onerror = function () {
       console.log("Error while getting XML.");
@@ -269,13 +283,19 @@
 
   */
   function play(song) {
-    parseXML(song);
     //for the love of god reset everything unless you want to enter the speedforce
     createjs.Sound.stop();
     clearInterval(m);
     ticker.length = 0;
     backTicker.length = 0;
     musicIndex = 0;
+    var songIndex = tracks.findIndex(song);
+    document.getElementById('track').innerHTML = titles[songIndex].toUpperCase();
+    var url = urls[songIndex];
+    createjs.Sound.registerSound(url, "sound");
+    rhythm = rhythms[songIndex].split('');
+    metronome = tempos[songIndex];
+
 
     //populate ticker with new beats
     for (var i = 0; i < 30; i++) {
