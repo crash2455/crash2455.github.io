@@ -151,24 +151,17 @@
       var songList = JSON.parse(result);
       var index = 0;
       while (songList['songs']['song'][index]) {
-        //console.log(index);
-        //console.log(songList['songs']['song'][index]['_attributes']['id']);
         var track = songList['songs']['song'][index]['_attributes']['id'];
         tracks.push(track);
         var title = songList['songs']['song'][index]['title']['_text'];
         titles.push(title);
-        //document.getElementById('track').innerHTML = track.toUpperCase();
         var url = songList['songs']['song'][index]['source']['_text'];
         urls.push(url);
-        //createjs.Sound.registerSound(url, "sound");
-        //metronome = songList['songs']['song'][index]['tempo']['_text'];
         var beatmap = songList['songs']['song'][index]['rhythm']['_text'];
         rhythms.push(beatmap);
-        //rhythm = songList['songs']['song'][index]['rhythm']['_text'].split('');
         var beats = songList['songs']['song'][index]['rhythm']['_text'].length;
         var duration = parseInt(songList['songs']['song'][index]['duration']['_text']);
         tempos.push(Math.floor(duration/beats));
-        //metronome = Math.floor(duration/beats);
         index++;
       }
 
@@ -292,6 +285,7 @@
     backTicker.length = 0;
     musicIndex = 0;
     var songIndex = tracks.lastIndexOf(song);
+    console.log(song);
     console.log(songIndex);
     document.getElementById('track').innerHTML = titles[songIndex].toUpperCase();
     var url = urls[songIndex];
