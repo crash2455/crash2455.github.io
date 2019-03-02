@@ -269,7 +269,7 @@
     document.getElementById("menu").classList.remove('invis');
     document.getElementById("hud").classList.remove('invis');
 
-    playTrack('Radioactive');
+    load('Radioactive');
   };
 
   /*
@@ -278,25 +278,22 @@
 
   */
   var songIndex 
-  function playTrack(song) {
+  function load(song){
+    songIndex = tracks.lastIndexOf(song);
+    document.getElementById('track').innerHTML = titles[songIndex].toUpperCase();
+    var url = urls[songIndex];
+    createjs.Sound.registerSound(url, "sound");
+    rhythm = rhythms[songIndex].split('');
+    metronome = tempos[songIndex];
+  }
+
+  function playTrack() {
     //for the love of god reset everything unless you want to enter the speedforce
     createjs.Sound.stop();
     clearInterval(m);
     ticker.length = 0;
     backTicker.length = 0;
     musicIndex = 0;
-    if (typeof song == 'string'){
-    songIndex = tracks.lastIndexOf(song);
-    }
-    //console.log(song);
-    //console.log(songIndex);
-    document.getElementById('track').innerHTML = titles[songIndex].toUpperCase();
-    var url = urls[songIndex];
-    createjs.Sound.registerSound(url, "sound");
-    console.log('hi');
-    rhythm = rhythms[songIndex].split('');
-    metronome = tempos[songIndex];
-
 
     //populate ticker with new beats
     for (var i = 0; i < 30; i++) {
@@ -382,28 +379,28 @@
     }
   }
 
-  document.getElementById("Radioactive").onclick = function () { playTrack('Radioactive')};
-  document.getElementById("Finale").onclick = function () { playTrack('Finale')};
-  document.getElementById("RowRow").onclick = function () { playTrack('RowRow')};
-  document.getElementById("Desire").onclick = function () { playTrack('Desire')};
-  document.getElementById("OutOfSight").onclick = function () { playTrack('OutOfSight')};
-  document.getElementById("SmileWithoutAFace").onclick = function () { playTrack('SmileWithoutAFace')};
-  document.getElementById("CourtshipDate").onclick = function () { playTrack('CourtshipDate')};
-  document.getElementById("Vordhosbn").onclick = function () { playTrack('Vordhosbn')};
-  document.getElementById("Orange").onclick = function () { playTrack('Orange')};
-  document.getElementById("Spoiler").onclick = function () { playTrack('Spoiler')};
-  document.getElementById("Kryptonite").onclick = function () { playTrack('Kryptonite')};
-  document.getElementById("BeyondRightNow").onclick = function () { playTrack('BeyondRightNow')};
-  document.getElementById("HoldMyLiquor").onclick = function () { playTrack('HoldMyLiquor')};
-  document.getElementById("Heart").onclick = function () { playTrack('Heart')};
-  document.getElementById("FuturePeople").onclick = function () { playTrack('FuturePeople')};
-  document.getElementById("Nanox").onclick = function () { playTrack('Nanox')};
-  document.getElementById("BlackEarth").onclick = function () { playTrack('BlackEarth')};
-  document.getElementById("EarlyMorningJay").onclick = function () { playTrack('EarlyMorningMay')};
-  document.getElementById("Weapon").onclick = function () { playTrack('Weapon')};
-  document.getElementById("LoveOnHaightStreet").onclick = function () { playTrack('LoveOnHaightStreet')};
-  document.getElementById("TheClockMaker").onclick = function () { playTrack('TheClockmaker')};
-  document.getElementById("Lies").onclick = function () { playTrack('Lies')};
+  document.getElementById("Radioactive").onclick = function () { load('Radioactive')};
+  document.getElementById("Finale").onclick = function () { load('Finale')};
+  document.getElementById("RowRow").onclick = function () { load('RowRow')};
+  document.getElementById("Desire").onclick = function () { load('Desire')};
+  document.getElementById("OutOfSight").onclick = function () { load('OutOfSight')};
+  document.getElementById("SmileWithoutAFace").onclick = function () { load('SmileWithoutAFace')};
+  document.getElementById("CourtshipDate").onclick = function () { load('CourtshipDate')};
+  document.getElementById("Vordhosbn").onclick = function () { load('Vordhosbn')};
+  document.getElementById("Orange").onclick = function () { load('Orange')};
+  document.getElementById("Spoiler").onclick = function () { load('Spoiler')};
+  document.getElementById("Kryptonite").onclick = function () { load('Kryptonite')};
+  document.getElementById("BeyondRightNow").onclick = function () { load('BeyondRightNow')};
+  document.getElementById("HoldMyLiquor").onclick = function () { load('HoldMyLiquor')};
+  document.getElementById("Heart").onclick = function () { load('Heart')};
+  document.getElementById("FuturePeople").onclick = function () { load('FuturePeople')};
+  document.getElementById("Nanox").onclick = function () { load('Nanox')};
+  document.getElementById("BlackEarth").onclick = function () { load('BlackEarth')};
+  document.getElementById("EarlyMorningJay").onclick = function () { load('EarlyMorningMay')};
+  document.getElementById("Weapon").onclick = function () { load('Weapon')};
+  document.getElementById("LoveOnHaightStreet").onclick = function () { load('LoveOnHaightStreet')};
+  document.getElementById("TheClockMaker").onclick = function () { load('TheClockmaker')};
+  document.getElementById("Lies").onclick = function () { load('Lies')};
 
 
 </script>
