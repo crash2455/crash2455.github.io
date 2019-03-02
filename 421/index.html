@@ -36,7 +36,7 @@
     <br><br><br><br>
     <input type="button" value="GO" id="start">
   </div>
-  <div id='loading'>LOADING</div>
+  <div id='loading'>LOADING: 0%</div>
   <div id='ticker' class="hideable"></div>
   <div id='beatDrop' class="hideable"></div>
   
@@ -130,6 +130,8 @@
   function loadSongs(index){
     
     if(index != urls.length){
+      var percent = Math.floor(index.urls.length);
+      document.getElementById('loading').innerHTML = 'LOADING: ' + percent.toString() + '%';
       var url = urls[index];
       var track = tracks[index];
       index++;
