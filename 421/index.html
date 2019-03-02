@@ -38,6 +38,7 @@
   </div>
   <div id='ticker' class="hideable"></div>
   <div id='beatDrop' class="hideable"></div>
+  <div id='loading' class="invis">LOADING</div>
 
   <div id='menu' class="bottom invis">
     <span class="hideable">
@@ -279,6 +280,9 @@
   */
   var songIndex 
   function load(song){
+    if (songIndex != tracks.lastIndexOf(song)){
+      document.getElementById("loading").classList.remove('invis');
+    }
     songIndex = tracks.lastIndexOf(song);
     document.getElementById('track').innerHTML = titles[songIndex].toUpperCase();
     var url = urls[songIndex];
@@ -289,6 +293,7 @@
 
   function playTrack() {
     //for the love of god reset everything unless you want to enter the speedforce
+    document.getElementById("loading").classList.add('invis');
     createjs.Sound.stop();
     clearInterval(m);
     ticker.length = 0;

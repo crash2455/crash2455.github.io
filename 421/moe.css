@@ -119,6 +119,12 @@ img {
 #ticker{
   font-size: 1em;
   text-align: center;
+  background-color: rgba(255,255,255,0.2);
+}
+#loading{
+  font-size: 4em;
+  text-align:center;
+  color: white;
 }
 
 /*beats comin off the ticker will fall down and vanish*/
