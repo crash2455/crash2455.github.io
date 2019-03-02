@@ -148,4 +148,10 @@
     <buildupRhythm>+....</buildupRhythm>
     <tempo>53.5</tempo>
   </song>
+  <song id="Lies">
+    <title>Marina and the Diamonds - Lies</title>
+    <source>./assets/audio/lies.ogg</source>
+    <rhythm>o.......:.......x.......:....---o.......:.......x.......:.......o.......:.......x.......:....---o....o....o...x.......:.......o.......:.......x.......:....---o.......:.......x.......:.......o.......:.......x.......:....---o....o....o...x.......:.........</rhythm>
+    <tempo>61</tempo>
+  </song>
 </songs>
