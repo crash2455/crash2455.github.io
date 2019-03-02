@@ -134,8 +134,8 @@
   }
 
   //a bunch of variables to hold all the garbage we get out of xml
-
-  var ttitles = [];
+  var tracks = [];
+  var titles = [];
   var urls = [];
   var rhythms = [];
   var tempos = [];
@@ -153,6 +153,8 @@
       while (!songList['songs']['song'][index]['_attributes']['id']) {  
         console.log(index);
         console.log(songList['songs']['song'][index]['_attributes']['id']);
+        var track = songList['songs']['song'][index]['_attributes']['id'];
+        tracks.push(track);
         var title = songList['songs']['song'][index]['title']['_text'];
         titles.push(title);
         //document.getElementById('track').innerHTML = track.toUpperCase();
