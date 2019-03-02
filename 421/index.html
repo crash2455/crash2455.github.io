@@ -277,6 +277,7 @@
         SONG SELECTION
 
   */
+  var songIndex 
   function playTrack(song) {
     //for the love of god reset everything unless you want to enter the speedforce
     createjs.Sound.stop();
@@ -284,7 +285,9 @@
     ticker.length = 0;
     backTicker.length = 0;
     musicIndex = 0;
-    var songIndex = tracks.lastIndexOf(song);
+    if (typeof song == 'string'){
+    songIndex = tracks.lastIndexOf(song);
+    }
     console.log(song);
     console.log(songIndex);
     document.getElementById('track').innerHTML = titles[songIndex].toUpperCase();
