@@ -81,7 +81,7 @@ input[type=button]{
 
 .blackout {
   animation: blackout;
-  animation-duration: .2s;
+  animation-duration: .3s;
 }
 
 /*the bread and butter of this hot nonsense*/
