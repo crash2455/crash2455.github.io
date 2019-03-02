@@ -150,7 +150,7 @@
       var result = xml2json(docHTML, { compact: true, spaces: 4 });
       var songList = JSON.parse(result);
       var index = 0;
-      while (!songList['songs']['song'][index]['_attributes']['id']) {  
+      while (songList['songs']['song'][index]['_attributes']['id']) {
         console.log(index);
         console.log(songList['songs']['song'][index]['_attributes']['id']);
         var track = songList['songs']['song'][index]['_attributes']['id'];
