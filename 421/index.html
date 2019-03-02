@@ -154,7 +154,7 @@
       rhythm = songList['songs']['song'][index]['rhythm']['_text'].split('');
       var beats = songList['songs']['song'][index]['rhythm']['_text'].length;
       var duration = parseInt(songList['songs']['song'][index]['duration']['_text']);
-      metronome = Math.ceil(duration/beats);
+      metronome = Math.floor(duration/beats);
       console.log(metronome);
     }
     xhr.onerror = function () {
