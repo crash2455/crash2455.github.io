@@ -130,7 +130,7 @@
   function loadSongs(index){
     
     if(index != urls.length){
-      var percent = Math.floor(index.urls.length);
+      var percent = Math.floor(index/(urls.length));
       document.getElementById('loading').innerHTML = 'LOADING: ' + percent.toString() + '%';
       var url = urls[index];
       var track = tracks[index];
