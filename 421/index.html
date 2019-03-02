@@ -205,14 +205,8 @@
 
     document.getElementById("ticker").innerHTML = backTicker.join('') + ticker.join('');
     document.getElementById("beatDrop").innerHTML = (rhythm[musicIndex] == '.' || rhythm[musicIndex] == '-' || rhythm[musicIndex] == '+' ? ' ' : rhythm[musicIndex]) + "</span> "
-    //change image and put up that spicy beat
-    if (rhythm[musicIndex] != '.' && rhythm[musicIndex] != ':' && rhythm[musicIndex] != '+') {
-      document.getElementById('moe').classList.remove('blackout');
-      moe();
-      Velocity(document.getElementById("beatDrop"), { opacity: [100, 0] }, 200);
-    }
-    //vibrate vertically
-    if (rhythm[musicIndex] == 'x') {
+      //vibrate vertically
+      if (rhythm[musicIndex] == 'x') {
       document.getElementById('moe').classList.add('blurx');
       //document.getElementById('blur').firstElementChild.setAttribute('stdDeviation', "10,0");
     }
@@ -220,6 +214,12 @@
     if (rhythm[musicIndex] == 'o') {
       document.getElementById('moe').classList.add('bluro');
       //document.getElementById('blur').firstElementChild.setAttribute('stdDeviation', "0,10");
+    }
+    //change image and put up that spicy beat
+    if (rhythm[musicIndex] != '.' && rhythm[musicIndex] != ':' && rhythm[musicIndex] != '+') {
+      document.getElementById('moe').classList.remove('blackout');
+      moe();
+      Velocity(document.getElementById("beatDrop"), { opacity: [100, 0] }, 200);
     }
 
     //change color but not image
