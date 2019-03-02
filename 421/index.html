@@ -123,7 +123,7 @@
   //external counter to keep track of where we are in the sample
   var musicIndex = 0;
 
-  createjs.Sound.on("fileload", this.play, this);
+  createjs.Sound.on("fileload", this.playTrack, this);
 
   function load(url, element) {
     req = new XMLHttpRequest();
