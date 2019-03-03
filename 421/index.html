@@ -174,8 +174,11 @@
         tempos.push(Math.floor(duration/beats));
         index++;
       }
+      //force all images to load once
+      for(var i=0; i<characters.length; i++){
+        document.getElementById('moe').style.backgroundImage = 'url("./assets/img/' + i.toString() + '.png")';
+      }
       loadSongs(0);
-
     }
     xhr.onerror = function () {
       console.log("Error while getting XML.");
