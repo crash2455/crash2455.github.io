@@ -125,6 +125,8 @@ img {
   font-size: 4em;
   text-align:center;
   color: white;
+  position: relative;
+  top: 150px;
 }
 
 /*beats comin off the ticker will fall down and vanish*/

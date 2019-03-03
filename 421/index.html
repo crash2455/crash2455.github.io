@@ -129,7 +129,7 @@
   var musicIndex = 0;
   function loadSongs(index){
     
-    if(index != urls.length){
+    if(index < urls.length){
       var percent = Math.floor(index/(urls.length));
       document.getElementById('loading').innerHTML = 'LOADING: ' + percent.toString() + '%';
       var url = urls[index];
@@ -137,6 +137,23 @@
       index++;
       createjs.Sound.registerSound(url, track);
       createjs.Sound.on("fileload", this.loadSongs(index),track);
+    }
+    else{
+      loadImg(0);
+    }
+  }
+  function loadImg(index){
+    
+    if(index < characters.length){
+      var percent = Math.floor(index/(urls.length));
+      document.getElementById('loading').innerHTML = 'LOADING: ' + percent.toString() + '%';
+      var src = './assets/img/'+index.toString()+'.png';
+      //console.log(src);
+      index++;
+      var img = new Image();
+      img.onload = this.loadImg(index);
+      img.src = src;
+      if (img.complete) img.onload();
     }
     else{
       document.getElementById("loading").classList.add('invis');
