@@ -147,6 +147,7 @@
     if(index < characters.length){
       var percent = Math.floor(index/(urls.length));
       document.getElementById('loading').innerHTML = 'LOADING: ' + percent.toString() + '%';
+      document.getElementById('moe').style.backgroundImage = 'url("./assets/img/' + index.toString() + '.png")';
       var src = './assets/img/'+index.toString()+'.png';
       //console.log(src);
       index++;
