@@ -37,6 +37,7 @@
     <input type="button" value="GO" id="start">
   </div>
   <div id='loading'>LOADING: 0%</div>
+  <img id='preload'>
   <div id='ticker' class="hideable"></div>
   <div id='beatDrop' class="hideable"></div>
   
@@ -147,17 +148,18 @@
     if(index < characters.length){
       var percent = Math.floor(index/(urls.length));
       document.getElementById('loading').innerHTML = 'LOADING: ' + percent.toString() + '%';
-      document.getElementById('moe').style.backgroundImage = 'url("./assets/img/' + index.toString() + '.png")';
+      document.getElementById('preload').src = 'https://crash2455.github.io/421/assets/img/' + index.toString() + '.png';
       var src = 'https://crash2455.github.io/421/assets/img/'+index.toString()+'.png';
       //console.log(src);
       index++;
-      var img = new Image();
-      img.onload = this.loadImg(index);
-      img.src = src;
-      if (img.complete) img.onload();
+      var image = new createjs.DOMElement("preload")
+      image.on("fileload",this.loadImg(index),src)
+//      img.src = src;
+//      if (img.complete) img.onload();
     }
     else{
       document.getElementById("loading").classList.add('invis');
+      document.getElementById("preload").classList.add('invis');
       document.getElementById("splash").classList.remove('invis');
       console.log('loading finished');
     }
