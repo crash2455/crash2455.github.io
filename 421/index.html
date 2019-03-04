@@ -131,8 +131,9 @@
   function loadSongs(index){
     
     if(index < urls.length){
-      var percent = Math.floor(index/(urls.length));
+      var percent = Math.floor((index/(characters.length))*50);
       document.getElementById('loading').innerHTML = 'LOADING: ' + percent.toString() + '%';
+      console.log(percent);
       var url = urls[index];
       var track = tracks[index];
       index++;
@@ -143,19 +144,21 @@
       loadImg(0);
     }
   }
+  
   function loadImg(index){
     
     if(index < characters.length){
-      var percent = Math.floor(index/(urls.length));
+      var percent = 50+ Math.floor((index/(characters.length))*50);
       document.getElementById('loading').innerHTML = 'LOADING: ' + percent.toString() + '%';
       document.getElementById('preload').src = 'https://crash2455.github.io/421/assets/img/' + index.toString() + '.png';
-      var src = 'https://crash2455.github.io/421/assets/img/'+index.toString()+'.png';
-      //console.log(src);
+      //var src = 'https://crash2455.github.io/421/assets/img/'+index.toString()+'.png';
+      console.log(percent);
       index++;
-      var image = new createjs.DOMElement("preload")
-      image.on("fileload",this.loadImg(index),src)
-//      img.src = src;
-//      if (img.complete) img.onload();
+      document.getElementById('preload').onload = function() {loadImg(index)};
+/*      var img = new Image();
+      img.onload = loadImg(index);
+      img.src = src;
+      if (img.complete) img.onload();*/
     }
     else{
       document.getElementById("loading").classList.add('invis');
@@ -200,6 +203,7 @@
         document.getElementById('moe').style.backgroundImage = 'url("./assets/img/' + i.toString() + '.png")';
       }
       loadSongs(0);
+
     }
     xhr.onerror = function () {
       console.log("Error while getting XML.");
