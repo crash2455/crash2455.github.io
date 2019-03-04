@@ -133,7 +133,6 @@
     if(index < urls.length){
       var percent = Math.floor((index/(characters.length))*50);
       document.getElementById('loading').innerHTML = 'LOADING: ' + percent.toString() + '%';
-      console.log(percent);
       var url = urls[index];
       var track = tracks[index];
       index++;
@@ -151,20 +150,13 @@
       var percent = 50+ Math.floor((index/(characters.length))*50);
       document.getElementById('loading').innerHTML = 'LOADING: ' + percent.toString() + '%';
       document.getElementById('preload').src = 'https://crash2455.github.io/421/assets/img/' + index.toString() + '.png';
-      //var src = 'https://crash2455.github.io/421/assets/img/'+index.toString()+'.png';
-      console.log(percent);
       index++;
       document.getElementById('preload').onload = function() {loadImg(index)};
-/*      var img = new Image();
-      img.onload = loadImg(index);
-      img.src = src;
-      if (img.complete) img.onload();*/
     }
     else{
       document.getElementById("loading").classList.add('invis');
       document.getElementById("preload").classList.add('invis');
       document.getElementById("splash").classList.remove('invis');
-      console.log('loading finished');
     }
   }
   //a bunch of variables to hold all the garbage we get out of xml
