@@ -1,7 +1,7 @@
 <html>
 
 <head>
-  <title>0x40 HUES in  JS</title>
+  <title>0x40 HUES in JS</title>
   <link rel="stylesheet" type="text/css" href="moe.css">
   <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
   <script src="https://code.createjs.com/1.0.0/soundjs.min.js"></script>
@@ -102,9 +102,6 @@
   //external counter for last slide shown, starts initialized at 1
   var moeExt = 1;
 
-  //song time finder
-  var seek = 0;
-
   //many characters / one character selector
   var many = true;
 
@@ -147,7 +144,7 @@
   function loadImg(index){
     
     if(index < characters.length){
-      var percent = 50+ Math.floor((index/(characters.length))*50);
+      var percent = Math.floor((index/(characters.length))*100);
       document.getElementById('loading').innerHTML = 'LOADING: ' + percent.toString() + '%';
       document.getElementById('preload').src = 'https://crash2455.github.io/421/assets/img/' + index.toString() + '.png';
       index++;
