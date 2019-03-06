@@ -364,15 +364,11 @@
     <fullname>Mikoto Misaka</fullname>
     <align>center</align>
   </image>
-  <image name="Misaka">
-    <source>http://myanimelist.net/character/13701/</source>
-    <fullname>Mikoto Misaka</fullname>
-    <align>left</align>
-  </image>
+
   <image name="Misaki">
     <source>http://myanimelist.net/character/2552/Misaki_Nakahara</source>
     <fullname>Misaki Nakahara</fullname>
-    <align>center</align>
+    <align>left</align>
   </image>
   <image name="Miu">
     <source>http://myanimelist.net/character/570/Miu_Matsuoka</source>
