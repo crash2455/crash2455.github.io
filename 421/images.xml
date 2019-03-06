@@ -549,7 +549,11 @@
     <fullname>Yoko Littner</fullname>
     <align>left</align>
   </image>
-
+  <image name="Yotsuba">
+    <source>http://myanimelist.net/character/3568/Yotsuba_Koiwai</source>
+    <fullname>Yotsuba Koiwai</fullname>
+    <align>center</align>
+  </image>
   <image name="Yui">
     <source>http://myanimelist.net/character/19565/Yui_Hirasawa</source>
     <fullname>Yui Hirasawa</fullname>
