@@ -125,28 +125,33 @@
 
   //external counter to keep track of where we are in the sample
   var musicIndex = 0;
+
+  //jsons holding the output of our xml
+  var songList
+  var imgList
+
+  parseXML('songs.xml');
+  parseXML('images.xml');
+
   function loadSongs(index){
-    
-    if(index < urls.length){
-      var percent = Math.floor((index/(characters.length))*50);
+    var count = Object.keys(songList).length;
+    if(index < count){
+      var percent = Math.floor((index/count)*50);
       document.getElementById('loading').innerHTML = 'LOADING: ' + percent.toString() + '%';
-      var url = urls[index];
-      var track = tracks[index];
+      var url = songList[index]['source']['_text']
+      var track = songList[index]['_attributes']['id'];
       index++;
       createjs.Sound.registerSound(url, track);
       createjs.Sound.on("fileload", this.loadSongs(index),track);
     }
-    else{
-      loadImg(0);
-    }
   }
   
   function loadImg(index){
-    
-    if(index < characters.length){
-      var percent = Math.floor((index/(characters.length))*100);
+    var count = Object.keys(imgList).length;
+    if(index < count){
+      var percent = Math.floor((index/(count))*100);
       document.getElementById('loading').innerHTML = 'LOADING: ' + percent.toString() + '%';
-      document.getElementById('preload').src = 'https://crash2455.github.io/421/assets/img/' + index.toString() + '.png';
+      document.getElementById('preload').src = './assets/img/' + imgList[index]._attributes['name'] + '.png';
       index++;
       document.getElementById('preload').onload = function() {loadImg(index)};
     }
@@ -156,48 +161,30 @@
       document.getElementById("splash").classList.remove('invis');
     }
   }
-  //a bunch of variables to hold all the garbage we get out of xml
-  var tracks = [];
-  var titles = [];
-  var urls = [];
-  var rhythms = [];
-  var tempos = [];
 
-  parseXML();
 
   //get song information from xml
-  function parseXML() {
+  function parseXML(path) {
     var xhr = new XMLHttpRequest();
     xhr.onload = function () {
       var docHTML = xhr.response.documentElement.outerHTML;
       var result = xml2json(docHTML, { compact: true, spaces: 4 });
-      var songList = JSON.parse(result);
-      var index = 0;
-      while (songList['songs']['song'][index]) {
-        var track = songList['songs']['song'][index]['_attributes']['id'];
-        tracks.push(track);
-        var title = songList['songs']['song'][index]['title']['_text'];
-        titles.push(title);
-        var url = songList['songs']['song'][index]['source']['_text'];
-        urls.push(url);
-        var beatmap = songList['songs']['song'][index]['rhythm']['_text'];
-        rhythms.push(beatmap);
-        var beats = songList['songs']['song'][index]['rhythm']['_text'].length;
-        var duration = parseInt(songList['songs']['song'][index]['duration']['_text']);
-        tempos.push(Math.floor(duration/beats));
-        index++;
+      var list = JSON.parse(result);
+      if(list['songs'])
+      {
+        songList = list['songs']['song'];
+        loadSongs(0);
       }
-      //force all images to load once
-      for(var i=0; i<characters.length; i++){
-        document.getElementById('moe').style.backgroundImage = 'url("./assets/img/' + i.toString() + '.png")';
+      if(list['images'])
+      {
+        imgList = list['images']['image'];
+        loadImg(0);
       }
-      loadSongs(0);
-
     }
     xhr.onerror = function () {
       console.log("Error while getting XML.");
     }
-    xhr.open("GET", "songs.xml");
+    xhr.open("GET", path);
     xhr.responseType = "document";
     xhr.send();
   }
@@ -217,11 +204,11 @@
 
     if (many) { //if we have character changer on then change characters
       //slide changer, biased to not pick the same image twice in a row
-      var moe = ((moeExt + (Math.ceil(Math.random() * 60))) % 121);
+      var moe = ((moeExt + (Math.ceil(Math.random() * 60))) % Object.keys(imgList).length);
       moeExt = moe;
-      var moeStr = moe.toString();
-      document.getElementById('moe').style.backgroundImage = 'url("./assets/img/' + moeStr + '.png")';
-      document.getElementById('character').innerHTML = characters[moe].toUpperCase();
+      //var moeStr = moe.toString();
+      document.getElementById('moe').style.backgroundImage = 'url("./assets/img/' + imgList[moe]._attributes['name'] + '.png")';
+      document.getElementById('character').innerHTML = imgList[moe]["fullname"]._text.toUpperCase();
     }
   }
 
@@ -305,14 +292,25 @@
         SONG SELECTION
 
   */
+  function findIndex(song) {
+    var index = 0;
+    while (songList[index]['_attributes']['id'] != song && index < Object.keys(songList).length)
+    {
+      songList[index]['_attributes']['id'];
+      index++;
+    }
+    return index;
+  }
   function playTrack(song) {
     //for the love of god reset everything unless you want to enter the speedforce
-    var songIndex = tracks.lastIndexOf(song);
+    var songIndex = findIndex(song);
     currTrack = song;
-    document.getElementById('track').innerHTML = titles[songIndex].toUpperCase();
-    var url = urls[songIndex];
-    rhythm = rhythms[songIndex].split('');
-    metronome = tempos[songIndex];
+    document.getElementById('track').innerHTML = songList[songIndex]['title']['_text'].toUpperCase();
+    var url = songList[songIndex]['source']['_text']
+    rhythm = songList[songIndex]['rhythm']['_text'].split('');
+    var beats = songList[songIndex]['rhythm']['_text'].length;
+    var duration = parseInt(songList[songIndex]['duration']['_text']);
+    metronome = Math.floor(duration/beats);
     createjs.Sound.stop();
     clearInterval(m);
     ticker.length = 0;
