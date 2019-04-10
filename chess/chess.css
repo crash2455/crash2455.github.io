@@ -1,0 +1,47 @@
+.black{
+    background: #222;
+    height: 100px;
+    width: 100px;
+    float:left;
+}
+.white
+{
+    background: #eee;
+    height: 100px;
+    width: 100px;
+    float:left;
+}
+.box
+{
+    width: 100px;
+    float:left;
+    text-align: center;
+}
+.box2
+{
+    height: 100px;
+    width: 10px;
+    float:left;
+}
+.box3
+{
+    width: 10px;
+    float:left;
+}
+
+.row{
+    display:table-row
+}
+
+.whitePiece{
+    font-size: 50px;
+    color: #fff;
+    -webkit-text-stroke: 1px black;
+    font-family: sans-serif;
+}
+.blackPiece{
+    font-size: 50px;
+    color: #000;
+    -webkit-text-stroke: 1px white;
+    font-family: sans-serif;
+}
